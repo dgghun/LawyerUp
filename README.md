@@ -1,2 +1,2 @@
 # LawyerUp
-Video chat application
+Video chat application.
