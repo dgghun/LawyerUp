@@ -6,7 +6,7 @@ var seleniumHelpers = require('webrtc-testbed/webdriver');
 var webdriver = require('selenium-webdriver');
 
 function doJoin(driver, room) {
-    return driver.get('file://' + process.cwd() + '/test/index.html?' + room);
+    return driver.get('file://' + process.cwd() + '/test/index.html.bak?' + room);
 }
 
 function iceConnected(driver) {

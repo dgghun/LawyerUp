@@ -1,128 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="scripts/semantic-ui-css/semantic.min.css">
-  <title>SimpleWebRTC Demo</title>
-  <style>
-    html { margin-top: 20px; }
-    #chat-content { height: 180px;  overflow-y: scroll; }
-  </style>
+    <title>LawyerUp</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+    <link href="css/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+
+    <link href="css/owl.carousel.min.css" rel="stylesheet">
+    <link href="css/owl.theme.default.min.css" rel="stylesheet">
+    <link href="css/magnific-popup.css" rel="stylesheet">
+
+    <link href="css/aos.css" rel="stylesheet">
+
+    <link href="css/ionicons.min.css" rel="stylesheet">
+
+    <link href="css/bootstrap-datepicker.css" rel="stylesheet">
+    <link href="css/jquery.timepicker.css" rel="stylesheet">
+
+    <link href="css/flaticon.css" rel="stylesheet">
+    <link href="css/icomoon.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
+
 <body>
 
-  <div class="ui container">
-    <h1 class="ui header">Simple WebRTC Messenger</h1>
-    <hr>
-    <div class="ui two column stackable grid">
-      <div class="ui ten wide column">
-        <div class="ui segment">
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">LawyerUp</a>
+        <button aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-target="#ftco-nav" data-toggle="collapse" type="button">
+            <span class="oi oi-menu"></span> Menu
+        </button>
 
-          <!-- Chat Room Form -->
-          <div class="ui form">
-            <div class="fields">
-              <div class="field">
-                <label>User Name</label>
-                <input type="text" placeholder="Enter user name" id="username" name="username">
-              </div>
-              <div class="field">
-                <label>Room</label>
-                <input type="text" placeholder="Enter room name" id="roomName" name="roomName">
-              </div>
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <p><a class="btn btn-primary py-3 px-4" href="#" style="margin-top:20px;">Login</a></p>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END nav -->
+
+<div class="hero-wrap js-fullheight" data-stellar-background-ratio="0.5"
+     style="background-image: url('images/bg_1.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
+             data-scrollax-parent="true">
+            <div class="col-md-10 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                <h2 class="subheading" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">We are here to
+                    help!</h2>
+                <h1 class="mb-0" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+                    <span>Experience</span> . <span>Innovation</span> . <span>Excellence</span>
+                </h1>
             </div>
-            <br>
-            <div class="ui buttons">
-              <div id="create-btn" class="ui submit orange button">Create Room</div>
-              <div class="or"></div>
-              <div id="join-btn" class="ui submit green button">Join Room</div>
+            <div class="col-md-3 text-center services align-self-stretch ftco-animate pt-5 mb-5">
+                <div class="icon"><span class="flaticon-auction"></span></div>
+                <div class="media-body">
+                    <h3 class="heading mb-3"><a href="#">Client</a></h3>
+                    <p>Find a Lawyer</p>
+                </div>
             </div>
-          </div>
+            <div class="col-md-1"></div>
 
-          <!-- Chat Room Messages -->
-          <div id="chat"></div>
+            <div class="col-md-3 text-center services align-self-stretch ftco-animate pt-5 mb-5">
+                <div class="icon"><span class="flaticon-lawyer"></span></div>
+                <div class="media-body">
+                    <h3 class="heading mb-3"><a href="#">Lawyer</a></h3>
+                    <p>Find clients to help</p>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <!-- Local Camera -->
-      <div class="ui six wide column">
-        <img  id="local-image" class="ui large image" src="images/image.png">
-        <video id="local-video" class="ui large image"  autoplay></video>
-        <h4 class="ui center aligned header" style="margin:0;">
-          Local Camera
-        </h4>
-      </div>
     </div>
+</div>
 
-    <!-- Remote Cameras -->
-    <h3 class="ui center aligned header">Remote Cameras</h3>
-    <div id="remote-videos" class="ui stackable grid">
-      <div class="four wide column">
-        <img class="ui centered medium image" src="images/image.png">
-      </div>
-      <div class="four wide column">
-        <img class="ui centered medium image" src="images/image.png">
-      </div>
-      <div class="four wide column">
-        <img class="ui centered medium image" src="images/image.png">
-      </div>
-      <div class="four wide column">
-        <img class="ui centered medium image" src="images/image.png">
-      </div>
-    </div>
-  </div>
-
-  <!-- TEMPLATES -->
-  <!-- Remote Video Template -->
-  <script id="remote-video-template" type="text/x-handlebars-template">
-    <div id="{{ id }}" class="four wide column">
-      <img class="ui centered medium image" src="images/image.png">
-    </div>
-  </script>
-
-  <!-- Chat Content Template -->
-  <script id="chat-content-template" type="text/x-handlebars-template">
-   {{#each messages}}
-    <div class="event">
-      <div class="label">
-        <i class="icon blue user"></i>
-      </div>
-      <div class="content">
-        <div class="summary">
-          <a href="#"> {{ username }}</a> posted on
-          <div class="date">
-            {{ postedOn }}
-          </div>
+<!---->
+<section class="ftco-section bg-secondary">
+    <div class="container-fluid">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+                <span class="subheading">Our Attorney</span>
+                <h2 class="mb-4">Our Legal Attorneys</h2>
+            </div>
         </div>
-        <div class="extra text">
-          {{ message }}
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="block-2 ftco-animate">
+                    <div class="flipper">
+                        <div class="front" style="background-image: url(/images/person_1.jpg);">
+                            <div class="box">
+                                <h2>Richard Anderson</h2>
+                                <p>Civil Lawyer</p>
+                            </div>
+                        </div>
+                        <div class="back">
+                            <!-- back content -->
+                            <blockquote>
+                                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an
+                                    almost unorthographic life One day however a small line of blind text by the name of
+                                    Lorem Ipsum decided to leave for the far World of Grammar.&rdquo;</p>
+                            </blockquote>
+                            <div class="author d-flex">
+                                <div class="image mr-3 align-self-center">
+                                    <img alt="" src="images/person_1.jpg">
+                                </div>
+                                <div class="name align-self-center">Richard Anderson <span
+                                        class="position">Civil Lawyer</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="block-2 ftco-animate">
+                    <div class="flipper">
+                        <div class="front" style="background-image: url(/images/person_2.jpg);">
+                            <div class="box">
+                                <h2>Jefford Maxillin</h2>
+                                <p>Business Lawyer</p>
+                            </div>
+                        </div>
+                        <div class="back">
+                            <!-- back content -->
+                            <blockquote>
+                                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an
+                                    almost unorthographic life One day however a small line of blind text by the name of
+                                    Lorem Ipsum decided to leave for the far World of Grammar.&rdquo;</p>
+                            </blockquote>
+                            <div class="author d-flex">
+                                <div class="image mr-3 align-self-center">
+                                    <img alt="" src="images/person_2.jpg">
+                                </div>
+                                <div class="name align-self-center">Jefford Maxillin<span class="position">Business Lawyer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="block-2 ftco-animate">
+                    <div class="flipper">
+                        <div class="front" style="background-image: url(/images/person_3.jpg);">
+                            <div class="box">
+                                <h2>Carlos Obing</h2>
+                                <p>Criminal Defense</p>
+                            </div>
+                        </div>
+                        <div class="back">
+                            <!-- back content -->
+                            <blockquote>
+                                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an
+                                    almost unorthographic life One day however a small line of blind text by the name of
+                                    Lorem Ipsum decided to leave for the far World of Grammar.&rdquo;</p>
+                            </blockquote>
+                            <div class="author d-flex">
+                                <div class="image mr-3 align-self-center">
+                                    <img alt="" src="images/person_3.jpg">
+                                </div>
+                                <div class="name align-self-center">Carlos Obing <span
+                                        class="position">Criminal Defense</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="block-2 ftco-animate">
+                    <div class="flipper">
+                        <div class="front" style="background-image: url(/images/person_4.jpg);">
+                            <div class="box">
+                                <h2>Nathan Smith</h2>
+                                <p>Insurance Lawyer</p>
+                            </div>
+                        </div>
+                        <div class="back">
+                            <!-- back content -->
+                            <blockquote>
+                                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an
+                                    almost unorthographic life One day however a small line of blind text by the name of
+                                    Lorem Ipsum decided to leave for the far World of Grammar.&rdquo;</p>
+                            </blockquote>
+                            <div class="author d-flex">
+                                <div class="image mr-3 align-self-center">
+                                    <img alt="" src="images/person_4.jpg">
+                                </div>
+                                <div class="name align-self-center">Nathan Smith <span
+                                        class="position">Insurance Lawyer</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  {{/each}}
-  </script>
+</section>
 
-  <!-- Chat Template -->
-  <script id="chat-template" type="text/x-handlebars-template">
-    <h3 class="ui orange header">Room ID -> <strong>{{ room }}</strong></h3>
-    <hr>
-    <div id="chat-content" class="ui feed"> </div>
-    <hr>
-    <div class="ui form">
-      <div class="ui field">
-        <label>Post Message</label>
-        <textarea id="post-message" name="post-message" rows="1"></textarea>
-      </div>
-      <div id="post-btn" class="ui primary submit button">Send</div>
+
+<!--BLOG -->
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <span class="subheading">Our Blog</span>
+                <h2>Recent Blog</h2>
+            </div>
+        </div>
+        <div class="row d-flex">
+            <div class="col-md-4 d-flex ftco-animate">
+                <div class="blog-entry justify-content-end">
+                    <a class="block-20" href="blog-single.html" style="background-image: url('images/image_1.jpg');">
+                    </a>
+                    <div class="text p-4 float-right d-block">
+                        <div class="topper d-flex align-items-center">
+                            <div class="one py-2 pl-3 pr-1 align-self-stretch">
+                                <span class="day">15</span>
+                            </div>
+                            <div class="two pl-0 pr-3 py-2 align-self-stretch">
+                                <span class="yr">2019</span>
+                                <span class="mos">January</span>
+                            </div>
+                        </div>
+                        <h3 class="heading mt-2"><a href="#">All you want to know about industrial laws</a></h3>
+                        <p>A small river named Duden flows by their place and supplies it with the necessary
+                            regelialia.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex ftco-animate">
+                <div class="blog-entry justify-content-end">
+                    <a class="block-20" href="blog-single.html" style="background-image: url('images/image_2.jpg');">
+                    </a>
+                    <div class="text p-4 float-right d-block">
+                        <div class="topper d-flex align-items-center">
+                            <div class="one py-2 pl-3 pr-1 align-self-stretch">
+                                <span class="day">12</span>
+                            </div>
+                            <div class="two pl-0 pr-3 py-2 align-self-stretch">
+                                <span class="yr">2019</span>
+                                <span class="mos">January</span>
+                            </div>
+                        </div>
+                        <h3 class="heading mt-2"><a href="#">All you want to know about industrial laws</a></h3>
+                        <p>A small river named Duden flows by their place and supplies it with the necessary
+                            regelialia.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex ftco-animate">
+                <div class="blog-entry">
+                    <a class="block-20" href="blog-single.html" style="background-image: url('images/image_3.jpg');">
+                    </a>
+                    <div class="text p-4 float-right d-block">
+                        <div class="topper d-flex align-items-center">
+                            <div class="one py-2 pl-3 pr-1 align-self-stretch">
+                                <span class="day">10</span>
+                            </div>
+                            <div class="two pl-0 pr-3 py-2 align-self-stretch">
+                                <span class="yr">2019</span>
+                                <span class="mos">January</span>
+                            </div>
+                        </div>
+                        <h3 class="heading mt-2"><a href="#">All you want to know about industrial laws</a></h3>
+                        <p>A small river named Duden flows by their place and supplies it with the necessary
+                            regelialia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </script>
+</section>
 
-  <!-- Scripts -->
-  <script src="scripts/jquery/dist/jquery.min.js"></script>
-  <script src="scripts/semantic-ui-css/semantic.min.js"></script>
-  <script src="scripts/handlebars/dist/handlebars.min.js "></script>
-  <script src="scripts/simplewebrtc/out/simplewebrtc-with-adapter.bundle.js"></script>
-  <script src="js/app.js"></script>
+
+<!-- FOOTER -->
+<footer class="ftco-footer ftco-bg-dark ftco-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-3">
+                    <h2 class="ftco-heading-2">LawyerUp</h2>
+                    <p>"It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first
+                        victory against the evil Galactic Empire. During the battle, Rebel spies managed to steal secret
+                        plans to the Empire’s ultimate weapon, the DEATH STAR, an armored space station with enough
+                        power to destroy an entire planet.
+                    </p>
+
+                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md">
+            </div>
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">Have a Questions?</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li><span class="icon icon-map-marker"></span><span class="text">Fake St. USA</span>
+                            </li>
+                            <li><a href="#"><span class="icon icon-phone"></span><span
+                                    class="text">800-222-2222</span></a></li>
+                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                    All rights reserved | This template is made with <i aria-hidden="true"
+                                                                        class="icon-heart color-danger"></i> by <a
+                            href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- loader -->
+<div class="show fullscreen" id="ftco-loader">
+    <svg class="circular" height="48px" width="48px">
+        <circle class="path-bg" cx="24" cy="24" fill="none" r="22" stroke="#eeeeee" stroke-width="4"/>
+        <circle class="path" cx="24" cy="24" fill="none" r="22" stroke="#F96D00" stroke-miterlimit="10"
+                stroke-width="4"/>
+    </svg>
+</div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/jquery.timepicker.min.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="js/google-map.js"></script>
+<script src="js/main.js"></script>
+
 </body>
 </html>
