@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    h1= title
+
+    //- video(id="localVideo" playsinline autoplay muted)
+    //- video(id="remoteVideo" playsinline autoplay muted)
+
+    form(action="/login", method="POST")
+        button(type="submit" name="btnLogin") Login
+
+
+    form(action="/clientSignup", method="POST")
+        button(type="submit") Client Signup
+
+    form(action="/lawyerSignup", method="POST")
+        button(type="submit" name="btnLawyerSignup") Lawyer Signup
+
+    //- div.box
+    //-     button(id="startButton" name="start_video") Start
+    //-     button(id="callButton" name="call") Call
+    //-     button(id="hangupButton" name="hangup_video") Hang Up
+
+    //- script(src="https://webrtc.github.io/adapter/adapter-latest.js")
+    //- script(src="/javascripts/videochat.js" async)
