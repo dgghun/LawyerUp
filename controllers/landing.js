@@ -20,7 +20,7 @@ exports.client_signup = function(req, res, next){
     console.log("stub: landing.js -> client_signup");
     console.log("\n")
     
-    res.render('client');
+    res.render('signup_client');
 }
 
 
@@ -28,5 +28,5 @@ exports.lawyer_signup = function(req, res, next){
     console.log("stub: landing.js -> lawyer_signup");
     console.log("\n")
 
-    res.render('lawyer');
+    res.render('signup_lawyer');
 }
