@@ -30,3 +30,10 @@ exports.lawyer_signup = function(req, res, next){
 
     res.render('signup_lawyer');
 }
+
+exports.crud_testing = function(req, res, next){
+    res.render('crud_testing',{
+        title: app_name,
+        message: 'CRUD Testing'
+    });
+}
