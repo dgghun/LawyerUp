@@ -1,308 +1,178 @@
-doctype html
-html(lang='en')
-  head
-    title LawyerUp
-    meta(charset='utf-8')
-    meta(content='width=device-width, initial-scale=1, shrink-to-fit=no', name='viewport')
+extends layout
 
-    link(href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900', rel='stylesheet')
-    link(href='https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i', rel='stylesheet')
-
-    link(href='stylesheets/open-iconic-bootstrap.min.css', rel='styleheet')
-    link(href='stylesheets/animate.css', rel='stylesheet')
-    link(href='stylesheets/owl.carousel.min.css', rel='stylesheet')
-    link(href='stylesheets/owl.theme.default.min.css', rel='stylesheet')
-    link(href='stylesheets/magnific-popup.css', rel='stylesheet')
-    link(href='stylesheets/aos.css', rel='stylesheet')
-    link(href='stylesheets/ionicons.min.css', rel='stylesheet')
-    link(href='stylesheets/bootstrap-datepicker.css', rel='stylesheet')
-    link(href='stylesheets/flaticon.css', rel='stylesheet')
-    link(href='stylesheets/icomoon.css', rel='stylesheet')
-    link(href='stylesheets/style.css', rel='stylesheet')
+block append styling
     style.
       a:hover {
       color: white;
       font-weight: bold;
       }
-  body
-    nav#ftco-navbar.navbar.navbar-expand-lg.navbar-dark.ftco_navbar.bg-dark.ftco-navbar-light
-      .container
-        a.navbar-brand(href='index.html') LawyerUp
-        #ftco-nav.collapse.navbar-collapse
-          ul.navbar-nav.ml-auto
-            p
-              button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#ModalLoginForm') Login
 
-    .hero-wrap.js-fullheight(data-stellar-background-ratio='0.5', style="background-image: url('images/bg_1.jpg');")
-      .overlay
-      .container
-        .row.no-gutters.slider-text.js-fullheight.align-items-center.justify-content-center(data-scrollax-parent='true')
-          .col-md-10.text-center.ftco-animate(data-scrollax=" properties: { translateY: '70%' }")
-            h2.subheading(data-scrollax="properties: { translateY: '30%', opacity: 1.6 }")
-              | We are here
-              | to help!
-            h1.mb-0(data-scrollax="properties: { translateY: '30%', opacity: 1.6 }")
-              span Experience
-              |  . 
-              span Innovation
-              |  . 
-              span Excellence
-          .col-md-3.text-center.services.align-self-stretch.ftco-animate.pt-5.mb-5
-            .icon
-              span.flaticon-auction
-            .media-body
-              h2.heading.mb-3
-                a(href='clientSignup') Client
-              p Find a Lawyer
-          .col-md-1
-          .col-md-3.text-center.services.align-self-stretch.ftco-animate.pt-5.mb-5
-            .icon
-              span.flaticon-lawyer
-            .media-body
-              h2.heading.mb-3
-                a(href='lawyerSignup') Lawyer
-              p Find clients to help
-    // Our Lawyers
-    section.ftco-section.bg-secondary
-      .container-fluid
-        .row.justify-content-center.mb-5.pb-3
-          .col-md-7.text-center.heading-section.heading-section-white.ftco-animate
-            span.subheading Our Attorney
-            h2.mb-4 Our Legal Attorneys
-        .row
-          // person 1
-          .col-lg-3.col-sm-6
-            .block-2.ftco-animate
-              .flipper
-                .front(style='background-image: url(images/person_1.jpg);')
-                  .box
-                    h2 Richard Anderson
-                    p Civil Lawyer
-              .back
-                // back content
-                blockquote
-                  p
-                    | "What do you call a group of nerds arguing on the internet?
-                    br
-                    br
-                    |                                     The internet.
-                .author.d-flex
-                  .image.mr-3.align-self-center
-                    img(alt='', src='images/person_1.jpg')
-          // person 2
-          .col-lg-3.col-sm-6
-            .block-2.ftco-animate
-              .flipper
-                .front(style='background-image: url(images/person_2.jpg);')
-                  .box
-                    h2 Jefford Maxillin
-                    p Business Lawyer
-              .back
-                // back content
-                blockquote
-                  p
-                    | "Why did the programmer die in the shower? The shampoo bottle said: "Wash, rinse,
-                    | repeat.
-                .author.d-flex
-                  .image.mr-3.align-self-center
-                    img(alt='', src='images/person_2.jpg')
-          // person 3
-          .col-lg-3.col-sm-6
-            .block-2.ftco-animate
-              .flipper
-                .front(style='background-image: url(images/person_3.jpg);')
-                  .box
-                    h2 Carlos Obing
-                    p Criminal Defense
-              .back
-                // back content
-                blockquote
-                  p
-                    | "My physics teacher told me I had a lot of potential. Then he pushed me off a roof."
-                .author.d-flex
-                  .image.mr-3.align-self-center
-                    img(alt='', src='images/person_3.jpg')
-          // person 4
-          .col-lg-3.col-sm-6
-            .block-2.ftco-animate
-              .flipper
-                .front(style='background-image: url(images/person_4.jpg);')
-                  .box
-                    h2 Nathan Smith
-                    p Insurance Lawyer
-              .back
-                // back content
-                blockquote
-                  p
-                    | "A Roman soldier walked into a bar. He held up two fingers and said to the
-                    | bartender, 'Five beers please.'"
-                .author.d-flex
-                  .image.mr-3.align-self-center
-                    img(alt='', src='images/person_4.jpg')
-    // BLOG
-    section.ftco-section.bg-light
-      .container
-        .row.justify-content-center.mb-5.pb-3
-          .col-md-7.heading-section.text-center.ftco-animate
-            span.subheading Our Blog
-            h2 Recent Blog
-        .row.d-flex
-          .col-md-4.d-flex.ftco-animate
-            .blog-entry.justify-content-end
-              a.block-20(href='blog-single.html', style="background-image: url('images/image_1.jpg');")
-              .text.p-4.float-right.d-block
-                .topper.d-flex.align-items-center
-                  .one.py-2.pl-3.pr-1.align-self-stretch
-                    span.day 15
-                  .two.pl-0.pr-3.py-2.align-self-stretch
-                    span.yr 2019
-                    span.mos January
-                h3.heading.mt-2
-                  a(href='#') All you want to know about industrial laws
-                p
-                  | A small river named Duden flows by their place and supplies it with the necessary
-                  | regelialia.
-              h3.heading.mt-2
-                a(href='#') All you want to know about industrial laws
-              p Some text goes here
-          .col-md-4.d-flex.ftco-animate
-            .blog-entry.justify-content-end
-              a.block-20(href='blog-single.html', style="background-image: url('images/image_2.jpg');")
-              .text.p-4.float-right.d-block
-                .topper.d-flex.align-items-center
-                  .one.py-2.pl-3.pr-1.align-self-stretch
-                    span.day 12
-                  .two.pl-0.pr-3.py-2.align-self-stretch
-                    span.yr 2019
-                    span.mos January
-                h3.heading.mt-2
-                  a(href='#') All you want to know about industrial laws
-                p
-                  | A small river named Duden flows by their place and supplies it with the necessary
-                  | regelialia.
-              h3.heading.mt-2
-                a(href='#') All you want to know about industrial laws
-              p Some text goes here
-          .col-md-4.d-flex.ftco-animate
-            .blog-entry
-              a.block-20(href='blog-single.html', style="background-image: url('images/image_3.jpg');")
-              .text.p-4.float-right.d-block
-                .topper.d-flex.align-items-center
-                  .one.py-2.pl-3.pr-1.align-self-stretch
-                    span.day 10
-                  .two.pl-0.pr-3.py-2.align-self-stretch
-                    span.yr 2019
-                    span.mos January
-                h3.heading.mt-2
-                  a(href='#') All you want to know about industrial laws
-                p
-                  | A small river named Duden flows by their place and supplies it with the necessary
-                  | regelialia.
-              h3.heading.mt-2
-                a(href='#') All you want to know about industrial laws
-              p Some text goes here
-    // FOOTER
-    footer.ftco-footer.ftco-bg-dark.ftco-section
-      .container
-        .row.mb-5
-          .col-md
-            .ftco-footer-widget.mb-3
-              h2.ftco-heading-2 LawyerUp
-              p
-                | "It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their
-                | first
-                | victory against the evil Galactic Empire. During the battle, Rebel spies managed to steal
-                | secret
-                | plans to the Empire’s ultimate weapon, the DEATH STAR, an armored space station with enough
-                | power to destroy an entire planet.
-              ul.ftco-footer-social.list-unstyled.float-md-left.float-lft.mt-5
-                li.ftco-animate
-                  a(href='#')
-                    span.icon-twitter
-                li.ftco-animate
-                  a(href='#')
-                    span.icon-facebook
-                li.ftco-animate
-                  a(href='#')
-                    span.icon-instagram
-          .col-md
-          .col-md
-            .ftco-footer-widget.mb-4
-              h2.ftco-heading-2 Have a Questions?
-              .block-23.mb-3
-                ul
-                  li
-                    span.icon.icon-map-marker
-                    span.text Fake St. USA
-                  li
-                    a(href='#')
-                      span.icon.icon-phone
-                      span.text 800-222-2222
-                  li
-                    a(href='#')
-                      span.icon.icon-envelope
-                      span.text info@yourdomain.com
+block content
+  .hero-wrap.js-fullheight(data-stellar-background-ratio='0.5', style="background-image: url('images/bg_1.jpg');")
+    .overlay
+    .container
+      .row.no-gutters.slider-text.js-fullheight.align-items-center.justify-content-center(data-scrollax-parent='true')
+        .col-md-10.text-center.ftco-animate(data-scrollax=" properties: { translateY: '70%' }")
+          h2.subheading(data-scrollax="properties: { translateY: '30%', opacity: 1.6 }")
+            | We are here
+            | to help!
+          h1.mb-0(data-scrollax="properties: { translateY: '30%', opacity: 1.6 }")
+            span Experience
+            |  . 
+            span Innovation
+            |  . 
+            span Excellence
+        .col-md-3.text-center.services.align-self-stretch.ftco-animate.pt-5.mb-5
+          .icon
+            span.flaticon-auction
+          .media-body
+            h2.heading.mb-3
+              a(href='clientSignup') Client
+            p Find a Lawyer
+        .col-md-1
+        .col-md-3.text-center.services.align-self-stretch.ftco-animate.pt-5.mb-5
+          .icon
+            span.flaticon-lawyer
+          .media-body
+            h2.heading.mb-3
+              a(href='lawyerSignup') Lawyer
+            p Find clients to help
+  // Our Lawyers
+  section.ftco-section.bg-secondary
+    .container-fluid
+      .row.justify-content-center.mb-5.pb-3
+        .col-md-7.text-center.heading-section.heading-section-white.ftco-animate
+          span.subheading Our Attorney
+          h2.mb-4 Our Legal Attorneys
       .row
-        .col-md-12.text-center
-          p
-            // Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-            | Copyright ©
-            script.
-              document.write(new Date().getFullYear());
-            |                     All rights reserved | This template is made with 
-            i.icon-heart.color-danger(aria-hidden='true')
-            |  by 
-            a(href='https://colorlib.com', target='_blank') Colorlib
-
-    // Modal HTML Markup
-
-    #ModalLoginForm.modal.fade
-      .modal-dialog
-        .modal-content
-          .modal-header
-            h4.modal-title.text-xs-center Log in like a Boss
-          .modal-body
-            form(role='form', method='POST', action='')
-              input(type='hidden', name='_token', value='')
-              .form-group
-                label.control-label E-Mail Address
-                div
-                  input.form-control.input-lg(type='email', name='email', value='')
-              .form-group
-                label.control-label Password
-                div
-                  input.form-control.input-lg(type='password', name='password')
-              .form-group
-                div
-                  .checkbox
-                    label
-                      input(type='checkbox', name='remember')
-                      |  Remember Me
-              .form-group
-                div
-                  a.btn.btn-link(href='') Forgot Your Password?
-                  button.btn.btn-info.btn-block(type='submit') Login
-          .modal-footer.text-xs-center
-            | Don't have an account? 
-            a(href='/auth/register') Sign up »
-    
-    // loader
-    #ftco-loader.show.fullscreen
-      svg.circular(height='48px', width='48px')
-        circle.path-bg(cx='24', cy='24', fill='none', r='22', stroke='#eeeeee', stroke-width='4')
-        circle.path(cx='24', cy='24', fill='none', r='22', stroke='#F96D00', stroke-miterlimit='10', stroke-width='4')
-    script(src='javascripts/jquery.min.js')
-    script(src='javascripts/jquery-migrate-3.0.1.min.js')
-    script(src='javascripts/popper.min.js')
-    script(src='javascripts/bootstrap.min.js')
-    script(src='javascripts/jquery.easing.1.3.js')
-    script(src='javascripts/jquery.waypoints.min.js')
-    script(src='javascripts/jquery.stellar.min.js')
-    script(src='javascripts/owl.carousel.min.js')
-    script(src='javascripts/jquery.magnific-popup.min.js')
-    script(src='javascripts/aos.js')
-    script(src='javascripts/jquery.animateNumber.min.js')
-    script(src='javascripts/scrollax.min.js')
-    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false')
-    script(src='javascripts/google-map.js')
-    script(src='javascripts/main.js')
+        // person 1
+        .col-lg-3.col-sm-6
+          .block-2.ftco-animate
+            .flipper
+              .front(style='background-image: url(images/person_1.jpg);')
+                .box
+                  h2 Richard Anderson
+                  p Civil Lawyer
+            .back
+              // back content
+              blockquote
+                p
+                  | "What do you call a group of nerds arguing on the internet?
+                  br
+                  br
+                  |                                     The internet.
+              .author.d-flex
+                .image.mr-3.align-self-center
+                  img(alt='', src='images/person_1.jpg')
+        // person 2
+        .col-lg-3.col-sm-6
+          .block-2.ftco-animate
+            .flipper
+              .front(style='background-image: url(images/person_2.jpg);')
+                .box
+                  h2 Jefford Maxillin
+                  p Business Lawyer
+            .back
+              // back content
+              blockquote
+                p
+                  | "Why did the programmer die in the shower? The shampoo bottle said: "Wash, rinse,
+                  | repeat.
+              .author.d-flex
+                .image.mr-3.align-self-center
+                  img(alt='', src='images/person_2.jpg')
+        // person 3
+        .col-lg-3.col-sm-6
+          .block-2.ftco-animate
+            .flipper
+              .front(style='background-image: url(images/person_3.jpg);')
+                .box
+                  h2 Carlos Obing
+                  p Criminal Defense
+            .back
+              // back content
+              blockquote
+                p
+                  | "My physics teacher told me I had a lot of potential. Then he pushed me off a roof."
+              .author.d-flex
+                .image.mr-3.align-self-center
+                  img(alt='', src='images/person_3.jpg')
+        // person 4
+        .col-lg-3.col-sm-6
+          .block-2.ftco-animate
+            .flipper
+              .front(style='background-image: url(images/person_4.jpg);')
+                .box
+                  h2 Nathan Smith
+                  p Insurance Lawyer
+            .back
+              // back content
+              blockquote
+                p
+                  | "A Roman soldier walked into a bar. He held up two fingers and said to the
+                  | bartender, 'Five beers please.'"
+              .author.d-flex
+                .image.mr-3.align-self-center
+                  img(alt='', src='images/person_4.jpg')
+  // BLOG
+  section.ftco-section.bg-light
+    .container
+      .row.justify-content-center.mb-5.pb-3
+        .col-md-7.heading-section.text-center.ftco-animate
+          span.subheading Our Blog
+          h2 Recent Blog
+      .row.d-flex
+        .col-md-4.d-flex.ftco-animate
+          .blog-entry.justify-content-end
+            a.block-20(href='blog-single.html', style="background-image: url('images/image_1.jpg');")
+            .text.p-4.float-right.d-block
+              .topper.d-flex.align-items-center
+                .one.py-2.pl-3.pr-1.align-self-stretch
+                  span.day 15
+                .two.pl-0.pr-3.py-2.align-self-stretch
+                  span.yr 2019
+                  span.mos January
+              h3.heading.mt-2
+                a(href='#') All you want to know about industrial laws
+              p
+                | A small river named Duden flows by their place and supplies it with the necessary
+                | regelialia.
+            h3.heading.mt-2
+              a(href='#') All you want to know about industrial laws
+            p Some text goes here
+        .col-md-4.d-flex.ftco-animate
+          .blog-entry.justify-content-end
+            a.block-20(href='blog-single.html', style="background-image: url('images/image_2.jpg');")
+            .text.p-4.float-right.d-block
+              .topper.d-flex.align-items-center
+                .one.py-2.pl-3.pr-1.align-self-stretch
+                  span.day 12
+                .two.pl-0.pr-3.py-2.align-self-stretch
+                  span.yr 2019
+                  span.mos January
+              h3.heading.mt-2
+                a(href='#') All you want to know about industrial laws
+              p
+                | A small river named Duden flows by their place and supplies it with the necessary
+                | regelialia.
+            h3.heading.mt-2
+              a(href='#') All you want to know about industrial laws
+            p Some text goes here
+        .col-md-4.d-flex.ftco-animate
+          .blog-entry
+            a.block-20(href='blog-single.html', style="background-image: url('images/image_3.jpg');")
+            .text.p-4.float-right.d-block
+              .topper.d-flex.align-items-center
+                .one.py-2.pl-3.pr-1.align-self-stretch
+                  span.day 10
+                .two.pl-0.pr-3.py-2.align-self-stretch
+                  span.yr 2019
+                  span.mos January
+              h3.heading.mt-2
+                a(href='#') All you want to know about industrial laws
+              p
+                | A small river named Duden flows by their place and supplies it with the necessary
+                | regelialia.
+            h3.heading.mt-2
+              a(href='#') All you want to know about industrial laws
+            p Some text goes here

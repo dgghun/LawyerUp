@@ -1,218 +1,42 @@
-doctype html
-html(lang='en')
-  head
-    title Lawyer Sign Up
-    meta(charset='utf-8')
-    meta(content='width=device-width, initial-scale=1, shrink-to-fit=no', name='viewport')
-    link(href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900', rel='stylesheet')
-    link(href='https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i', rel='stylesheet')
-    link(href='stylesheets/open-iconic-bootstrap.min.css', rel='stylesheet')
-    link(href='stylesheets/animate.css', rel='stylesheet')
-    link(href='stylesheets/owl.carousel.min.css', rel='stylesheet')
-    link(href='stylesheets/owl.theme.default.min.css', rel='stylesheet')
-    link(href='stylesheets/magnific-popup.css', rel='stylesheet')
-    link(href='stylesheets/aos.css', rel='stylesheet')
-    link(href='stylesheets/ionicons.min.css', rel='stylesheet')
-    link(href='stylesheets/flaticon.css', rel='stylesheet')
-    link(href='stylesheets/icomoon.css', rel='stylesheet')
-    link(href='stylesheets/style.css', rel='stylesheet')
-  body
-    nav#ftco-navbar.navbar.navbar-expand-lg.navbar-dark.ftco_navbar.bg-dark.ftco-navbar-light
-      .container
-        a.navbar-brand(href='index.html') LawyerUp
-        button.navbar-toggler(aria-controls='ftco-nav', aria-expanded='false', aria-label='Toggle navigation', data-target='#ftco-nav', data-toggle='collapse', type='button')
-          span.oi.oi-menu
-          |  Menu
-        #ftco-nav.collapse.navbar-collapse
-          ul.navbar-nav.ml-auto
-            p
-              button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#ModalLoginForm') Login
-    // END nav
-    .hero-wrap.js-fullheight(data-stellar-background-ratio='0.5', style="background-image: url('images/bg_lawyer-signup.jpg');")
-      .overlay
-      .container
-        .row.slider-text.js-fullheight.align-items-center.justify-content-center(data-scrollax-parent='true')
-          .col-md-10.text-center.ftco-animate(data-scrollax=" properties: { translateY: '70%' }")
-            h1.mb-0(data-scrollax="properties: { translateY: '30%', opacity: 1.6 }")
-              span Laywer Sign Up
-            br
-            form#formLawyerSignUp(onsubmit='validate(this)')
-              .form-group
-                input#firstName.form-control(type='text', aria-describedby='message', placeholder='First Name', required='')
-              .form-group
-                input#lastName.form-control(type='text', placeholder='Last Name', required='')
-              .form-group
-                .row
-                  .col-sm
-                    input#license.form-control.col-sm(type='text', placeholder='License')
-                  .col-sm-3
-                    select#statesDropDown.form-control(name='st')
-                      option(value='State') State
-                      option(value='AK') AK
-                      option(value='AL') AL
-                      option(value='AR') AR
-                      option(value='AZ') AZ
-                      option(value='CA') CA
-                      option(value='CO') CO
-                      option(value='CT') CT
-                      option(value='DC') DC
-                      option(value='DE') DE
-                      option(value='FL') FL
-                      option(value='GA') GA
-                      option(value='HI') HI
-                      option(value='IA') IA
-                      option(value='ID') ID
-                      option(value='IL') IL
-                      option(value='IN') IN
-                      option(value='KS') KS
-                      option(value='KY') KY
-                      option(value='LA') LA
-                      option(value='MA') MA
-                      option(value='MD') MD
-                      option(value='ME') ME
-                      option(value='MI') MI
-                      option(value='MN') MN
-                      option(value='MO') MO
-                      option(value='MS') MS
-                      option(value='MT') MT
-                      option(value='NC') NC
-                      option(value='ND') ND
-                      option(value='NE') NE
-                      option(value='NH') NH
-                      option(value='NJ') NJ
-                      option(value='NM') NM
-                      option(value='NV') NV
-                      option(value='NY') NY
-                      option(value='OH') OH
-                      option(value='OK') OK
-                      option(value='OR') OR
-                      option(value='PA') PA
-                      option(value='PR') PR
-                      option(value='RI') RI
-                      option(value='SC') SC
-                      option(value='SD') SD
-                      option(value='TN') TN
-                      option(value='TX') TX
-                      option(value='UT') UT
-                      option(value='VA') VA
-                      option(value='VT') VT
-                      option(value='WA') WA
-                      option(value='WI') WI
-                      option(value='WV') WV
-                      option(value='WY') WY
-              .form-group
-                input#email.form-control(type='email', placeholder='Email', aria-describedby='msgEmail', required='')
-                small#msgEmail.form-text(style='color: #ffe97a') We'll never share your email. Email will be used for login.
-              .form-group
-                input#password.form-control(type='password', placeholder='Create Password', required='')
-              .form-group
-                input#rePassword.form-control(type='password', placeholder='Re-Enter Password', aria-describedby='msgPassword', required='')
-                small#msgPassword.form-text(style='color: #ffe97a')
-                  | Password must be 6 characters containing at least one upper case, one lower case, and a number.
-              button.btn.btn-primary(type='submit') Submit
-    // FOOTER
-    footer.ftco-footer.ftco-bg-dark.ftco-section
-      .container
-        .row.mb-5
-          .col-md
-            .ftco-footer-widget.mb-3
-              h2.ftco-heading-2 LawyerUp
-              p
-                | "It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their
-                | first
-                | victory against the evil Galactic Empire. During the battle, Rebel spies managed to steal
-                | secret
-                | plans to the Empire’s ultimate weapon, the DEATH STAR, an armored space station with enough
-                | power to destroy an entire planet.
-              ul.ftco-footer-social.list-unstyled.float-md-left.float-lft.mt-5
-                li.ftco-animate
-                  a(href='#')
-                    span.icon-twitter
-                li.ftco-animate
-                  a(href='#')
-                    span.icon-facebook
-                li.ftco-animate
-                  a(href='#')
-                    span.icon-instagram
-          .col-md
-          .col-md
-            .ftco-footer-widget.mb-4
-              h2.ftco-heading-2 Have a Questions?
-              .block-23.mb-3
-                ul
-                  li
-                    span.icon.icon-map-marker
-                    span.text Fake St. USA
-                  li
-                    a(href='#')
-                      span.icon.icon-phone
-                      span.text 800-222-2222
-                  li
-                    a(href='#')
-                      span.icon.icon-envelope
-                      span.text info@yourdomain.com
-        .row
-          .col-md-12.text-center
-            p
-              // Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-              | Copyright ©
-              script.
-                document.write(new Date().getFullYear());
-              |                         All rights reserved | This template is made with 
-              i.icon-heart.color-danger(aria-hidden='true')
-              |  by 
-              a(href='https://colorlib.com', target='_blank') Colorlib
-              // Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-              // loader
+extends layout
 
-            #ModalLoginForm.modal.fade
-              .modal-dialog
-                .modal-content
-                  .modal-header
-                    h4.modal-title.text-xs-center Log in like a Boss
-                  .modal-body
-                    form(role='form', method='POST', action='')
-                      input(type='hidden', name='_token', value='')
-                      .form-group
-                        label.control-label E-Mail Address
-                        div
-                          input.form-control.input-lg(type='email', name='email', value='')
-                      .form-group
-                        label.control-label Password
-                        div
-                          input.form-control.input-lg(type='password', name='password')
-                      .form-group
-                        div
-                          .checkbox
-                            label
-                              input(type='checkbox', name='remember')
-                              |  Remember Me
-                      .form-group
-                        div
-                          a.btn.btn-link(href='') Forgot Your Password?
-                          button.btn.btn-info.btn-block(type='submit') Login
-                  .modal-footer.text-xs-center
-                    | Don't have an account? 
-                    a(href='/auth/register') Sign up »
+block title
+  title LawyerUp-Signup
 
+block content
+  .hero-wrap.js-fullheight(data-stellar-background-ratio='0.5', style="background-image: url('images/bg_lawyer-signup.jpg');")
+    .overlay
+    .container
+      .row.slider-text.js-fullheight.align-items-center.justify-content-center(data-scrollax-parent='true')
+        .col-md-10.text-center.ftco-animate(data-scrollax=" properties: { translateY: '70%' }")
+          h1.mb-0(data-scrollax="properties: { translateY: '30%', opacity: 1.6 }")
+            span Laywer Sign Up
+          br
+          form#formLawyerSignUp(onsubmit='validate(this)')
+            .form-group
+              input#firstName.form-control(type='text', aria-describedby='message', placeholder='First Name', required='')
+            .form-group
+              input#lastName.form-control(type='text', placeholder='Last Name', required='')
+            .form-group
+              .row
+                .col-sm
+                  input#license.form-control.col-sm(type='text', placeholder='License')
+                .col-sm-3
+                  select#statesDropDown.form-control(name='st')
+                    option(value='State' disabled selected) State
+                    each val in ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY']
+                      option(value=val) #{val}
 
-              #ftco-loader.show.fullscreen
-                svg.circular(height='48px', width='48px')
-                  circle.path-bg(cx='24', cy='24', fill='none', r='22', stroke='#eeeeee', stroke-width='4')
-                  circle.path(cx='24', cy='24', fill='none', r='22', stroke='#F96D00', stroke-miterlimit='10', stroke-width='4')
-              script(src='javascripts/jquery.min.js')
-              script(src='javascripts/jquery-migrate-3.0.1.min.js')
-              script(src='javascripts/popper.min.js')
-              script(src='javascripts/bootstrap.min.js')
-              script(src='javascripts/jquery.easing.1.3.js')
-              script(src='javascripts/jquery.waypoints.min.js')
-              script(src='javascripts/jquery.stellar.min.js')
-              script(src='javascripts/owl.carousel.min.js')
-              script(src='javascripts/jquery.magnific-popup.min.js')
-              script(src='javascripts/aos.js')
-              script(src='javascripts/jquery.animateNumber.min.js')
-              script(src='javascripts/scrollax.min.js')
-              script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false')
-              script(src='javascripts/google-map.js')
-              script(src='javascripts/main.js')
-              script(src='javascripts/signup.js')
+            .form-group
+              input#email.form-control(type='email', placeholder='Email', aria-describedby='msgEmail', required='')
+              small#msgEmail.form-text(style='color: #ffe97a') We'll never share your email. Email will be used for login.
+            .form-group
+              input#password.form-control(type='password', placeholder='Create Password', required='')
+            .form-group
+              input#rePassword.form-control(type='password', placeholder='Re-Enter Password', aria-describedby='msgPassword', required='')
+              small#msgPassword.form-text(style='color: #ffe97a')
+                | Password must be 6 characters containing at least one upper case, one lower case, and a number.
+            button.btn.btn-primary(type='submit') Submit
+
+  block append footerScripts
+    script(src='javascripts/signup.js')
