@@ -7,7 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     phoneNum: DataTypes.STRING,
     country: DataTypes.STRING,
     password: DataTypes.STRING
-  }, {});
+  }, {
+    freezeTableName: true
+  });
   client_tbl.associate = function(models) {
     // associations can be defined here
   };

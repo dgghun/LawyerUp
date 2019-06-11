@@ -1,13 +1,35 @@
 exports.db_create = function(req, res, next){
-    console.log("MESSAGE: db_create() called.");
-    // console.log(JSON.stringify(req.body));
+    console.log("db_create() called.");
     
-    console.log("---> FirstName:" + req.body.firstName);
-    console.log("---> LastName: " + req.body.lastName);
-    console.log("---> Email:    " + req.body.email);
-    console.log("---> Phone:    " + req.body.phone);
-    console.log("---> Country:  " + req.body.country);
-    console.log("---> Password: " + req.body.password);
+    var Sequelize = require('sequelize');
+    const ClientModel = require('../models/client_tbl');
+    
+    //Setting up the config
+    var sequelize = new Sequelize('lawyerup_db_dev', 'root', null, {
+        host: 'localhost',
+        port: 3306,
+        dialect: 'mysql'
+    });
+    
+    // Checking connection status
+    sequelize.authenticate()
+    .then(function(err) {
+        console.log('Connection has been established successfully.');
+    }).catch(function (err) {
+        console.log('Unable to connect to the database:', err);
+    });
+    
+    //Create Client
+    const Client = ClientModel(sequelize, Sequelize);
+    console.log(req.body);
+    Client.create(req.body)
+        .then(function(err){
+            console.log('Client create.')
+        })
+        .catch(function(err){
+            console.log('Error creating client.');
+            console.log(err);
+        });
 
     res.render('crud_testing');
 }
