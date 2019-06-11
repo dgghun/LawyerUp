@@ -7,9 +7,9 @@ let landing = require('../controllers/landing');
 
 router.get('/', landing.get_landing);
 
-router.post('/login', landing.login);
-router.post('/clientSignup', landing.client_signup);
-router.post('/lawyerSignup', landing.lawyer_signup);
+router.get('/login', landing.login);
+router.get('/clientSignup', landing.client_signup);
+router.get('/lawyerSignup', landing.lawyer_signup);
 
 
 module.exports = router;
