@@ -10,6 +10,10 @@ router.get('/', landing.get_landing);
 router.post('/login', landing.login);
 router.post('/clientSignup', landing.client_signup);
 router.post('/lawyerSignup', landing.lawyer_signup);
+router.post('/CRUD', landing.crud_testing);
 
+// CRUD calls
+let crud = require('../controllers/crud');
+router.post('/create', crud.db_create);
 
 module.exports = router;

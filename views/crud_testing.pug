@@ -1,0 +1,21 @@
+block content
+    form(method='POST' action='/create')
+      div.form-group
+        label(for='firstName') First Name:
+        input#firstName.form-control(type='text', placeholder='first name' name='firstName')
+      div.form-group
+        label(for='lastName') Last Name:
+        input#lastName.form-control(type='text', placeholder='last name' name='lastName')
+      div.form-group
+        label(for='email') Email:
+        input#email.form-control(type='email', placeholder='name@email.com' name='email')
+      div.form-group
+        label(for='phone') Phone:
+        input#phone.form-control(type='text', placeholder='909-555-1234' name='phone')
+      div.form-group
+        label(for='country') Country:
+        input#country.form-control(type='password' placeholder='usa' name='country')
+      div.form-group
+        label(for='password') Password:
+        input#password.form-control(type='password' name='password')
+      button.btn.btn-primary(type='submit') Create
