@@ -28,14 +28,10 @@ html(lang='en')
     nav#ftco-navbar.navbar.navbar-expand-lg.navbar-dark.ftco_navbar.bg-dark.ftco-navbar-light
       .container
         a.navbar-brand(href='index.html') LawyerUp
-        button.navbar-toggler(aria-controls='ftco-nav', aria-expanded='false', aria-label='Toggle navigation', data-target='#ftco-nav', data-toggle='collapse', type='button')
-          span.oi.oi-menu
-          |  Menu
         #ftco-nav.collapse.navbar-collapse
           ul.navbar-nav.ml-auto
             p
-              a.btn.btn-primary.py-3.px-4(href='login', style='margin-top:20px;') Login
-            //-   a.btn.btn-primary.py-3.px-4(href='https://public.dgghun.now.sh', style='margin-top:20px;') Login
+              button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#ModalLoginForm') Login
 
     .hero-wrap.js-fullheight(data-stellar-background-ratio='0.5', style="background-image: url('images/bg_1.jpg');")
       .overlay
@@ -257,6 +253,39 @@ html(lang='en')
             i.icon-heart.color-danger(aria-hidden='true')
             |  by 
             a(href='https://colorlib.com', target='_blank') Colorlib
+
+    // Modal HTML Markup
+
+    #ModalLoginForm.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h4.modal-title.text-xs-center Log in like a Boss
+          .modal-body
+            form(role='form', method='POST', action='')
+              input(type='hidden', name='_token', value='')
+              .form-group
+                label.control-label E-Mail Address
+                div
+                  input.form-control.input-lg(type='email', name='email', value='')
+              .form-group
+                label.control-label Password
+                div
+                  input.form-control.input-lg(type='password', name='password')
+              .form-group
+                div
+                  .checkbox
+                    label
+                      input(type='checkbox', name='remember')
+                      |  Remember Me
+              .form-group
+                div
+                  a.btn.btn-link(href='') Forgot Your Password?
+                  button.btn.btn-info.btn-block(type='submit') Login
+          .modal-footer.text-xs-center
+            | Don't have an account? 
+            a(href='/auth/register') Sign up »
+    
     // loader
     #ftco-loader.show.fullscreen
       svg.circular(height='48px', width='48px')
@@ -274,8 +303,6 @@ html(lang='en')
     script(src='javascripts/aos.js')
     script(src='javascripts/jquery.animateNumber.min.js')
     script(src='javascripts/scrollax.min.js')
-
     script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false')
-
     script(src='javascripts/google-map.js')
     script(src='javascripts/main.js')

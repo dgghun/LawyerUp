@@ -26,7 +26,7 @@ html(lang='en')
         #ftco-nav.collapse.navbar-collapse
           ul.navbar-nav.ml-auto
             p
-              a.btn.btn-primary.py-3.px-4(href='#', style='margin-top:20px;') Login
+              button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#ModalLoginForm') Login
     // END nav
     .hero-wrap.js-fullheight(data-stellar-background-ratio='0.5', style="background-image: url('images/bg_lawyer-signup.jpg');")
       .overlay
@@ -164,6 +164,38 @@ html(lang='en')
               a(href='https://colorlib.com', target='_blank') Colorlib
               // Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
               // loader
+
+            #ModalLoginForm.modal.fade
+              .modal-dialog
+                .modal-content
+                  .modal-header
+                    h4.modal-title.text-xs-center Log in like a Boss
+                  .modal-body
+                    form(role='form', method='POST', action='')
+                      input(type='hidden', name='_token', value='')
+                      .form-group
+                        label.control-label E-Mail Address
+                        div
+                          input.form-control.input-lg(type='email', name='email', value='')
+                      .form-group
+                        label.control-label Password
+                        div
+                          input.form-control.input-lg(type='password', name='password')
+                      .form-group
+                        div
+                          .checkbox
+                            label
+                              input(type='checkbox', name='remember')
+                              |  Remember Me
+                      .form-group
+                        div
+                          a.btn.btn-link(href='') Forgot Your Password?
+                          button.btn.btn-info.btn-block(type='submit') Login
+                  .modal-footer.text-xs-center
+                    | Don't have an account? 
+                    a(href='/auth/register') Sign up »
+
+
               #ftco-loader.show.fullscreen
                 svg.circular(height='48px', width='48px')
                   circle.path-bg(cx='24', cy='24', fill='none', r='22', stroke='#eeeeee', stroke-width='4')
@@ -184,5 +216,3 @@ html(lang='en')
               script(src='javascripts/google-map.js')
               script(src='javascripts/main.js')
               script(src='javascripts/signup.js')
-
-
