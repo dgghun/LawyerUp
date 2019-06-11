@@ -2,8 +2,12 @@
   "name": "lawyerup",
   "version": "0.0.0",
   "private": true,
+  "_comments": {
+    "comment1": "use this Start script for Linux-> if [[ $NODE_ENV == 'production' ]]; then node ./bin/www; else nodemon ./bin/www; fi",
+    "comment2": "use this Start script for Windows-> nodemon ./bin/www"
+  },
   "scripts": {
-    "start": "if [[ $NODE_ENV == 'production' ]]; then node ./bin/www; else nodemon ./bin/www; fi"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
