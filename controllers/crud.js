@@ -8,8 +8,7 @@ var sequelize;
 const CLIENT = 'client'
 const LAWYER = 'lawyer'
 
-
-exports.db_create = function(req, res, next){
+exports.db_createClient = function(req, res, next){
     console.log("db_create() called.");
     getConnection();    // check connection
     

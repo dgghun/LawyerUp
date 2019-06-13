@@ -1,5 +1,5 @@
 block content
-    form(method='POST' action='/create')
+    form(method='POST' action='/createClient')
       div.form-group
         label(for='firstName') First Name:
         input#firstName.form-control(type='text', placeholder='first name' name='firstName')
@@ -10,8 +10,8 @@ block content
         label(for='email') Email:
         input#email.form-control(type='email', placeholder='name@email.com' name='email')
       div.form-group
-        label(for='phone') Phone:
-        input#phone.form-control(type='text', placeholder='909-555-1234' name='phone')
+        label(for='phoneNum') Phone:
+        input#phone.form-control(type='text', placeholder='909-555-1234' name='phoneNum')
       div.form-group
         label(for='country') Country:
         input#country.form-control(type='text' placeholder='usa' name='country')
