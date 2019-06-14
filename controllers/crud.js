@@ -13,43 +13,64 @@ const PAGE = 'crud_testing' // render same page for now
 
 
 /**
- * TODO 
+ * Delete model
+ */
+exports.db_deleteClient = function (req, res, next) {
+
+    getConnection()                     // get a connection
+    const Client = getModel(CLIENT);    // get model
+    console.log(req.body);              // print form data
+
+    Client.destroy({
+        where: { id: req.body.id }
+    })
+    .then(function (rowsDeleted) {
+        console.log('Rows Deleted: ' + rowsDeleted);
+        if (rowsDeleted == 1)
+            doRender(res, PAGE, 'Deleted Successfully!');
+        else if (rowsDeleted > 1) {
+            console.log('Rows Deleted:' + rowsDeleted);
+            doRender(res, PAGE, 'More than one row deleted');
+        }
+        else
+            doRender(res, PAGE, 'ID not found.')
+    })
+    .catch(function (err) {
+        console.log('Delete Error');
+        console.log(err);
+        doRender(res, PAGE, 'Delete error :(');
+    });
+}
+
+
+/**
  * Update a client
  */
 exports.db_updateClient = function(req, res, next){
-    getConnection()    // get a connection
 
+    getConnection()                     // get a connection
     const Client = getModel(CLIENT);    // get model
-    console.log(req.body);  // print form data
-    console.log(req.body.id);  // print form data
+    console.log(req.body);              // print form data
 
-    Client.findOne({ 
-        where: {
-            id: req.body.id
-        }
+    Client.update(req.body,{
+            where: { id: req.body.id }
     })
-    .then(client =>{
-        client.updateAttributes(req.body,{
-            // Only update these fields
-            fields: [req.body.email],
-            fields: [req.body.phoneNum],
-            fields: [req.body.password]
-        })
-        .then(client =>{
-            doRender(res, PAGE, 'Updated ' + client.firstName + ' ' + client.lastname + ', ID:' + client.id + '');    
-        })
-        .catch(function (err){
-            console.log('Error updating client');
-            console.log(err);
-            doRender(res, PAGE, 'Client not updated :(');   
-        })
+    .then(function (rowsUpdated) {
+        console.log('RowsUpdated:' + rowsUpdated);
+        if (rowsUpdated == 1)
+            doRender(res, PAGE, 'Updated Successfully!');
+        else if (rowsUpdated > 1) {
+            console.log('Rows Updated:' + rowsUpdated);
+            doRender(res, PAGE, 'More than one row updated');
+        }
+        else
+            doRender(res, PAGE, 'ID not found.')
     })
     .catch(function (err) {
-        console.log('Error finding client');
+        console.log('Update Error');
         console.log(err);
-        doRender(res, PAGE, 'Client not found :(');
+        doRender(res, PAGE, 'Update error :(');
     });
-    
 }
 
 /**
@@ -60,10 +81,11 @@ exports.db_getClient = function(req, res, next){
     getConnection()    // get a connection
 
     const Client = getModel(CLIENT);    // get model
-    console.log(req.body);  // print form data
+    console.log(req.body);              // print form data
+    const id = req.body.id;
 
     Client.findOne({ 
-        where: req.body
+        where: {id: id}
     })
     .then(client => {
         doRender(res, PAGE, 'Found ' + client.firstName + ' ' + client.lastname + ', ID:' + client.id + '');
@@ -75,6 +97,13 @@ exports.db_getClient = function(req, res, next){
     });
 }
 
+// function retrieve(Model, id){
+//     Model.findOne({
+//         where: {id: id}
+//     })(model => {
+
+//     })
+// }
 
 /**
  * Create a new client

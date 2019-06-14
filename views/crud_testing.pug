@@ -26,12 +26,12 @@ html
       button.btn.btn-primary(type='submit') Create Client
       br
       br
-    h2 Get Client
+    h2 Retrieve Client
     form(method='POST', action='/getClient')
       div.form-group
         label(for='id') Client ID:
         input#id.form-control(type='number', placeholder='123456' name='id' min='1')
-      button.btn.btn-primary(type='submit') Get Client
+      button.btn.btn-primary(type='submit') Retrieve Client
       br
       br
     h2 Update Client
@@ -49,3 +49,13 @@ html
         label(for='password') Enter new pass:
         input#password.form-control(type='password' name='password')
       button.btn.btn-primary(type='submit') Update Client
+      br
+      br
+    h2 Delete Client
+    form(method='POST', action='/deleteClient')
+      div.form-group
+        label(for='id') Client ID:
+        input#id.form-control(type='number', placeholder='123456' name='id' min='1')
+      button.btn.btn-primary(type='submit') Delete Client
+      br
+      br
