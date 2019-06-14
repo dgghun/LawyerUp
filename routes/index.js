@@ -15,5 +15,7 @@ router.post('/CRUD', landing.crud_testing);
 // CRUD calls
 let crud = require('../controllers/crud');
 router.post('/createClient', crud.db_createClient);
+router.post('/getClient', crud.db_getClient);
+router.post('/updateClient', crud.db_updateClient);
 
 module.exports = router;

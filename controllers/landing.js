@@ -32,5 +32,8 @@ exports.lawyer_signup = function(req, res, next){
 }
 
 exports.crud_testing = function(req, res, next){
-    res.render('crud_testing');
+    res.render('crud_testing',{
+        title: app_name,
+        message: 'CRUD Testing'
+    });
 }
