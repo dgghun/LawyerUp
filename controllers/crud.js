@@ -13,7 +13,7 @@ const PAGE = 'crud_testing' // render same page for now
 
 
 /**
- * Delete model
+ * Delete client
  */
 exports.db_deleteClient = function (req, res, next) {
 
@@ -24,6 +24,30 @@ exports.db_deleteClient = function (req, res, next) {
 
     // Delete client
     doDelete(Client, id).then(function(rowsDeleted){
+        if (rowsDeleted == 1)
+            doRender(res, PAGE, 'Deleted Successfully!');
+        else if (rowsDeleted > 1) {
+            console.log('Rows Deleted:' + rowsDeleted);
+            doRender(res, PAGE, 'More than one row deleted');
+        }
+        else
+            doRender(res, PAGE, 'ID not found.')
+    });
+}
+
+
+/**
+ * Delete lawyer
+ */
+exports.db_deleteLawyer = function (req, res, next) {
+
+    getConnection()                     // get a connection
+    const Lawyer = getModel(LAWYER);    // get model
+    console.log(req.body);              // print form data
+    const id = req.body.id
+
+    // Delete lawyer
+    doDelete(Lawyer, id).then(function(rowsDeleted){
         if (rowsDeleted == 1)
             doRender(res, PAGE, 'Deleted Successfully!');
         else if (rowsDeleted > 1) {
@@ -61,6 +85,30 @@ exports.db_updateClient = function(req, res, next){
 
 
 /**
+ * Update a lawyer
+ */
+exports.db_updateLawyer = function(req, res, next){
+
+    getConnection()                     // get a connection
+    const Lawyer = getModel(LAWYER);    // get model
+    console.log(req.body);              // print form data
+    const id = req.body.id;
+
+    //Update lawyer
+    doUpdate(Lawyer, id, req.body).then(function(rowsUpdated){
+        if (rowsUpdated == 1)
+            doRender(res, PAGE, 'Updated Successfully!');
+        else if (rowsUpdated > 1) {
+            console.log('Rows Updated:' + rowsUpdated);
+            doRender(res, PAGE, 'More than one row updated');
+        }
+        else
+            doRender(res, PAGE, 'ID not found.')
+    });
+}
+
+
+/**
  * Gets a client
  */
 exports.db_getClient = function(req, res, next){
@@ -76,6 +124,26 @@ exports.db_getClient = function(req, res, next){
             doRender(res, PAGE, 'Found ' + client.firstName + ' ' + client.lastname + ', ID:' + client.id + '');
         else
             doRender(res, PAGE, 'Client not found :(');
+    })
+}
+
+
+/**
+ * Gets a lawyer
+ */
+exports.db_getLawyer = function(req, res, next){
+    
+    getConnection()                     // get a connection
+    const Lawyer = getModel(LAWYER);    // get model
+    console.log(req.body);              // print form data
+    const id = req.body.id;
+    
+    // Retrieve Lawyer and process if found
+    doRetrieve(Lawyer, id).then(function (lawyer){
+        if(lawyer != null)
+            doRender(res, PAGE, 'Found ' + lawyer.firstName + ' ' + lawyer.lastname + ', ID:' + lawyer.id + '');
+        else
+            doRender(res, PAGE, 'Lawyer not found :(');
     })
 }
 
