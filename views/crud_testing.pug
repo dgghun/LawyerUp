@@ -3,82 +3,140 @@ html
     title= title
   body
     h1= message
-     h2 Create Lawyer
-    form(method='POST' action='/createLawyer')
-      div.form-group
-        label(for='firstName') First Name:
-        input#firstName.form-control(type='text', placeholder='first name' name='firstName')
-      div.form-group
-        label(for='lastname') Last Name:
-        input#lastName.form-control(type='text', placeholder='last name' name='lastname')
-      div.form-group
-        label(for='email') Email:
-        input#email.form-control(type='email', placeholder='name@email.com' name='email')
-      div.form-group
-        label(for='phoneNum') Phone:
-        input#phone.form-control(type='text', placeholder='909-555-1234' name='phoneNum')
-      div.form-group
-        label(for='country') Country:
-        input#country.form-control(type='text' placeholder='usa' name='country')
-      div.form-group
-        label(for='password') Password:
-        input#password.form-control(type='password' name='password')
-      button.btn.btn-primary(type='submit') Create Lawyer
-      br
-      br
-    h2 Create Client
-    form(method='POST' action='/createClient')
-      div.form-group
-        label(for='firstName') First Name:
-        input#firstName.form-control(type='text', placeholder='first name' name='firstName')
-      div.form-group
-        label(for='lastname') Last Name:
-        input#lastName.form-control(type='text', placeholder='last name' name='lastname')
-      div.form-group
-        label(for='email') Email:
-        input#email.form-control(type='email', placeholder='name@email.com' name='email')
-      div.form-group
-        label(for='phoneNum') Phone:
-        input#phone.form-control(type='text', placeholder='909-555-1234' name='phoneNum')
-      div.form-group
-        label(for='country') Country:
-        input#country.form-control(type='text' placeholder='usa' name='country')
-      div.form-group
-        label(for='password') Password:
-        input#password.form-control(type='password' name='password')
-      button.btn.btn-primary(type='submit') Create Client
-      br
-      br
-    h2 Retrieve Client
-    form(method='POST', action='/getClient')
-      div.form-group
-        label(for='id') Client ID:
-        input#id.form-control(type='number', placeholder='123456' name='id' min='1')
-      button.btn.btn-primary(type='submit') Retrieve Client
-      br
-      br
-    h2 Update Client
-    form(method='POST', action='/updateClient')
-      div.form-group
-        label(for='id') Enter ID to update: 
-        input#id.form-control(type='number', placeholder='123456' name='id' min='1')
-      div.form-group
-        label(for='email') Enter new email:
-        input#email.form-control(type='email', placeholder='name@email.com' name='email')
-      div.form-group
-        label(for='phoneNum') Enter new Phone:
-        input#phone.form-control(type='text', placeholder='909-555-1234' name='phoneNum')
-      div.form-group
-        label(for='password') Enter new pass:
-        input#password.form-control(type='password' name='password')
-      button.btn.btn-primary(type='submit') Update Client
-      br
-      br
-    h2 Delete Client
-    form(method='POST', action='/deleteClient')
-      div.form-group
-        label(for='id') Client ID:
-        input#id.form-control(type='number', placeholder='123456' name='id' min='1')
-      button.btn.btn-primary(type='submit') Delete Client
-      br
-      br
+    table(style='border-spacing: 25px;' )
+      tr
+        td
+          h2 Create Lawyer
+          form(method='POST' action='/createLawyer')
+            div.form-group
+              label(for='firstName') First Name:
+              input#firstName.form-control(type='text', placeholder='first name' name='firstName')
+            div.form-group
+              label(for='lastname') Last Name:
+              input#lastName.form-control(type='text', placeholder='last name' name='lastname')
+            div.form-group
+              label(for='email') Email:
+              input#email.form-control(type='email', placeholder='name@email.com' name='email')
+            div.form-group
+              label(for='phoneNum') Phone:
+              input#phone.form-control(type='text', placeholder='909-555-1234' name='phoneNum')
+            div.form-group
+              label(for='country') Country:
+              input#country.form-control(type='text' placeholder='usa' name='country')
+            div.form-group
+              label(for='password') Password:
+              input#password.form-control(type='password' name='password')
+            button.btn.btn-primary(type='submit') Create Lawyer
+            br
+            br
+        td
+        td
+          h2 Create Client
+          form(method='POST' action='/createClient')
+            div.form-group
+              label(for='firstName') First Name:
+              input#firstName.form-control(type='text', placeholder='first name' name='firstName')
+            div.form-group
+              label(for='lastname') Last Name:
+              input#lastName.form-control(type='text', placeholder='last name' name='lastname')
+            div.form-group
+              label(for='email') Email:
+              input#email.form-control(type='email', placeholder='name@email.com' name='email')
+            div.form-group
+              label(for='phoneNum') Phone:
+              input#phone.form-control(type='text', placeholder='909-555-1234' name='phoneNum')
+            div.form-group
+              label(for='country') Country:
+              input#country.form-control(type='text' placeholder='usa' name='country')
+            div.form-group
+              label(for='password') Password:
+              input#password.form-control(type='password' name='password')
+            button.btn.btn-primary(type='submit') Create Client
+            br
+            br
+        td
+      tr
+      tr
+        td
+          h2 Retrieve Client
+          form(method='POST', action='/getClient')
+            div.form-group
+              label(for='id') Client ID:
+              input#id.form-control(type='number', placeholder='123456' name='id' min='1')
+            button.btn.btn-primary(type='submit') Retrieve Client
+            br
+            br
+        td
+        td
+          h2 Retrieve Lawyer
+          form(method='POST', action='/getLawyer')
+            div.form-group
+              label(for='id') Client ID:
+              input#id.form-control(type='number', placeholder='123456' name='id' min='1')
+            button.btn.btn-primary(type='submit') Retrieve Lawyer
+            br
+            br  
+        td
+      tr
+      tr
+        td
+          h2 Update Client
+          form(method='POST', action='/updateClient')
+            div.form-group
+              label(for='id') Enter ID to update: 
+              input#id.form-control(type='number', placeholder='123456' name='id' min='1')
+            div.form-group
+              label(for='email') Enter new email:
+              input#email.form-control(type='email', placeholder='name@email.com' name='email')
+            div.form-group
+              label(for='phoneNum') Enter new Phone:
+              input#phone.form-control(type='text', placeholder='909-555-1234' name='phoneNum')
+            div.form-group
+              label(for='password') Enter new pass:
+              input#password.form-control(type='password' name='password')
+            button.btn.btn-primary(type='submit') Update Client
+            br
+            br
+        td
+        td
+          h2 Update Lawyer
+          form(method='POST', action='/updateLawyer')
+            div.form-group
+              label(for='id') Enter ID to update: 
+              input#id.form-control(type='number', placeholder='123456' name='id' min='1')
+            div.form-group
+              label(for='email') Enter new email:
+              input#email.form-control(type='email', placeholder='name@email.com' name='email')
+            div.form-group
+              label(for='phoneNum') Enter new Phone:
+              input#phone.form-control(type='text', placeholder='909-555-1234' name='phoneNum')
+            div.form-group
+              label(for='password') Enter new pass:
+              input#password.form-control(type='password' name='password')
+            button.btn.btn-primary(type='submit') Update Lawyer
+            br
+            br
+        td
+      tr
+      tr
+        td      
+          h2 Delete Client
+          form(method='POST', action='/deleteClient')
+            div.form-group
+              label(for='id') Client ID:
+              input#id.form-control(type='number', placeholder='123456' name='id' min='1')
+            button.btn.btn-primary(type='submit') Delete Client
+            br
+            br
+        td
+        td
+          h2 Delete Lawyer
+          form(method='POST', action='/deleteLawyer')
+            div.form-group
+              label(for='id') Client ID:
+              input#id.form-control(type='number', placeholder='123456' name='id' min='1')
+            button.btn.btn-primary(type='submit') Delete Lawyer
+            br
+            br        
+        td
+      tr

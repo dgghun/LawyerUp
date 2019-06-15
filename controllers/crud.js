@@ -98,7 +98,23 @@ exports.db_createClient = function(req, res, next){
     });
 }
 
+/**
+ * Create a new lawyer
+ */
+exports.db_createLawyer = function(req, res, next){
+    
+    getConnection()                     // get a connection
+    const Lawyer = getModel(LAWYER);    // get model
+    console.log(req.body);              // print form data
 
+    //Create Client
+    doCreate(Lawyer, req.body).then(function(newLawyer){
+        if(newLawyer != null)
+            doRender(res, PAGE, 'Lawyer ' + newLawyer.firstName + ', ID:' + newLawyer.id + ' created successfully!');
+        else
+            doRender(res, PAGE, 'Error creating lawyer!');
+    });
+}
 
 /**
  * 
