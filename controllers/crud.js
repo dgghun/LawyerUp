@@ -88,7 +88,7 @@ exports.db_createClient = function(req, res, next){
     getConnection()                     // get a connection
     const Client = getModel(CLIENT);    // get model
     console.log(req.body);              // print form data
-    
+
     //Create Client
     doCreate(Client, req.body).then(function(newClient){
         if(newClient != null)
@@ -97,6 +97,7 @@ exports.db_createClient = function(req, res, next){
             doRender(res, PAGE, 'Error creating client!');
     });
 }
+
 
 
 /**
