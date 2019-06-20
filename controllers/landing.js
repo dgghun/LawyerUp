@@ -1,39 +1,15 @@
-const app_name = 'LawyerUp';
+var pwdhash = require("../libs/bcrypt");
+var crud = require("./crud");
 
-exports.get_landing = function(req, res, next) {
-    res.render('landing', {title: app_name})
-}
+const app_name = "LawyerUp";
 
-exports.login = function(req, res, next){
-    console.log("stub: landing.js -> login function");
-    console.log("\n")
+exports.get_landing = (req, res, next) => res.render("landing", { title: app_name });
+exports.client_signup = (req, res, next) => res.render("signup_client");
+exports.lawyer_signup = (req, res, next) => res.render("signup_lawyer");
 
-    //TODO - Create redirect logic for client vs lawyer.
-
-    //Desired output -  Redirect to client if client login
-    //  redirect to lawyer if lawyer login.
-
-    res.render('login');
-}
-
-exports.client_signup = function(req, res, next){
-    console.log("stub: landing.js -> client_signup");
-    console.log("\n")
-    
-    res.render('signup_client');
-}
-
-
-exports.lawyer_signup = function(req, res, next){
-    console.log("stub: landing.js -> lawyer_signup");
-    console.log("\n")
-
-    res.render('signup_lawyer');
-}
-
-exports.crud_testing = function(req, res, next){
-    res.render('crud_testing',{
-        title: app_name,
-        message: 'CRUD Testing'
-    });
-}
+exports.crud_testing = function(req, res, next) {
+  res.render("crud_testing", {
+    title: app_name,
+    message: "CRUD Testing"
+  });
+};

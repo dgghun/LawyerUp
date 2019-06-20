@@ -12,11 +12,11 @@ block content
           h1.mb-0(data-scrollax="properties: { translateY: '30%', opacity: 1.6 }")
             span Laywer Sign Up
           br
-          form#formLawyerSignUp(onsubmit='validate(this)')
+          form#formLawyerSignUp(role='form', method='POST', action='lawyersignup')
             .form-group
-              input#firstName.form-control(type='text', aria-describedby='message', placeholder='First Name', required='')
+              input#firstName.form-control(type='text', name='firstname', aria-describedby='message', placeholder='First Name', required='')
             .form-group
-              input#lastName.form-control(type='text', placeholder='Last Name', required='')
+              input#lastName.form-control(type='text', name='lastname', placeholder='Last Name', required='')
             .form-group
               .row
                 .col-sm
@@ -28,12 +28,14 @@ block content
                       option(value=val) #{val}
 
             .form-group
-              input#email.form-control(type='email', placeholder='Email', aria-describedby='msgEmail', required='')
+              input#phonenumber.form-control(type='text', name='phonenumber', placeholder="(909) 867-5309", aria-describedby='msgPhone', required='')
+              input#country.form-control(type='text', name='country', placeholder='USA', aria-describedby='msgCountry', required='')
+              input#email.form-control(type='email', name='email', placeholder='Email', aria-describedby='msgEmail', required='')
               small#msgEmail.form-text(style='color: #ffe97a') We'll never share your email. Email will be used for login.
             .form-group
-              input#password.form-control(type='password', placeholder='Create Password', required='')
+              input#password.form-control(type='password', name='password' placeholder='Create Password', required='')
             .form-group
-              input#rePassword.form-control(type='password', placeholder='Re-Enter Password', aria-describedby='msgPassword', required='')
+              input#rePassword.form-control(type='password', name='password_dup' placeholder='Re-Enter Password', aria-describedby='msgPassword', required='')
               small#msgPassword.form-text(style='color: #ffe97a')
                 | Password must be 6 characters containing at least one upper case, one lower case, and a number.
             button.btn.btn-primary(type='submit') Submit

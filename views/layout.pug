@@ -36,14 +36,14 @@ html
               p
                 button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#ModalLoginForm') Login
 
-      // Modal HTML Markup
+      // Login Modal HTML Markup
       #ModalLoginForm.modal.fade
         .modal-dialog
           .modal-content
             .modal-header
               h4.modal-title.text-xs-center Log in like a Boss
             .modal-body
-              form(role='form', method='POST', action='')
+              form(role='form', method='POST', action='/login')
                 input(type='hidden', name='_token', value='')
                 .form-group
                   label.control-label E-Mail Address
