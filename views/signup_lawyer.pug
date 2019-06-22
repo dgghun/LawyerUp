@@ -14,21 +14,22 @@ block content
           br
           form#formLawyerSignUp(role='form', method='POST', action='lawyersignup')
             .form-group
-              input#firstName.form-control(type='text', name='firstname', aria-describedby='message', placeholder='First Name', required='')
+              input#firstName.form-control(type='text', name='firstName', aria-describedby='message', placeholder='First Name', required='')
             .form-group
-              input#lastName.form-control(type='text', name='lastname', placeholder='Last Name', required='')
-            .form-group
-              .row
-                .col-sm
-                  input#license.form-control.col-sm(type='text', placeholder='License')
-                .col-sm-3
-                  select#statesDropDown.form-control(name='st')
-                    option(value='State' disabled selected) State
-                    each val in ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY']
-                      option(value=val) #{val}
+              input#lastName.form-control(type='text', name='lastName', placeholder='Last Name', required='')
+            // TODO: Trying to make the login more generic and allow for profile updates through a profile manager
+            //- .form-group
+            //-   .row
+            //-     .col-sm
+            //-       input#license.form-control.col-sm(type='text', placeholder='License')
+            //-     .col-sm-3
+            //-       select#statesDropDown.form-control(name='st')
+            //-         option(value='State' disabled selected) State
+            //-         each val in ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY']
+            //-           option(value=val) #{val}
 
             .form-group
-              input#phonenumber.form-control(type='text', name='phonenumber', placeholder="(909) 867-5309", aria-describedby='msgPhone', required='')
+              input#phonenumber.form-control(type='text', name='phoneNumber', placeholder="(909) 867-5309", aria-describedby='msgPhone', required='')
               input#country.form-control(type='text', name='country', placeholder='USA', aria-describedby='msgCountry', required='')
               input#email.form-control(type='email', name='email', placeholder='Email', aria-describedby='msgEmail', required='')
               small#msgEmail.form-text(style='color: #ffe97a') We'll never share your email. Email will be used for login.

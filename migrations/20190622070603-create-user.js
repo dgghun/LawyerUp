@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('lawyer_tbl', {
+    return queryInterface.createTable('users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,40 +9,48 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       firstName: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
-      lastname: {
+      lastName: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
       email: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
-      phoneNum: {
+      phoneNumber: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
       country: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
       password: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
+      },
+      isLawyer: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      roomKey: {
+        type: Sequelize.UUID,
+        allowNull: false,
       },
       createdAt: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
       }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('lawyer_tbl');
+    return queryInterface.dropTable('users');
   }
 };

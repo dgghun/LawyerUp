@@ -1,15 +1,37 @@
-/**
- *
- */
-const LawyerModel = require("../models/lawyer_tbl");
+let model =  require('../models/user');
 
 var Sequelize;
 var sequelize;
 var message;
-var TITLE = "This is a title";
-const CLIENT = "client";
-const LAWYER = "lawyer";
-const PAGE = "crud_testing"; // render same page for now
+
+/**
+ * Inserts user into table
+ *
+ * @param {string} userDict 'client' or 'lawyer'
+ * @param {string} userDict dictonary of user attributes
+ * @returns Sequelize user model or NULL 
+ */
+exports.db_createUser = function(userDict) {
+  getConnection(); // get a connection
+  const userModel = getModel();
+  return userModel.create(userDict);
+};
+
+/**
+ * Gets first matching user in table based on user email address
+ *
+ * @param {dictonary} userDict user attributes to query {[email: ""]}
+ * @returns Sequelize user model or NULL
+ */
+exports.db_getUserEmail = function(userDict){
+  getConnection();
+  const userModel = getModel();
+  return userModel.findOne({
+    where: {email: userDict.email}
+  });
+};
+// ----------------------------------------------------------------------------
+
 
 /**
  * Delete client
@@ -88,27 +110,6 @@ exports.db_updateLawyer = function(req, res, next) {
 };
 
 /**
- * Gets first mathcing user in table based on user email address
- *
- * @param {string} db_table which table to fetch from
- * @param {string} useremail user email address
- * @returns {model} Sequelize model
- *
- *TODO: Rename this method to something more generic
- *    Method handled fetching both 'lawyer' and 'client'
- *    should be renamed something like db_getUser?
- */
-exports.db_getClient = function(db_table, useremail) {
-  getConnection();
-  if (db_table == "client") model = getModel(CLIENT);
-  else model = getModel(LAWYER);
-
-  return model.findOne({
-    where: { email: useremail }
-  });
-};
-
-/**
  * Gets a lawyer
  *TODO: Remove this method
  *   Method should be remove because the 'db_getClient'
@@ -139,28 +140,6 @@ exports.db_getLawyer = function(req, res, next) {
   });
 };
 
-/**
- * Inserts new user into table
- */
-exports.db_createUser = function(db_table, userDict) {
-  getConnection(); // get a connection
-
-  if (db_table == "client") {
-    model = getModel(CLIENT); // get model
-  } else {
-    model = getModel(LAWYER);
-  }
-
-  //Currently no difference between client and lawyer tables
-  return model.create({
-    firstName: userDict["firstName"],
-    lastname: userDict["lastName"],
-    email: userDict["email"],
-    phoneNum: userDict["phoneNumber"],
-    country: userDict["country"],
-    password: userDict["password"]
-  });
-};
 
 /**
  * Create a new client
@@ -300,14 +279,9 @@ function doRender(res, page, msg) {
 
 /**
  * Returns sequelize model from /models/ directory
- * @param {Model type} model
+ * @returns user model
  */
-function getModel(model) {
-  var model;
-
-  if (model == CLIENT) model = require("../models/client_tbl");
-  else if (model == LAWYER) model = require("../models/lawyer_tbl");
-
+function getModel() {
   return model(sequelize, Sequelize); //get the model
 }
 
