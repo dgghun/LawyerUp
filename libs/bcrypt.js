@@ -1,15 +1,24 @@
 let bcrypt = require('bcrypt');
 
+const saltRounds = 10;
 
-exports.generateHash =
-
-
+/**
+ * Generates a salted and hashed string for passwords.
+ *
+ * @param {string} password string to salt and hash
+ * @returns a hashed password
+ */
 exports.generateHash = function (password) {
-    console.log('stub: libs.bcrypt.generateHash');
-    return password;
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(saltRounds));
 };
 
-exports.compare = function(pwd1, pwd2,){
-    console.log('stub: libs.bcrypt.generateHash');
-    return true;
+/**
+ * Checks if two passwords are the same.
+ *
+ * @param {string} password plain-text password to be salted+hashed
+ * @param {string} storedPassword password thats already salted+hashed
+ * @returns true = if equal
+ */
+exports.compare = function(password, storedPassword){
+    return bcrypt.compareSync(password, storedPassword);
 };

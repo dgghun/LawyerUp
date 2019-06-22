@@ -14,19 +14,16 @@ exports.login = function(req, res, next) {
           if (user == null) {
             res.render("landing");
           } else {
-            if (pwdhash.compare(req.body.password, user.password))
-              res.render("lawyer");
+            if (pwdhash.compare(req.body.password, user.password)) res.render("lawyer");
             else res.render("landing");
           }
         }); //end check lawywer table
       } else {
-        if (pwdhash.compare(req.body.password, user.password))
-          res.render("client");
+        if (pwdhash.compare(req.body.password, user.password)) res.render("client");
         else res.render("landing");
       }
     })
     .catch(function(err) {
-      console.log("Error: logincontroller/login");
       res.render("landing");
     });
 };
