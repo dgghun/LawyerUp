@@ -1,7 +1,7 @@
-{
+module.exports = {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "password",
     "database": "lawyerup_db_dev",
     "host": "127.0.0.1",
     "port" : 3306,
@@ -23,4 +23,4 @@
     "port" : 3306,
     "dialect": "mysql"
   }
-}
+};

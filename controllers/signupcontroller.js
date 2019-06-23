@@ -19,7 +19,7 @@ exports.signupClient = function(req, res, next) {
   //  error and pose some action.
   crud.db_createUser(userDict)
     .then(user => {
-      console.log(userDict);
+      // console.log(userDict);
       res.render("landing");
     })
     .catch(function(err) {
@@ -46,7 +46,7 @@ exports.signupLawyer = function(req, res, next) {
   //  error and pose some action.
   crud.db_createUser(userDict)
     .then(user => {
-      console.log(userDict);
+      // console.log(userDict);
       res.render("landing");
     })
     .catch(function(err) {

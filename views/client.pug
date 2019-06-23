@@ -1,6 +1,50 @@
-h1 Hello from client landing page
+block head
+    script(src='https://code.jquery.com/jquery-3.4.1.min.js', integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=', crossorigin='anonymous')
+
+
+h1 HELLO FROM THE CLIENT PAGE
 
 block content
     p
         form(role='form', method='POST', action='/logout')
             button.btn.btn-primary.btn-lg(type='submit') Logout
+    |
+    |
+    p I need a lawyer for...
+    form(method='GET', action='/user/client/findLawyer')
+        select#incident(name='incident')
+            if(incidents!=undefined)
+                each i in incidents
+                    option(name=i.type, value=i.id) #{i.type}
+        button#queryLawyers.btn.btn-primary.btn-lg(type='button', onclick='') Find Lawyer
+
+    #queryResults
+
+script.
+    $(document).ready(function(){
+        $('#queryLawyers').on('click',(function(){
+            let incidentId = $('#incident').val();
+            var url = '/user/client/findLawyer';
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: {'incident': incidentId},
+                dataType: 'json',
+                success: function(data){
+                    $('#queryResults').html('');
+                    $('#queryResults').append('<h3>Suggested Lawyers</h3>');
+                    for(i in data){
+                        console.log(url);
+                        //- <form method='GET' action='${url}/reqapt'>
+                        $('#queryResults').append(`
+                        <form name='reqapt' method='GET' action='${url}/reqapt'>
+                            <div class='form-group'>
+                                ${data[i].firstName} ${data[i].lastName} <a href="mailto:${data[i].email}">${data[i].email}</a> ${data[i].phoneNumber} ${data[i].country}
+                                <button class=requestBtn type='submit' name='reqid' value=${data[i].id}>Request Appointment</button>
+                            </div>
+                        </form>`);
+                    }
+                }
+            });
+        }));
+    });

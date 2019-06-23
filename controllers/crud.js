@@ -1,21 +1,13 @@
-let model =  require('../models/user');
-
-var Sequelize;
-var sequelize;
-var message;
-const PASSWORD = "";  // MySQL connection password
+var db = require("../libs/db");
 
 /**
  * Inserts user into table
  *
- * @param {string} userDict 'client' or 'lawyer'
  * @param {string} userDict dictonary of user attributes
- * @returns Sequelize user model or NULL 
+ * @returns Sequelize user model or NULL
  */
 exports.db_createUser = function(userDict) {
-  getConnection(); // get a connection
-  const userModel = getModel();
-  return userModel.create(userDict);
+  return db.users.create(userDict);
 };
 
 /**
@@ -24,15 +16,72 @@ exports.db_createUser = function(userDict) {
  * @param {dictonary} userDict user attributes to query {[email: ""]}
  * @returns Sequelize user model or NULL
  */
-exports.db_getUserEmail = function(userDict){
-  getConnection();
-  const userModel = getModel();
-  return userModel.findOne({
-    where: {email: userDict.email}
+exports.db_getUserEmail = function(userDict) {
+  return db.users.findOne({
+    where: { email: userDict.email }
   });
 };
-// ----------------------------------------------------------------------------
 
+/**
+ *Gets all incidents from incidents table
+ *
+ * @returns incidents model
+ */
+exports.db_getIncidents = function() {
+  return db.incidents.findAll();
+};
+
+/**
+ *Gets all IncidentID(s) (FK) from LegalIncidentMap table.
+ *
+ * @param {array or integer} incidentId id number(s) to query
+ * @returns legalIncidentMap model
+ */
+exports.db_getLegalIncidentMap_IdFK = function(incidentId) {
+  return db.legalIncidentMaps.findAll({
+    attributes: ["fieldID"],
+    where: { incidentID: incidentId }
+  });
+};
+
+/**
+ *Gets all LayerProfile User ID(s) from LawyerProfile table that match given
+ *fieldId(s)
+ *
+ * @param {array or integer} fieldId
+ */
+exports.db_getLawyerProfile_UserIdFk = function(fieldId) {
+  return db.lawyerLegalProfiles.findAll({
+    attributes: ["userID"],
+    where: { fieldID: fieldId }
+  });
+};
+
+/**
+ *Gets all users with matching userID
+ *
+ * @param {number array OR integer} userId user id to query
+ * @param {boolean} [basicProfile=true] determines if we should exlude columns
+ * @returns user model
+ */
+exports.db_getUsers = function(userId, basicProfile = true) {
+  if (basicProfile) {
+    return db.users.findAll({
+      where: { id: userId },
+      attributes: { exclude: ["password", "roomKey", "createdAt", "updatedAt"] }
+    });
+  } else {
+    //return everything
+    return db.users.findAll({
+      where: { id: userId }
+    });
+  }
+};
+
+exports.db_createAppointment = function(partyIDs){
+  return db.appointments.create(partyIDs);
+}
+// ----------------------------------------------------------------------------
 
 /**
  * Delete client
@@ -109,7 +158,6 @@ exports.db_updateLawyer = function(req, res, next) {
     } else doRender(res, PAGE, "ID not found.");
   });
 };
-
 
 /**
  *
@@ -197,34 +245,4 @@ function doRender(res, page, msg) {
   res.render(page, {
     message: msg
   });
-}
-
-/**
- * Returns sequelize model from /models/ directory
- * @returns user model
- */
-function getModel() {
-  return model(sequelize, Sequelize); //get the model
-}
-
-/**
- * Gets a connection to db
- */
-function getConnection() {
-  Sequelize = require("sequelize");
-  sequelize = new Sequelize("lawyerup_db_dev", "root", PASSWORD, {
-    host: "localhost",
-    port: 3306,
-    dialect: "mysql"
-  });
-
-  // Checking connection status
-  sequelize
-    .authenticate()
-    .then(function(err) {
-      console.log("Connection has been established successfully.");
-    })
-    .catch(function(err) {
-      console.log("Unable to connect to the database:", err);
-    });
 }

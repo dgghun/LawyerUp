@@ -7,12 +7,13 @@ exports.login = function(req, res, next) {
       if (user == null) {
         throw "User not found";
       } else {
-        if (pwdhash.compare(req.body.password, user.password)){
-            if(user.isLawyer)
-                res.render("lawyer");
-            else 
-                res.render("client");
-        }
+        if (pwdhash.compare(req.body.password, user.password))
+          if (user.isLawyer){
+            res.redirect('/user/lawyer');
+          }
+          else{
+            res.redirect('/user/client');
+          }
         else res.render("landing");
       }
     })
