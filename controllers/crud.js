@@ -3,6 +3,7 @@ let model =  require('../models/user');
 var Sequelize;
 var sequelize;
 var message;
+const PASSWORD = "";  // MySQL connection password
 
 /**
  * Inserts user into table
@@ -211,7 +212,7 @@ function getModel() {
  */
 function getConnection() {
   Sequelize = require("sequelize");
-  sequelize = new Sequelize("lawyerup_db_dev", "root", "password", {
+  sequelize = new Sequelize("lawyerup_db_dev", "root", PASSWORD, {
     host: "localhost",
     port: 3306,
     dialect: "mysql"

@@ -11,7 +11,8 @@ exports.logout = (req, res, next) => {
     //TODO: When sessions or cookies are implemented
     //  we should destroy any that exist.
 
-    res.render('landing');
+    // res.render('landing');
+    res.render('msg_loggedout');  // show pop up message and log out
 };
 
 exports.crud_testing = function(req, res, next) {
