@@ -9,6 +9,9 @@ exports.login = function(req, res) {
       } else {
         if (pwdhash.compare(req.body.password, user.password)){
           req.session.uid = user.id;
+          req.session.firstName = user.firstName;
+          req.session.lastName = user.lastName;
+
           if (user.isLawyer) {
             res.redirect('/user/lawyer');
           }

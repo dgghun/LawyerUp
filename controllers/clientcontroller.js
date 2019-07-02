@@ -8,14 +8,15 @@ var crud = require("./crud");
  * @param {next} next invokes next route handler
  */
 exports.landing = (req, res, next) => {
-  crud
-    .db_getIncidents()
+
+  //Get list of incidents from DB.
+  crud.db_getIncidents()
     .then(id => {
       var results = [];
       id.forEach(element => {
         results.push({ id: element.id, type: element.type });
       });
-      res.render("client", { incidents: results });
+      res.render("client", {userName: `${req.session.firstName}`, incidents: results });
     })
     .catch(function(err) {
       console.log("Error: Issue fetching Incident ID's");
