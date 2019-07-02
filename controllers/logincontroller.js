@@ -13,7 +13,8 @@ exports.login = function(req, res) {
           req.session.lastName = user.lastName;
 
           if (user.isLawyer) {
-            res.redirect('/user/lawyer');
+            // res.redirect('/user/lawyer');
+            renderLawyerPage(res, 'lawyer', user);
           }
           else {
             res.redirect('/user/client');
@@ -27,3 +28,14 @@ exports.login = function(req, res) {
       res.render("landing");
     });
 };
+
+function renderLawyerPage(res, page, user){
+  var userInfo = {
+    id: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    phoneNumber: user.phoneNumber
+  }
+  res.render(page, userInfo);
+}

@@ -1,0 +1,13 @@
+
+
+block content
+    p
+        form(role='form', method='GET', action="/", name="form")
+            button.btn.btn-primary.btn-lg(type='submit', id='submit-btn') PressMe
+    script.
+        document.getElementById('submit-btn').style.visibility='hidden';
+        var msg = "#{message}";     // alert message
+        var act = "#{action}"       // where to go after
+        alert(msg);                 
+        document.form.action = act; 
+        document.getElementById('submit-btn').click();

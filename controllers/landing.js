@@ -9,10 +9,15 @@ exports.get_landing = (req, res, next) => {
 exports.client_signup = (req, res, next) => res.render("signup_client");
 exports.lawyer_signup = (req, res, next) => res.render("signup_lawyer");
 
-exports.logout = (req, res, next) => {
-  req.session.destroy();
-  res.render('msg_loggedout');  // show pop up message and log out
-  res.render('landing');
+/**
+ * Render logout alert, log out and send to landing
+ */
+exports.logout = function(req, res, next){
+  req.session.destroy();  
+  res.render('alert', {
+    message: req.body.message,
+    action: '/'
+  });  
 };
 
 exports.crud_testing = function(req, res, next) {
