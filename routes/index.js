@@ -7,6 +7,10 @@ let loginController = require("../controllers/logincontroller");
 let signupController = require("../controllers/signupcontroller");
 
 router.get("/", landing.get_landing);
+router.get("/blog-single", function(req,res, next){
+    res.render('blog/blog-single');
+});
+
 router.get("/clientsignup", landing.client_signup);
 router.get("/lawyersignup", landing.lawyer_signup);
 
