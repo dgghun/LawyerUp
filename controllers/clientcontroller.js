@@ -39,11 +39,7 @@ exports.findLawyer = (req, res, next) => {
   //  Can prob. use iterators in we have to use lists
   //  ...think Promise.all can be used here
 
-  // let suggestedLawyers = [];
-  // var fieldId = [];
-  // var possibleLawyersId = [];
-  crud
-    .db_getLegalIncidentMap_IdFK(Number(req.query.incident))
+  crud.db_getLegalIncidentMap_IdFK(Number(req.query.incident))
     .then(incidentId => {
       var temp = [];
       incidentId.forEach(element => {

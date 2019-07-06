@@ -6,11 +6,6 @@ module.exports = {
       "incidents",
       [
         {
-          type: "Airplane Business Transactions",
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
           type: "Asbestos",
           createdAt: new Date(),
           updatedAt: new Date()
