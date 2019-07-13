@@ -17,14 +17,14 @@ exports.landing = (req, res, next) => {
       id.forEach(element => {
         results.push({ id: element.id, type: element.type });
       });
-      res.render("client", {
+      res.render("client/clientNews", {
         userName: `${req.session.firstName}`,
         incidents: results
       });
     })
     .catch(function(err) {
       console.log("Error: Issue fetching Incident ID's");
-      res.render("client");
+      res.render("client/clientNews");
     });
 };
 
@@ -122,6 +122,6 @@ exports.requestAppointment = (req, res, next) => {
     })
     .catch(function(err) {
       console.log("Error requesting appointment");
-      res.render("client");
+      res.render("client/client");
     });
 };

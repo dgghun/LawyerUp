@@ -1,0 +1,107 @@
+doctype html
+html
+  head
+    block title
+      title Client Page
+
+    block meta
+      meta(charset='utf-8')
+      meta(name='viewport', content='width=device-width, initial-scale=1.0, shrink-to-fit=no')
+
+    block links
+      link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css')
+      link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.7.1/css/all.css')
+      link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+      link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Lora')
+
+    block fonts
+      link(rel='stylesheet', href='assets/fonts/fontawesome5-overrides.min.css')
+    
+    block styling
+      link(rel='stylesheet', href='/css/client/Article-Clean.css')
+      link(rel='stylesheet', href='/css/client/Calendar-BS4-1.css')
+      link(rel='stylesheet', href='/css/client/Calendar-BS4.css')
+      link(rel='stylesheet', href='/css/client/Profile-Edit-Form-1.css')
+      link(rel='stylesheet', href='/css/client/Profile-Edit-Form.css')
+      link(rel='stylesheet', href='/css/client/sidebar.css')
+
+  body
+    block sidebar
+      // Start: Sidebar
+      ul.nav.flex-column.shadow.d-flex.sidebar.mobile-hid(style='background-color: #333333;')
+        // Start: Logo Holder
+        li.nav-item.logo-holder
+          .text-center.text-white.logo.py-4.mx-4
+            a#title.text-white.text-decoration-none(href='#')
+              strong LawyerUp
+            a#sidebarToggleHolder.text-white.float-right(href='#')
+              i#sidebarToggle.fas.fa-bars
+        // End: Logo Holder
+        // Start: News
+        li.nav-item
+          a.nav-link.active.text-left.text-white.py-1.px-0(href='/user/client')
+            i.far.fa-newspaper.mx-3
+            span.text-nowrap.mx-2 News
+        // End: News
+        // Start: lawyerSearch
+        li.nav-item
+          a.nav-link.active.text-left.text-white.py-1.px-0(href='/user/client/incidentForm')
+            i.far.fa-handshake.mx-3
+            span.text-nowrap.mx-2 Find a lawyer
+        // End: lawyerSearch
+        // Start: mailBox
+        li.nav-item
+          a.nav-link.text-left.text-white.py-1.px-0(href='/user/client/mailbox')
+            i.far.fa-paper-plane.mx-3
+            span.text-nowrap.mx-2 Mail box
+        // End: mailBox
+        // Start: clientCases
+        li.nav-item
+          a.nav-link.text-left.text-white.py-1.px-0(href='/user/client/cases')
+            i.fas.fa-archive.mx-3
+            span.text-nowrap.mx-2 Your cases
+        // End: clientCases
+        // Start: clientCalendar
+        li.nav-item
+          a.nav-link.text-left.text-white.py-1.px-0(href='/user/client/calendar')
+            i.fas.fa-calendar-alt.mx-3
+            span.text-nowrap.mx-2 Calendar
+        // End: clientCalendar
+        // Start: userProfile
+        li.nav-item
+          a.nav-link.text-left.text-white.py-1.px-0(href='/user/client/profile')
+            i.fas.fa-user.mx-3
+            span.text-nowrap.mx-2 User profile
+        // End: userProfile
+        // Start: clientSettings
+        li.nav-item.dropdown
+          a.dropdown-toggle.nav-link.text-left.text-white.py-1.px-0.position-relative(data-toggle='dropdown', aria-expanded='false', href='#')
+            i.fas.fa-sliders-h.mx-3
+            span.text-nowrap.mx-2 Settings
+            i.fas.fa-caret-down.float-none.float-lg-right.fa-sm
+          .dropdown-menu.border-0.animated.fadeIn(role='menu')
+            a.dropdown-item.text-white(role='presentation', href='#')
+              span Change password
+            a.dropdown-item.text-white(role='presentation', href='#')
+              span Change email
+            a.dropdown-item.text-white(role='presentation', href='#')
+              span More
+        // End: clientSettings
+        // Start: logout
+        li.nav-item
+          a.nav-link.text-left.text-white.py-1.px-0(href='/logout')
+            i.fas.fa-sign-out-alt.mx-3
+            i.fa.fa-caret-right.d-none.position-absolute
+            span.text-nowrap.mx-2 Log out
+        // End: logout
+        // End: Sidebar
+
+    block content
+
+
+  block footer_scripts
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js')
+    script(src='/js/clientScripts/lawyerSearch.js')
+    script(src='/js/clientScripts/sidebar.js')
+    script(src='/js/Profile-Edit-Form.js')

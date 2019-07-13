@@ -1,0 +1,47 @@
+extends clientLayout
+
+append content
+  // Start: Profile Edit Form
+  #profile.container.profile.profile-view
+    .row
+      .col-md-12.alert-col.relative
+        .alert.alert-info.absolue.center(role='alert')
+          button.close(type='button', data-dismiss='alert', aria-label='Close')
+            span(aria-hidden='true') ×
+          span Profile save with success
+    form
+      .form-row.profile-row
+        .col-md-4.relative
+          .avatar
+            .avatar-bg.center
+          input.form-control(type='file', name='avatar-file')
+        .col-md-8
+          h1 Profile 
+          hr
+          .form-row
+            .col-sm-12.col-md-6
+              .form-group
+                label Firstname 
+                input.form-control(type='text', name='firstname')
+            .col-sm-12.col-md-6
+              .form-group
+                label Lastname 
+                input.form-control(type='text', name='lastname')
+          .form-group
+            label Email 
+            input.form-control(type='email', autocomplete='off', required='', name='email')
+          .form-row
+            .col-sm-12.col-md-6
+              .form-group
+                label Password 
+                input.form-control(type='password', name='password', autocomplete='off', required='')
+            .col-sm-12.col-md-6
+              .form-group
+                label Confirm Password
+                input.form-control(type='password', name='confirmpass', autocomplete='off', required='')
+          hr
+          .form-row
+            .col-md-12.content-right
+              button.btn.btn-primary.form-btn(type='submit') SAVE 
+              button.btn.btn-danger.form-btn(type='reset') CANCEL 
+  // End: Profile Edit Form

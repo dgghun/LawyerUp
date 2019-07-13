@@ -13,7 +13,6 @@ exports.login = function(req, res) {
           req.session.lastName = user.lastName;
 
           if (user.isLawyer) {
-            // res.redirect('/user/lawyer');
             renderLawyerPage(res, 'lawyer', user);
           }
           else {

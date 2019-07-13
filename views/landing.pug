@@ -6,8 +6,21 @@ block append styling
       color: white;
       font-weight: bold;
       }
+    
+    style.
+      .alert {
+        position:absolute;
+        z-index:1;
+      }
 
 block content
+  //TODO: Alert is off centered
+  if logout
+    .col-sm
+      .alert.alert-success.alert-dismissible.fade.show
+        strong Success!
+        |  You have been successfully logged out.
+        button.close(type='button', data-dismiss='alert') x
   .hero-wrap.js-fullheight(data-stellar-background-ratio='0.5', style="background-image: url('images/bg_1.jpg');")
     .overlay
     .container

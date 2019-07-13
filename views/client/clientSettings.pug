@@ -1,0 +1,51 @@
+extends clientLayout
+
+append content
+  // Start: Main content
+  .container.article-clean(style='padding-right: 0px;padding-left: 0px;width: 1050px;')
+    .row(style='margin-right: -15px;width: 1050px;')
+      .col
+        // Start: Calendar (BS4)
+        div(style='margin:46px;')
+          .row.row-striped
+            .col-2.text-center
+              h1.display-4
+                span.badge.date-green 14
+              h2 FEB
+            .col-10
+              h3.text-uppercase
+                strong Valentine's Day
+              ul.list-inline
+                li.list-inline-item
+                  i.fa.fa-calendar-o(aria-hidden='true')
+                  |  Wednesday
+                li.list-inline-item
+                  i.fa.fa-clock-o(aria-hidden='true')
+                  |  18:30 PM - 22:00 PM
+                li.list-inline-item
+                  i.fa.fa-location-arrow(aria-hidden='true')
+                  |  Restaurant
+              p
+                | Lorem ipsum dolsit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          .row.row-striped
+            .col-2.text-center
+              h1.display-4
+                span.badge.badge-grey 26
+              h2 JAN
+            .col-10
+              h3.text-uppercase
+                strong Work Meeting
+              ul.list-inline
+                li.list-inline-item
+                  i.fa.fa-calendar-o(aria-hidden='true')
+                  |  Friday
+                li.list-inline-item
+                  i.fa.fa-clock-o(aria-hidden='true')
+                  |  2:30 PM - 4:00 PM
+                li.list-inline-item
+                  i.fa.fa-location-arrow(aria-hidden='true')
+                  |  Room 1408
+              p
+                | Lorem ipsum dolsit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        // End: Calendar (BS4)
+        // End: Main content

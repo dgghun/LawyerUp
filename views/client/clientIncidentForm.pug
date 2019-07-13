@@ -1,0 +1,32 @@
+extends clientLayout
+
+append content
+  // Start: Main content
+  .container.article-clean
+    .row
+      .col-lg-10.col-xl-10.offset-lg-1.offset-xl-1
+        // Start: Intro
+        .text-center.intro
+          h1.text-center Tell us a little more about what happened...
+        // End: Intro
+        div
+          form
+            .form-group
+              label(style='padding-left: 0px;') Are you filling out this form for yourself or someone else?
+              .form-check
+                input#formCheck-1.form-check-input(type='radio', name='radio_who_for')
+                label.form-check-label(for='formCheck-1') Myself
+              .form-check
+                input#formCheck-2.form-check-input(type='radio', name='radio_who_for')
+                label.form-check-label(for='formCheck-2') Someone else
+            .form-group
+              label(style='padding-left: 0px;') *If this is for someone else what is their name?
+            .form-group
+              label(style='padding-left: 0px;') Was there an arrest made?
+              .form-check
+                input#formCheck-1.form-check-input(type='radio', name='radio_arrest')
+                label.form-check-label(for='formCheck-1') Yes
+              .form-check
+                input#formCheck-2.form-check-input(type='radio', name='radio_arrest')
+                label.form-check-label(for='formCheck-2') No
+  // End: Main content

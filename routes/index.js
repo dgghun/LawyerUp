@@ -13,8 +13,9 @@ router.get("/blog-single", function(req,res, next){
     res.render('blog/blog-single');
 });
 
-router.get("/clientsignup", landing.client_signup); //client signup page
-router.get("/lawyersignup", landing.lawyer_signup); //lawyer signup page
+router.get("/clientsignup", landing.client_signup);
+router.get("/lawyersignup", landing.lawyer_signup);
+router.get("/logout", landing.logout);
 
 router.post("/", landing.get_landing);
 router.post("/logout", landing.logout);
