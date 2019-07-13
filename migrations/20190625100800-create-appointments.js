@@ -24,6 +24,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      apptAccepted: {
+        type: Sequelize.BOOLEAN
+      },
+      apptDate: {
+        type: Sequelize.DATE
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     clientID: DataTypes.INTEGER,
     clientRoomKey: DataTypes.INTEGER,
     lawyerID: DataTypes.INTEGER,
-    lawyerRoomKey: DataTypes.INTEGER
+    lawyerRoomKey: DataTypes.INTEGER,
+    apptAccepted: DataTypes.BOOLEAN,
+    apptDate: DataTypes.DATE
   }, {});
   appoinments.associate = function(models) {
     // associations can be defined here
