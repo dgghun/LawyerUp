@@ -64,23 +64,45 @@ exports.db_getLawyerProfile_UserIdFk = function(fieldId) {
  * @param {boolean} [basicProfile=true] determines if we should exlude columns
  * @returns user model
  */
-exports.db_getUsers = function(userId, basicProfile = true) {
-  if (basicProfile) {
-    return db.users.findAll({
-      where: { id: userId },
-      attributes: { exclude: ["password", "roomKey", "createdAt", "updatedAt"] }
-    });
-  } else {
-    //return everything
-    return db.users.findAll({
-      where: { id: userId }
-    });
+exports.db_getUsers = function(userId, profile = 'basic') {
+  switch(profile){
+    case 'all':
+      return db.users.findAll({
+        where: { id: userId }
+      });
+    case 'basic':
+      return db.users.findAll({
+        where: { id: userId },
+        attributes: { exclude: ["password", "roomKey", "createdAt", "updatedAt"] }
+      });
+    case 'appointment':
+      return db.users.findAll({
+        where: { id: userId },
+        attributes: { exclude: ["password", "createdAt", "updatedAt"] }
+      });
   }
 };
 
-exports.db_createAppointment = function(partyIDs){
-  return db.appointments.create(partyIDs);
-}
+/**
+ *Retrieves the userID for the specified lawyerID in lawyerLegalProfiles table
+
+ * @param {string} lawyerID lawyerLegalProfiles.ID
+ */
+exports.db_retriveUserID_LawyerIDPK = function(lawyerID){
+  return db.lawyerLegalProfiles.findOne({
+    where: {id: lawyerID}
+  });
+};
+
+/**
+ *  Creates a new appointment request
+ *
+ * @param {dictonary} appointment appointment request from client
+ */
+exports.db_createAppointment = function(appointment){
+  return db.appointments.create(appointment);
+};
+
 // ----------------------------------------------------------------------------
 
 /**

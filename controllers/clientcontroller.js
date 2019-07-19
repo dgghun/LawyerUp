@@ -1,5 +1,6 @@
 var crud = require("./crud");
 
+
 /**
  * Loads client landing page
  *
@@ -8,15 +9,18 @@ var crud = require("./crud");
  * @param {next} next invokes next route handler
  */
 exports.landing = (req, res, next) => {
-
   //Get list of incidents from DB.
-  crud.db_getIncidents()
+  crud
+    .db_getIncidents()
     .then(id => {
       var results = [];
       id.forEach(element => {
         results.push({ id: element.id, type: element.type });
       });
-      res.render("client", {userName: `${req.session.firstName}`, incidents: results });
+      res.render("client", {
+        userName: `${req.session.firstName}`,
+        incidents: results
+      });
     })
     .catch(function(err) {
       console.log("Error: Issue fetching Incident ID's");
@@ -39,7 +43,11 @@ exports.findLawyer = (req, res, next) => {
   //  Can prob. use iterators in we have to use lists
   //  ...think Promise.all can be used here
 
-  crud.db_getLegalIncidentMap_IdFK(Number(req.query.incident))
+  // let suggestedLawyers = [];
+  // var fieldId = [];
+  // var possibleLawyersId = [];
+  crud
+    .db_getLegalIncidentMap_IdFK(Number(req.query.incident))
     .then(incidentId => {
       var temp = [];
       incidentId.forEach(element => {
@@ -69,21 +77,51 @@ exports.findLawyer = (req, res, next) => {
     });
 };
 
-
+/**
+ * Initates the clients request to create a appointment with a lawyer
+ *
+ * @param {request} req HTTP Request - URL holds query info, Session hold client info
+ * @param {response} res HTTP Response
+ * @param {next} next invokes next route handler
+ */
 exports.requestAppointment = (req, res, next) => {
-  //TODO: Currently there's only 'hackish' methods to get
-  //  the clients id. Need to add in cookies/sessions
-  //  to properly fill out the database.
+  var appointment = {
+    'clientID': '',
+    'clientRoomKey': '',
+    'lawyerID': '',
+    'lawyerRoomKey': ''
+  };
 
-  //Hardcoding userID for now
-  crud.db_createAppointment({clientID: 1, lawyerID: req.query.reqid})
-  .then(item =>{
-    // res.render('client');
-    res.redirect(`${res.req.baseUrl}/client`);
-    // res.redirect('/');
-  })
-  .catch(function(err){
-    res.render('client');
-  });
-
+  crud.db_retriveUserID_LawyerIDPK(req.query.reqid)
+    .then(lawyerUserID => {
+      //fetch userID from lawyerID
+      atters = { clientID: req.session.uid, lawyerID: lawyerUserID.id };
+      return atters;
+    })
+    .then(usersUID => {
+      //fetches both client and user data
+      return Promise.all([crud.db_getUsers([usersUID.clientID, usersUID.lawyerID], profile = 'appointment')]);
+    })
+    .then(users => {
+      if (users[0][0].isLawyer){
+        appointment.lawyerID = users[0][0].id;
+        appointment.lawyerRoomKey = users[0][0].roomKey;
+        appointment.clientID = users[0][1].id;
+        appointment.clientRoomKey = users[0][1].roomKey;
+      } else {
+        appointment.clientID = users[0][0].id;
+        appointment.clientRoomKey = users[0][0].roomKey;
+        appointment.lawyerID = users[0][1].id;
+        appointment.lawyerRoomKey = users[0][1].roomKey;
+      }
+      crud.db_createAppointment(appointment);
+    })
+    .then(item => {
+      // crud.db_createAppointment({clientID: req.session.uid, lawyerID: userID});
+      res.redirect(`${res.req.baseUrl}/client`);
+    })
+    .catch(function(err) {
+      console.log("Error requesting appointment");
+      res.render("client");
+    });
 };

@@ -9,10 +9,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       clientID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      clientRoomKey: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       lawyerID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      lawyerRoomKey: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
