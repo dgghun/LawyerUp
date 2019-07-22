@@ -37,5 +37,17 @@ function renderLawyerPage(res, page, user){
     email: user.email,
     phoneNumber: user.phoneNumber
   }
+
+  crud.db_getLegalFields()
+    .then(fields =>{
+      fields.forEach(i => {
+        console.log("LegalField - ID:" + i.id + " Field:" + i.field)
+      });
+      // console.log("LegalFields: " + fields)
+    })
+    .catch(function(err){
+      console.log("ERROR: " + err);
+    });
+
   res.render(page, userInfo);
 }

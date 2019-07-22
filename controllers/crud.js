@@ -32,6 +32,17 @@ exports.db_getIncidents = function() {
 };
 
 /**
+ *Gets all legal fields
+ *
+ * @returns legal fields
+ */
+exports.db_getLegalFields = function() {
+  return db.legalFields.findAll({
+    attributes: ['id','field']
+  });
+};
+
+/**
  *Gets all IncidentID(s) (FK) from LegalIncidentMap table.
  *
  * @param {array or integer} incidentId id number(s) to query
