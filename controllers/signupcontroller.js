@@ -23,8 +23,17 @@ exports.signupClient = function(req, res, next) {
       res.render("landing");
     })
     .catch(function(err) {
-      console.log("Error: signupcontroller/signupClient");
-      res.render("landing");
+      if (err.name == 'SequelizeUniqueConstraintError'){
+        res.render('signup_client', {
+          err: 'Email address is already in use', 
+          userInput: {
+            country: res.req.body.country,
+            email: res.req.body.email,
+            firstName: res.req.body.firstName,
+            lastName: res.req.body.lastName,
+            phoneNumber: res.req.body.phoneNumber
+        }});
+      }
     });
 };
 

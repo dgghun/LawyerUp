@@ -1,5 +1,6 @@
 extends layout
 
+
 block title
   title LawyerUp-Signup
 
@@ -13,25 +14,48 @@ block content
             span Sign Up to Find a Lawyer.
           br
           form#formLawyerSignUp(role='form', method='POST', action='clientsignup')
-            .form-group
-              input#firstName.form-control(type='text', name='firstName', aria-describedby='message', placeholder='First Name', required='')
-            .form-group
-              input#lastName.form-control(type='text', name='lastName', placeholder='Last Name', required='')
-            .form-group
-              input#phonenumber.form-control(type='text', name='phoneNumber', placeholder="(909) 867-5309", aria-describedby='msgPhone', required='')
-            .form-group
-              input#country.form-control(type='text', name='country', placeholder='USA', aria-describedby='msgCountry', required='')
-            .form-group
-              input#email.form-control(type='email', name='email', placeholder='Email', aria-describedby='msgEmail', required='')
-              small#msgEmail.form-text(style='color: #ffe97a') We'll never share your email. Email will be used for login.
-            .form-group
-
-              input#password.form-control(type='password', name='password', placeholder='Create Password', required='')
-            .form-group
-              input#rePassword.form-control(type='password', name='password_dup' placeholder='Re-Enter Password', aria-describedby='msgPassword', required='')
-              small#msgPassword.form-text(style='color: #ffe97a')
-                | Password must be 6 characters containing at least one upper case, one lower case, and a number.
-            button.btn.btn-primary(type='submit') Submit
+            if err == null
+              .form-group
+                input#firstName.form-control(type='text', name='firstName', aria-describedby='message', placeholder='First Name', required='')
+              .form-group
+                input#lastName.form-control(type='text', name='lastName', placeholder='Last Name', required='')
+              .form-group
+                input#phonenumber.form-control(type='text', name='phoneNumber', placeholder="(909) 867-5309", aria-describedby='msgPhone', required='')
+              .form-group
+                input#country.form-control(type='text', name='country', placeholder='USA', aria-describedby='msgCountry', required='')
+              .form-group
+                input#email.form-control(type='email', name='email', placeholder='Email', aria-describedby='msgEmail', required='')
+                small#msgEmail.form-text(style='color: #ffe97a') We'll never share your email. Email will be used for login.
+              .form-group
+                input#password.form-control(type='password', name='password', placeholder='Create Password', required='')
+              .form-group
+                input#rePassword.form-control(type='password', name='password_dup' placeholder='Re-Enter Password', aria-describedby='msgPassword', required='')
+                small#msgPassword.form-text(style='color: #ffe97a')
+                  | Password must be 6 characters containing at least one upper case, one lower case, and a number.
+              button.btn.btn-primary(type='submit') Submit
+            else
+              .alert.alert-danger.alert-dismissible.fade.show
+                strong Error!
+                |  #{err}
+                button.close(type='button', data-dismiss='alert') ×
+              .form-group
+                input#firstName.form-control(type='text', name='firstName', aria-describedby='message', placeholder=userInput.firstName, required='')
+              .form-group
+                input#lastName.form-control(type='text', name='lastName', placeholder=userInput.lastName, required='')
+              .form-group
+                input#phonenumber.form-control(type='text', name='phoneNumber', placeholder=userInput.phoneNumber, aria-describedby='msgPhone', required='')
+              .form-group
+                input#country.form-control(type='text', name='country', placeholder=userInput.country, aria-describedby='msgCountry', required='')
+              .form-group
+                input#email.form-control(type='email', name='email', placeholder=userInput.email, aria-describedby='msgEmail', required='')
+                small#msgEmail.form-text(style='color: #ffe97a') We'll never share your email. Email will be used for login.
+              .form-group
+                input#password.form-control(type='password', name='password', placeholder='Create Password', required='')
+              .form-group
+                input#rePassword.form-control(type='password', name='password_dup' placeholder='Re-Enter Password', aria-describedby='msgPassword', required='')
+                small#msgPassword.form-text(style='color: #ffe97a')
+                  | Password must be 6 characters containing at least one upper case, one lower case, and a number.
+              button.btn.btn-primary(type='submit') Submit
 
   block append footerScripts
     script(src='javascripts/signup.js')
