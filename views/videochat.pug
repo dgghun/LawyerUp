@@ -1,0 +1,11 @@
+html
+    block body
+        script(src='/javascripts/vidyo.js')
+        script.
+            const TOKEN ="#{token}"
+            const USER = "#{name}"
+            const ROOM = "#{room}"
+            onVidyoClientLoaded(status);
+            
+        div(div id="renderer",style="position: absolute; top: 41px; left: 3px; bottom: -23px; z-index: 99; height: 300px; width: 300px;")
+        script(src='https://static.vidyo.io/latest/javascript/VidyoClient/VidyoClient.js?onload=onVidyoClientLoaded&webrtc=true&plugin=false')

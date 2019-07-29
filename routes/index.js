@@ -5,6 +5,8 @@ var router = express.Router();
 let landing = require("../controllers/landing");
 let loginController = require("../controllers/logincontroller");
 let signupController = require("../controllers/signupcontroller");
+let videoController = require('../controllers/videocontroller');
+
 
 router.get("/", landing.get_landing);
 router.get("/blog-single", function(req,res, next){
@@ -19,5 +21,8 @@ router.post("/logout", landing.logout);
 router.post("/login", loginController.login);
 router.post("/clientsignup", signupController.signupClient);
 router.post("/lawyersignup", signupController.signupLawyer);
+
+//------ Video Chat Routes ------
+router.post('/launchVideo', videoController.launchVideo);
 
 module.exports = router;

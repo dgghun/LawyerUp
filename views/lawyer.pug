@@ -98,7 +98,14 @@ html
                                 h5.mb-1 John Doughnut
                                 small 7/2/19 4:30pm
                             p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-                            small Meeting Room Ready!
+
+                            //- TESTING launch video chat
+                            //- input data should be handled by session/cookie. Just testing at this point.
+                            form.form-inline(role='form', method='POST', action='/launchVideo')
+                                //- input(type="hidden",id="userName",name="userName",value="#{firstName}")
+                                //- input(type="hidden",id="id",name="id",value="#{id}")
+                                button.btn.btn-success.btn-sm.mb-2(type='submit') MEETING READY! 
+
                         a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
                             div.d-flex.w-100.justify-content-between
                                 h5.mb-1 John Doughnut

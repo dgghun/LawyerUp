@@ -17,4 +17,6 @@ router.get('/lawyer', function(req, res, next){
     res.render('lawyer');
 });
 
+
+
 module.exports = router;
