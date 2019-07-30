@@ -1,5 +1,6 @@
 var pwdhash = require("../libs/bcrypt");
 var crud = require("./crud");
+var login = require('./logincontroller');
 
 /**
  * Creates a new client user and routes back to landing page for login
@@ -9,18 +10,15 @@ var crud = require("./crud");
  * @param {next} next invokes next route handler
  */
 exports.signupClient = function(req, res, next) {
-  var userDict = req.body;
+  var userDict = Object.assign({}, req.body);
   userDict.password = pwdhash.generateHash(userDict.password);
   userDict['isLawyer'] = false;
   userDict['roomKey'] = Math.floor(100000 + Math.random() * 900000);
 
-  // TODO: Need to add proper error handling
-  //  The user should be notified if there was an
-  //  error and pose some action.
   crud.db_createUser(userDict)
     .then(user => {
-      // console.log(userDict);
-      res.render("landing");
+      // res.render("landing");
+      login.login(req, res);
     })
     .catch(function(err) {
       if (err.name == 'SequelizeUniqueConstraintError'){

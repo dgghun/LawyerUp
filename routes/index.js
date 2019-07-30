@@ -13,14 +13,14 @@ router.get("/blog-single", function(req,res, next){
     res.render('blog/blog-single');
 });
 
-router.get("/clientsignup", landing.client_signup);
-router.get("/lawyersignup", landing.lawyer_signup);
+router.get("/clientsignup", landing.client_signup); //client signup page
+router.get("/lawyersignup", landing.lawyer_signup); //lawyer signup page
 
 router.post("/", landing.get_landing);
 router.post("/logout", landing.logout);
 router.post("/login", loginController.login);
-router.post("/clientsignup", signupController.signupClient);
-router.post("/lawyersignup", signupController.signupLawyer);
+router.post("/clientsignup", signupController.signupClient); //client information submit
+router.post("/lawyersignup", signupController.signupLawyer); //lawyer information submit
 
 //------ Video Chat Routes ------
 router.post('/launchVideo', videoController.launchVideo);
