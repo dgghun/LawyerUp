@@ -39,15 +39,15 @@ block content
                 |  #{err}
                 button.close(type='button', data-dismiss='alert') ×
               .form-group
-                input#firstName.form-control(type='text', name='firstName', aria-describedby='message', placeholder=userInput.firstName, required='')
+                input#firstName.form-control(type='text', name='firstName', aria-describedby='message', placeholder=userInput.firstName, value=userInput.firstName required='')
               .form-group
-                input#lastName.form-control(type='text', name='lastName', placeholder=userInput.lastName, required='')
+                input#lastName.form-control(type='text', name='lastName', placeholder=userInput.lastName, value=userInput.lastName, required='')
               .form-group
-                input#phonenumber.form-control(type='text', name='phoneNumber', placeholder=userInput.phoneNumber, aria-describedby='msgPhone', required='')
+                input#phonenumber.form-control(type='text', name='phoneNumber', placeholder=userInput.phoneNumber, value=userInput.phoneNumber, aria-describedby='msgPhone', required='')
               .form-group
-                input#country.form-control(type='text', name='country', placeholder=userInput.country, aria-describedby='msgCountry', required='')
+                input#country.form-control(type='text', name='country', placeholder=userInput.country, value=userInput.country, aria-describedby='msgCountry', required='')
               .form-group
-                input#email.form-control(type='email', name='email', placeholder=userInput.email, aria-describedby='msgEmail', required='')
+                input#email.form-control(type='email', name='email', placeholder=userInput.email, value=userInput.email, aria-describedby='msgEmail', required='')
                 small#msgEmail.form-text(style='color: #ffe97a') We'll never share your email. Email will be used for login.
               .form-group
                 input#password.form-control(type='password', name='password', placeholder='Create Password', required='')
