@@ -12,13 +12,13 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+db.cases = require('../models/cases')(sequelize, Sequelize);
 db.users = require('../models/users')(sequelize, Sequelize);
 db.incidents = require('../models/incidents')(sequelize, Sequelize);
 db.lawyerLegalProfiles = require('../models/lawyerlegalprofiles')(sequelize, Sequelize);
 db.legalFields = require('../models/legalfields')(sequelize, Sequelize);
 db.legalIncidentMaps = require('../models/legalincidentmaps')(sequelize, Sequelize);
 db.appointments = require('../models/appointments')(sequelize, Sequelize);
-
 
 //Relations
 db.users.hasMany(db.lawyerLegalProfiles); //one-to-many

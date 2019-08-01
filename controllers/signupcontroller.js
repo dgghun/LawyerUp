@@ -23,7 +23,7 @@ exports.signupClient = function(req, res, next) {
     .catch(function(err) {
       if (err.name == 'SequelizeUniqueConstraintError'){
         res.render('signup_client', {
-          err: 'Email address is already in use', 
+          err: 'Email address is already in use',
           userInput: {
             country: res.req.body.country,
             email: res.req.body.email,
@@ -48,16 +48,22 @@ exports.signupLawyer = function(req, res, next) {
   userDict['isLawyer'] = true;
   userDict['roomKey'] = Math.floor(100000 + Math.random() * 900000);
 
-  // TODO: Need to add proper error handling
-  //  The user should be notified if there was an
-  //  error and pose some action.
   crud.db_createUser(userDict)
     .then(user => {
-      // console.log(userDict);
-      res.render("landing");
+      //res.render("landing");
+      login.login(req, res);
     })
     .catch(function(err) {
-      console.log("Error: signupcontroller/signupClient");
-      res.render("landing");
+      if (err.name == 'SequelizeUniqueConstraintError'){
+        res.render('signup_client', {
+          err: 'Email address is already in use',
+          userInput: {
+            country: res.req.body.country,
+            email: res.req.body.email,
+            firstName: res.req.body.firstName,
+            lastName: res.req.body.lastName,
+            phoneNumber: res.req.body.phoneNumber
+        }});
+      }
     });
 };

@@ -22,7 +22,7 @@ exports.db_getUserId = function(userId){
     attributes: { exclude: ["password", "roomKey", "createdAt", "updatedAt"] },
     raw:true
   });
-}
+};
 
 /**
  * Gets first matching user in table based on user email address
@@ -130,7 +130,7 @@ exports.db_createAppointment = function(appointment){
 
 /**
  * Gets lawyer appointments
- * 
+ *
  * @param {string} id lawyer id to serach for
  */
 exports.db_getLawyerAppointments = function(id){
@@ -138,6 +138,10 @@ exports.db_getLawyerAppointments = function(id){
     where: {lawyerID: id},
     raw:true,
   });
+};
+
+exports.db_createIncident = function(incident){
+  return db.cases.create(incident);
 };
 
 // ----------------------------------------------------------------------------

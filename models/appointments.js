@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     clientRoomKey: DataTypes.INTEGER,
     lawyerID: DataTypes.INTEGER,
     lawyerRoomKey: DataTypes.INTEGER,
+    caseUUID: DataTypes.UUIDV4,
     apptAccepted: DataTypes.BOOLEAN,
     apptDate: DataTypes.DATE
   }, {});

@@ -1,14 +1,18 @@
-var crud = require("./crud");
+var uuidv4 = require('uuid/v4');
+var mkdirp = require('mkdirp');
+var fs = require('fs');
+var crud = require('./crud');
 
+const CASES_DIR = './cases/';
 
 /**
- * Loads client landing page
+ * Loads client incident form with relevent incident categories
  *
  * @param {request} req HTTP Request
  * @param {response} res HTTP Response
  * @param {next} next invokes next route handler
  */
-exports.landing = (req, res, next) => {
+exports.incidentForm = (req, res, next) => {
   //Get list of incidents from DB.
   crud
     .db_getIncidents()
@@ -17,14 +21,78 @@ exports.landing = (req, res, next) => {
       id.forEach(element => {
         results.push({ id: element.id, type: element.type });
       });
-      res.render("client/clientNews", {
+      res.render('client/clientIncidentForm', {
         userName: `${req.session.firstName}`,
         incidents: results
       });
     })
     .catch(function(err) {
       console.log("Error: Issue fetching Incident ID's");
-      res.render("client/clientNews");
+      res.render('client/clientNews');
+    });
+
+};
+
+/**
+ * Logs client case information into app
+ *
+ * @param {request} req HTTP Request - URL holds query info, Session hold client info
+ * @param {response} res HTTP Response
+ * @param {next} next invokes next route handler
+ */
+exports.incidentFormSubmit = (req, res, next) => {
+  let incident_info = {
+    uuid: uuidv4(),
+    isForClient: (req.body.radio_who_for_client == 'on') ? 'true':'false',
+    arrest: (req.body.radio_arrest_true == 'on') ? 'true':'false',
+    incidentID: req.body.incident,
+    clientStory: req.body.clientStory
+  };
+
+  ensureExists(CASES_DIR, function(err){
+    //persist client case "incident" information to case file (json)
+    fs.writeFile(`${CASES_DIR}${incident_info.uuid}.json`, JSON.stringify(incident_info), (err) => {
+      if (err){
+        //TODO: Add error message in view
+        //  The form should reload and allow the user to enter information again
+        //  and throw an error message
+        res.render('client/clientIncidentForm', {err: 'Could not save incident information'});
+      }
+
+      //Lookup lawyers for case type
+      crud.db_getLegalIncidentMap_IdFK(Number(incident_info.incidentID))
+        .then(incidentId => {
+          var temp = [];
+          incidentId.forEach(element => {
+            temp.push(Number([element.fieldID]));
+          });
+          return temp;
+        })
+        .then(fieldId => {
+          return Promise.all([crud.db_getLawyerProfile_UserIdFk(fieldId)]);
+        })
+        .then(users => {
+          var usersIdList = [];
+          users[0].forEach(element => {
+            usersIdList.push(Number([element.userID]));
+          });
+          return Promise.all([crud.db_getUsers(usersIdList)]);
+        })
+        .then(lawyerId => {
+          let suggestedLawyers = [];
+          lawyerId[0].forEach(element => {
+            suggestedLawyers.push(element);
+          });
+
+          req.session.caseUUID = incident_info.uuid;
+          res.render('client/lawyerSearch', {lawyerProfiles: suggestedLawyers});
+
+        })
+        .catch(function(err) {
+          console.log("Error: Could not determine lawyer suggestions");
+        });
+
+      });
     });
 };
 
@@ -86,13 +154,15 @@ exports.findLawyer = (req, res, next) => {
  */
 exports.requestAppointment = (req, res, next) => {
   var appointment = {
-    'clientID': '',
-    'clientRoomKey': '',
-    'lawyerID': '',
-    'lawyerRoomKey': ''
+    clientID: '',
+    clientRoomKey: '',
+    lawyerID: '',
+    lawyerRoomKey: '',
+    caseUUID: req.session.caseUUID,
   };
 
-  crud.db_retriveUserID_LawyerIDPK(req.query.reqid)
+  crud
+    .db_retriveUserID_LawyerIDPK(req.query.reqid)
     .then(lawyerUserID => {
       //fetch userID from lawyerID
       atters = { clientID: req.session.uid, lawyerID: lawyerUserID.id };
@@ -100,10 +170,15 @@ exports.requestAppointment = (req, res, next) => {
     })
     .then(usersUID => {
       //fetches both client and user data
-      return Promise.all([crud.db_getUsers([usersUID.clientID, usersUID.lawyerID], profile = 'appointment')]);
+      return Promise.all([
+        crud.db_getUsers(
+          [usersUID.clientID, usersUID.lawyerID],
+          (profile = "appointment")
+        )
+      ]);
     })
     .then(users => {
-      if (users[0][0].isLawyer){
+      if (users[0][0].isLawyer) {
         appointment.lawyerID = users[0][0].id;
         appointment.lawyerRoomKey = users[0][0].roomKey;
         appointment.clientID = users[0][1].id;
@@ -117,11 +192,20 @@ exports.requestAppointment = (req, res, next) => {
       crud.db_createAppointment(appointment);
     })
     .then(item => {
-      // crud.db_createAppointment({clientID: req.session.uid, lawyerID: userID});
-      res.redirect(`${res.req.baseUrl}/client`);
+      res.render('client/clientNews', {status: 'success', msg: 'Appointment request has been made'});
     })
     .catch(function(err) {
-      console.log("Error requesting appointment");
-      res.render("client/client");
+      res.render('client/clientNews', {status: 'error', msg: 'There was an issue requesting the appointment.'});
     });
 };
+
+function ensureExists(path, cb) {
+  chmod = 0755;
+
+  fs.mkdir(path, chmod, function(err) {
+      if (err) {
+          if (err.code == 'EEXIST') cb(null); // ignore the error if the folder already exists
+          else cb(err); // something else went wrong
+      } else cb(null); // successfully created folder
+  });
+}

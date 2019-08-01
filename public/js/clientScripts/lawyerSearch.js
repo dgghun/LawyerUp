@@ -5,7 +5,7 @@
             $.ajax({
                 type: 'GET',
                 url: url,
-                data: {'incident': incidentId},d
+                data: {'incident': incidentId},
                 dataType: 'json',
                 success: function(data){
                     $('#queryResults').html('');

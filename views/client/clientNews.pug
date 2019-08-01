@@ -1,6 +1,17 @@
 extends clientLayout
 
 append content
+  if status == 'success'
+    .alert.alert-success.alert-dismissible.fade.show
+      strong Success!
+      |  #{msg}
+      button.close(type='button', data-dismiss='alert') ×
+  if status == 'error'
+    .alert.alert-danger.alert-dismissible.fade.show
+      strong Error!
+      |  #{msg}
+      button.close(type='button', data-dismiss='alert') ×
+
   // Start: Main content
   .container.article-clean(style='padding-right: 0px;padding-left: 0px;width: 1050px;')
     .row(style='margin-right: -15px;width: 1050px;')
@@ -19,18 +30,18 @@ append content
         // Start: Text
         .text
           p
-            | Sed lobortis mi. Suspendisse vel placerat ligula. 
+            | Sed lobortis mi. Suspendisse vel placerat ligula.
             span(style='text-decoration: underline;') Vivamus
             |  ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.
             |                         Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
           p
-            | Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac lacus. 
+            | Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac lacus.
             strong Ut vehicula rhoncus
-            |  elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit 
+            |  elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit
             em pulvinar dict
             |  vel in justo. Vestibulum ante
             |                         ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
-          h2 Aliquam In Arcu 
+          h2 Aliquam In Arcu
           p
             | Suspendisse vel placerat ligula. Vivamus ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
             | posuere cubilia Curae.

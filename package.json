@@ -10,6 +10,11 @@
     "start": "nodemon ./bin/www",
     "test": "mocha --reporter spec"
   },
+  "nodemonConfig": {
+    "ignore": [
+      "cases/*"
+    ]
+  },
   "dependencies": {
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
@@ -24,13 +29,15 @@
     "http-errors": "~1.6.3",
     "jshint": "^2.10.2",
     "jssha": "^2.3.1",
+    "mkdirp": "^0.5.1",
     "mocha": "^6.2.0",
     "moment": "^2.24.0",
     "morgan": "~1.9.1",
     "mysql2": "^1.6.5",
     "pug": "^2.0.3",
     "sequelize": "^6.0.0",
-    "sequelize-cli": "^5.4.0"
+    "sequelize-cli": "^5.4.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"

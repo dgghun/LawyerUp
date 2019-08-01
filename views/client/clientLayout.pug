@@ -1,4 +1,5 @@
 doctype html
+
 html
   head
     block title
@@ -15,13 +16,11 @@ html
       link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Lora')
 
     block fonts
-      link(rel='stylesheet', href='assets/fonts/fontawesome5-overrides.min.css')
-    
+      link(rel='stylesheet', href='/fonts/client/fontawesome5-overrides.min.css')
+
     block styling
       link(rel='stylesheet', href='/css/client/Article-Clean.css')
-      link(rel='stylesheet', href='/css/client/Calendar-BS4-1.css')
-      link(rel='stylesheet', href='/css/client/Calendar-BS4.css')
-      link(rel='stylesheet', href='/css/client/Profile-Edit-Form-1.css')
+      //- link(rel='stylesheet', href='/css/client/Calendar-BS4.css')
       link(rel='stylesheet', href='/css/client/Profile-Edit-Form.css')
       link(rel='stylesheet', href='/css/client/sidebar.css')
 
@@ -98,10 +97,8 @@ html
 
     block content
 
-
   block footer_scripts
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js')
-    script(src='/js/clientScripts/lawyerSearch.js')
     script(src='/js/clientScripts/sidebar.js')
-    script(src='/js/Profile-Edit-Form.js')
+    script(src='/js/clientScripts/Profile-Edit-Form.js')

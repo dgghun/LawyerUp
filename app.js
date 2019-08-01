@@ -17,7 +17,7 @@ const MAX_AGE = 1000 * 60 * 15; // m/s (15 minutes)
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
-app.locals.moment = require('moment') //date & time library
+app.locals.moment = require('moment'); //date & time library
 
 app.use(logger("dev"));
 app.use(express.json());

@@ -24,6 +24,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      caseUUID:{
+        allowNull: false,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
+      },
       apptAccepted: {
         type: Sequelize.BOOLEAN
       },
