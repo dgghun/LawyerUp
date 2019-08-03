@@ -29,6 +29,19 @@ module.exports = {
           updatedAt: new Date()
 
         },
+        {
+          firstName: "Milo",
+          lastName: "Ren",
+          phoneNumber: "9097986666",
+          country: "usa",
+          email: "deathstar@space.complete",
+          password: "$2b$10$t8xZhmAwKs1JrvOjVTJp1OodEaUfJMi1IrSwMV.vP2vedQM.d08kW",
+          isLawyer: false,
+          roomKey: 832219,
+          createdAt: new Date(),
+          updatedAt: new Date()
+          
+        },
 
         //lawyers
         {

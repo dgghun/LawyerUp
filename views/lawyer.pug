@@ -81,12 +81,40 @@ html
                                 p.card-text #{email}
                             div.d-flex.justify-content-center
                                 a.btn.btn-warning(href="#", style="padding:7px") Edit Info
-                    div.custom-control.custom-checkbox
-                        input(type='checkbox', class='custom-control-input', id='chk1')
-                        label(class='custom-control-label', for='chk1') Check box
                 div.col
                     p.display-4 Appointments
+                    //- Appointment cards
                     div.list-group
+                        //- List all appointments
+                        each item in appointments
+                            //-  appointment requests
+                            if item.apptAccepted == null
+                                a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
+                                    div.d-flex.w-100.justify-content-between
+                                        h5.mb-1 #{item.firstName} #{item.lastName}
+                                        label.badge.badge-dark 
+                                            span.align-middle APPOINTMENT REQUEST
+                                    div.hide-overflow.d-flex
+                                        i.fas.fa-envelope-square.mr-1.mt-1
+                                        p.mb-1 #{item.email}
+                                    div.hide-overflow.d-flex
+                                        i.fas.fa-phone-square-alt.mr-1.mt-1
+                                        p.mb-1 #{item.phoneNumber}
+                                    small.m-1 Select Appointment Date
+                                    form.form-inline(role='form', method='POST', action='#', id="acceptAppt=" + item.id, name="acceptAppt=" + item.id)
+                                        div.input-group.m-1(style='width:50%;')
+                                            span.input-group-addon 
+                                                i.fas.fa-calendar-alt.mt-2.mr-1
+                                            input.form-control.input-sm(id="date", name="date", type='date', value= moment().format('YYYY-MM-DD'))
+                                        div.input-group.m-1(style='width:40%;')
+                                            span.input-group-addon 
+                                                i.fas.fa-clock.mt-2.mr-1
+                                            input.form-control(id="time", name="time", type='time', value= moment().format('hh:mm') + ':00')
+                                        button.btn.btn-success.btn-sm.m-1(type='button') ACCEPT
+                                        form(role='form', method='POST', action='#', id="declineAppt=" + item.id, name="declineAppt=" + item.id) 
+                                            button.btn.btn-danger.btn-sm.m-1(type='button') DECLINE
+                                        //- button.btn.btn-danger.btn-sm.m-1(type='button') DECLINE  
+                        //- Hard coded cards for testing
                         a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
                             div.d-flex.w-100.justify-content-between
                                 h5.mb-1 John Doughnut

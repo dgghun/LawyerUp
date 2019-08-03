@@ -11,6 +11,20 @@ exports.db_createUser = function(userDict) {
 };
 
 /**
+ * Gets first matching user in table based on user id
+ *
+ * @param {var} userId a users id
+ * @returns Sequelize user model or NULL
+ */
+exports.db_getUserId = function(userId){
+  return db.users.findOne({
+    where: {id: userId},
+    attributes: { exclude: ["password", "roomKey", "createdAt", "updatedAt"] },
+    raw:true
+  });
+}
+
+/**
  * Gets first matching user in table based on user email address
  *
  * @param {dictonary} userDict user attributes to query {[email: ""]}
@@ -112,6 +126,18 @@ exports.db_retriveUserID_LawyerIDPK = function(lawyerID){
  */
 exports.db_createAppointment = function(appointment){
   return db.appointments.create(appointment);
+};
+
+/**
+ * Gets lawyer appointments
+ * 
+ * @param {string} id lawyer id to serach for
+ */
+exports.db_getLawyerAppointments = function(id){
+  return db.appointments.findAll({
+    where: {lawyerID: id},
+    raw:true,
+  });
 };
 
 // ----------------------------------------------------------------------------
