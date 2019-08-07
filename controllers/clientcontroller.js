@@ -14,23 +14,45 @@ const CASES_DIR = "./cases/";
  * @param {next} next invokes next route handler
  */
 exports.incidentForm = (req, res, next) => {
-  //Get list of incidents from DB.
-  crud
-    .db_getIncidents()
-    .then(id => {
-      var results = [];
-      id.forEach(element => {
-        results.push({ id: element.id, type: element.type });
+  if (!req.query.case) {
+    crud
+      .db_getIncidents()
+      .then(id => {
+        var results = [];
+        id.forEach(element => {
+          results.push({ id: element.id, type: element.type });
+        });
+        res.render("client/clientIncidentForm", {
+          userName: `${req.session.firstName}`,
+          incidents: results
+        });
+      })
+      .catch(function(err) {
+        console.log("Error: Issue fetching Incident ID's");
+        res.render("client/clientNews");
       });
-      res.render("client/clientIncidentForm", {
-        userName: `${req.session.firstName}`,
-        incidents: results
-      });
-    })
-    .catch(function(err) {
-      console.log("Error: Issue fetching Incident ID's");
-      res.render("client/clientNews");
+  } else {
+    //user opts to edit existing form
+    fs.readFile(`${CASES_DIR}${req.query.case}.json`, (err, data) => {
+      if (err) {
+        console.log("Error: Could not read case JSON file");
+        res.render("client/clientNews");
+      }
+      crud
+        .db_getIncidents() //Legal incidents (why user needs lawyer)
+        .then(id => {
+          var results = [];
+          id.forEach(element => { results.push({ id: element.id, type: element.type }); });
+          req.session.case = req.query.case;
+          res.render("client/clientIncidentForm", {
+            userName: req.session.firstName,
+            updatingForm: 'true',
+            incidents: results,
+            caseData: JSON.parse(data)
+        });
+      });//end crud
     });
+  }
 };
 
 /**
@@ -40,7 +62,10 @@ exports.incidentForm = (req, res, next) => {
  * @param {response} res HTTP Response
  * @param {next} next invokes next route handler
  */
-exports.incidentFormSubmit = (req, res, next) => {
+exports.incidentFormSubmit = (req, res, next, update=false) => {
+  //TODO: Needs to handle the update of the user form if file already exists
+
+  console.log('test');
   let incident_info = {
     uuid: uuidv4(),
     isForClient: req.body.radio_who_for_client == "on" ? "true" : "false",
@@ -103,54 +128,80 @@ exports.incidentFormSubmit = (req, res, next) => {
   });
 };
 
-/**
- * Redirect to list of lawyers for specific incident
- *
- * @param {request} req HTTP Request - URL holds query info
- * @param {response} res HTTP Response
- * @param {next} next invokes next route handler
- */
-exports.findLawyer = (req, res, next) => {
-  // TODO: Refactor the logic when DB Foreign Key constrainsts are added.
-  //  This function is a hack until the DB (sequelize) is fully wired up wit FK's.
-  //  Once wired up the code can be cutdown and cleaned.
-  //
-  //  Can prob. use iterators in we have to use lists
-  //  ...think Promise.all can be used here
 
-  // let suggestedLawyers = [];
-  // var fieldId = [];
-  // var possibleLawyersId = [];
-  crud
-    .db_getLegalIncidentMap_IdFK(Number(req.query.incident))
-    .then(incidentId => {
-      var temp = [];
-      incidentId.forEach(element => {
-        temp.push(Number([element.fieldID]));
-      });
-      return temp;
-    })
-    .then(fieldId => {
-      return Promise.all([crud.db_getLawyerProfile_UserIdFk(fieldId)]);
-    })
-    .then(users => {
-      var usersIdList = [];
-      users[0].forEach(element => {
-        usersIdList.push(Number([element.userID]));
-      });
-      return Promise.all([crud.db_getUsers(usersIdList)]);
-    })
-    .then(lawyerId => {
-      let suggestedLawyers = [];
-      lawyerId[0].forEach(element => {
-        suggestedLawyers.push(element);
-      });
-      res.send(suggestedLawyers);
-    })
-    .catch(function(err) {
-      console.log("Error: Could not determine lawyer suggestions");
-    });
+/**
+ * Logs client case information into app
+ *
+ * @param {request} req HTTP Request - URL holds query info, Session hold client info
+ * @param {response} res HTTP Response
+ */
+exports.incidentFormUpdate = (req, res) => {
+  //TODO: Needs to handle the update of the user form if file already exists
+
+  let incident_info = {
+    uuid: req.session.case,
+    isForClient: req.body.radio_who_for_client == "on" ? "true" : "false",
+    arrest: req.body.radio_arrest_true == "on" ? "true" : "false",
+    incidentID: req.body.incident,
+    clientStory: req.body.clientStory
+  };
+
+  req.session.case = null;
+
+  ensureExists(CASES_DIR, function(err) {
+    //persist client case "incident" information to case file (json)
+    fs.writeFile(
+      `${CASES_DIR}${incident_info.uuid}.json`,
+      JSON.stringify(incident_info),
+      err => {
+        if (err) {
+          //TODO: Add error message in view
+          //  The form should reload and allow the user to enter information again
+          //  and throw an error message
+          res.render("client/clientIncidentForm", {
+            err: "Could not save incident information"
+          });
+        }
+
+        //Lookup lawyers for case type
+        crud
+          .db_getLegalIncidentMap_IdFK(Number(incident_info.incidentID))
+          .then(incidentId => {
+            var temp = [];
+            incidentId.forEach(element => {
+              temp.push(Number([element.fieldID]));
+            });
+            return temp;
+          })
+          .then(fieldId => {
+            return Promise.all([crud.db_getLawyerProfile_UserIdFk(fieldId)]);
+          })
+          .then(users => {
+            var usersIdList = [];
+            users[0].forEach(element => {
+              usersIdList.push(Number([element.userID]));
+            });
+            return Promise.all([crud.db_getUsers(usersIdList)]);
+          })
+          .then(lawyerId => {
+            let suggestedLawyers = [];
+            lawyerId[0].forEach(element => {
+              suggestedLawyers.push(element);
+            });
+
+            req.session.caseUUID = incident_info.uuid;
+            res.render("client/clientNews", {
+              lawyerProfiles: suggestedLawyers
+            });
+          })
+          .catch(function(err) {
+            console.log("Error: Could not determine lawyer suggestions");
+          });
+      }
+    );
+  });
 };
+
 
 /**
  * Fetch relevent news article for user to read
@@ -167,11 +218,15 @@ exports.fetchNews = (req, res) => {
       req.session.uid
     )
     .then(userAppt => {
-      if (userAppt === "empty" || userAppt === null || userAppt.apptDate === null) {
+      if (
+        userAppt === "empty" ||
+        userAppt === null ||
+        userAppt.apptDate === null
+      ) {
         res.render("client/clientNews");
-      }
-      else {
-        req.session.aptkey = userAppt.clientRoomKey.toString() + userAppt.lawyerRoomKey.toString();
+      } else {
+        req.session.aptkey =
+          userAppt.clientRoomKey.toString() + userAppt.lawyerRoomKey.toString();
         res.render("client/clientNews", {
           nextAppointment: JSON.stringify(userAppt.apptDate)
         });
@@ -245,6 +300,27 @@ exports.requestAppointment = (req, res, next) => {
       });
     });
 };
+
+/**
+ * Fetches all client cases and renders them to user
+ *
+ * @param {request} req HTTP Request
+ * @param {response} res HTTP Response
+ */
+exports.clientCases = (req, res) => {
+  crud
+    .db_getClientCases(req.session.uid)
+    .then(clientCases => {
+      console.log(JSON.stringify(clientCases));
+
+      res.render("client/clientCases", { clientCaseList: clientCases });
+    })
+    .catch(function(err) {
+      console.log("Error: Can not fetch client cases");
+    });
+};
+
+exports.updateCaseForm = (req, res) => {};
 
 /**
  * Ensures directory exists before trying to write file to it.

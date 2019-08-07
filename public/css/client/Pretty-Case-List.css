@@ -54,7 +54,7 @@
 }
 
 .row-striped:nth-of-type(odd){
-  background-color: #efefef;
+  background-color: #ffffff;
   /* border-left: 10px #cd3333 solid; */
 }
 
@@ -77,5 +77,6 @@
 }
 
 .badge-grey {
-  background-color: #efefef;
+  background-color: #ffffff;
+  /* background-color: #efefef; */
 }

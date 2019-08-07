@@ -1,43 +1,112 @@
 extends clientLayout
 
 append content
-  // Start: Main content
-  .container.article-clean
-    .row
-      .col-lg-10.col-xl-10.offset-lg-1.offset-xl-1
-        // Start: Intro
-        .text-center.intro
-          h1.text-center Tell us a little more about what happened...
-        // End: Intro
-        div
-          form#incidentForm(method='POST', action='incidentFormSubmit')
-            .form-group
-              label(style='padding-left: 0px;') Are you filling out this form for yourself or someone else?
-              .form-check
-                input#formCheck-1.form-check-input(type='radio', name='radio_who_for_client', checked)
-                label.form-check-label(for='formCheck-1') Myself
-              .form-check
-                input#formCheck-2.form-check-input(type='radio', name='radio_who_for_other')
-                label.form-check-label(for='formCheck-2') Someone else
-            .form-group
-              label(style='padding-left: 0px;') *If this is for someone else what is their name?
-            .form-group
-              label(style='padding-left: 0px;') Did this incident involve an arrest?
-              .form-check
-                input#formCheck-1.form-check-input(type='radio', name='radio_arrest_true', checked)
-                label.form-check-label(for='formCheck-1') Yes
-              .form-check
-                input#formCheck-2.form-check-input(type='radio', name='radio_arrest_false')
-                label.form-check-label(for='formCheck-2') No
-            .form-group
-              p I need a lawyer for:
-              select#incident(name='incident')
-                  if(incidents!=undefined)
+  if !updatingForm
+    // Start: Main content
+    .container.article-clean
+      .row
+        .col-lg-10.col-xl-10.offset-lg-1.offset-xl-1
+          // Start: Intro
+          .text-center.intro
+            h1.text-center Tell us a little more about what happened...
+          // End: Intro
+          div
+            form#incidentForm(method='POST', action='incidentFormSubmit')
+              .form-group
+                label(style='padding-left: 0px;') Are you filling out this form for yourself or someone else?
+                .form-check
+                  input#formCheck-1.form-check-input(type='radio', name='radio_who_for_client', checked)
+                  label.form-check-label(for='formCheck-1') Myself
+                .form-check
+                  input#formCheck-2.form-check-input(type='radio', name='radio_who_for_other')
+                  label.form-check-label(for='formCheck-2') Someone else
+              .form-group
+                label(style='padding-left: 0px;') *If this is for someone else what is their name?
+              .form-group
+                label(style='padding-left: 0px;') Did this incident involve an arrest?
+                .form-check
+                  input#formCheck-1.form-check-input(type='radio', name='radio_arrest_true', checked)
+                  label.form-check-label(for='formCheck-1') Yes
+                .form-check
+                  input#formCheck-2.form-check-input(type='radio', name='radio_arrest_false')
+                  label.form-check-label(for='formCheck-2') No
+              .form-group
+                p I need a lawyer for:
+                select#incident(name='incident')
+                    if(incidents!=undefined)
+                        each i in incidents
+                            option.dd_incident(name=i.type, value=i.id) #{i.type}
+              .form-group
+                label Describe in your own words what happened:
+                textarea#clientStory.form-control(name='clientStory', style='height: 250px;')
+              .col-xl-4.offset-xl-7.float-right(style='margin-left: 0px;')
+                button.btn.btn-primary(type='submit', style='margin-left: 175px;') Next
+    // End: Main content
+  else
+    // Start: Main content
+    .container.article-clean
+      .row
+        .col-lg-10.col-xl-10.offset-lg-1.offset-xl-1
+          // Start: Intro
+          .text-center.intro
+            h1.text-center Tell us a little more about what happened...
+          // End: Intro
+          div
+            form#incidentForm(method='POST', action='incidentFormUpdate')
+              .form-group
+                label(style='padding-left: 0px;') Are you filling out this form for yourself or someone else?
+
+                  //Check if the form is filled for client or someone else
+                  if caseData.isForClient
+                    .form-check
+                      input#formCheck-1.form-check-input(type='radio', name='radio_who_for_client', checked)
+                      label.form-check-label(for='formCheck-1') Myself
+                    .form-check
+                      input#formCheck-2.form-check-input(type='radio', name='radio_who_for_other')
+                      label.form-check-label(for='formCheck-2') Someone else
+                  else
+                    if caseData.isForClient
+                    .form-check
+                      input#formCheck-1.form-check-input(type='radio', name='radio_who_for_client')
+                      label.form-check-label(for='formCheck-1') Myself
+                    .form-check
+                      input#formCheck-2.form-check-input(type='radio', name='radio_who_for_other', checked)
+                      label.form-check-label(for='formCheck-2') Someone else
+              .form-group
+                label(style='padding-left: 0px;') *If this is for someone else what is their name?
+              .form-group
+                label(style='padding-left: 0px;') Did this incident involve an arrest?
+
+                //Check if an arrest has been made
+                if caseData.arrest
+                  .form-check
+                    input#formCheck-1.form-check-input(type='radio', name='radio_arrest_true', checked)
+                    label.form-check-label(for='formCheck-1') Yes
+                  .form-check
+                    input#formCheck-2.form-check-input(type='radio', name='radio_arrest_false')
+                    label.form-check-label(for='formCheck-2') No
+                else
+                  .form-check
+                    input#formCheck-1.form-check-input(type='radio', name='radio_arrest_true')
+                    label.form-check-label(for='formCheck-1') Yes
+                  .form-check
+                    input#formCheck-2.form-check-input(type='radio', name='radio_arrest_false', checked)
+                    label.form-check-label(for='formCheck-2') No
+
+              .form-group
+                p I need a lawyer for:
+                select#incident(name='incident')
+                    if(incidents!=undefined)
                       each i in incidents
+                        if i.id==caseData.incidentID
+                          option.dd_incident(name=i.type, value=i.id, selected='selected') #{i.type}
+                        else
                           option.dd_incident(name=i.type, value=i.id) #{i.type}
-            .form-group
-              label Describe in your own words what happened:
-              textarea#clientStory.form-control(name='clientStory', style='height: 250px;')
-            .col-xl-4.offset-xl-7.float-right(style='margin-left: 0px;')
-              button.btn.btn-primary(type='submit', style='margin-left: 175px;') Next
-  // End: Main content
+
+              .form-group
+                label Describe in your own words what happened:
+                if caseData.clientStory
+                  textarea#clientStory.form-control(name='clientStory', style='height: 250px;') #{caseData.clientStory}
+              .col-xl-4.offset-xl-7.float-right(style='margin-left: 0px;')
+                button.btn.btn-primary(type='submit', style='margin-left: 175px;') Update
+    // End: Main content

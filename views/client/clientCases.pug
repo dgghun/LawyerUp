@@ -1,38 +1,34 @@
 extends clientLayout
 
+append styling
+  link(rel='stylesheet', href='/css/client/Pretty-Case-List.css')
+
 append content
-  // Start: Main content
-  .container.article-clean(style='padding-right: 0px;padding-left: 0px;width: 1050px;')
+  .container.article-clean(style='padding-right: 0px;padding-left: 0px;width: 2500px;')
     .row(style='margin-right: -15px;width: 1050px;')
-      .col-lg-10.col-xl-8.offset-lg-1.offset-xl-2
-        // Start: Intro
-        .text-center.intro
-          h1.text-center Client Cases Stub - Still in progress
-          img.img-fluid(src='assets/img/desk.jpg')
-        // End: Intro
-        // Start: Text
-        .text
-          p
-            | Sed lobortis mi. Suspendisse vel placerat ligula. 
-            span(style='text-decoration: underline;') Vivamus
-            |  ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.
-            |                         Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
-          p
-            | Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac lacus. 
-            strong Ut vehicula rhoncus
-            |  elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit 
-            em pulvinar dict
-            |  vel in justo. Vestibulum ante
-            |                         ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
-          h2 Aliquam In Arcu 
-          p
-            | Suspendisse vel placerat ligula. Vivamus ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-            | posuere cubilia Curae.
-          figure
-            img.figure-img(src='assets/img/beach.jpg')
-            figcaption Caption
-          p
-            | Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Suspendisse vel placerat ligula. Vivamus ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar
-            | dictum vel in justo.
-        // End: Text
-        // End: Main content
+      .col
+        div(style='margin:46px;')
+          if(clientCaseList)
+            each legalCase in clientCaseList
+              .row.row-striped
+                .col-2.text-center
+                  .user-container
+                    a.user-avatar(href='#')
+                      img.img-fluid(src='/images/legalReportIcon.jpg', alt='Report image', width='200', height='200')
+                      //img.img-fluid(src='/images/icons/courthouse-256.png', alt='Client case icon', width='200', height='200')
+                .col-10
+                  h3.text-uppercase
+                    strong Case#: #{legalCase.caseUUID}
+                  ul.list-inline
+                    li.list-inline-item
+                      i.fa.fa-calendar-o(aria-hidden='true')
+                      | Created On: #{legalCase.createdAt}
+                  p
+                    | Profile information: Lorem ipsum dolsit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  //- input(type='hidden', name='reqid', value=profile.id)
+                  //- button#updateCase.btn.btn-primary.btn-sm(type='submit', href='/user/client/incidentForm') Update Case Information
+                  a#updateCase.btn.btn-primary.btn-sm(type='submit', href='/user/client/incidentForm?case='+legalCase.caseUUID) Update Case Information
+          //- a.nav-link.active.text-left.text-white.py-1.px-0(href='/user/client/incidentForm')
+
+          else
+            h1 Sorry you have no previous cases to lookup.

@@ -198,6 +198,24 @@ exports.db_createIncident = function(incident){
   return db.cases.create(incident);
 };
 
+
+/**
+ *Fetches all of a clients submitted cases saved in the appointments tables.
+ *
+ * @param {string} clientID clients user ID.
+ * @param {string} [sort='ASC'] sorting order for dates:
+ *        Use 'ASC' for acending
+ *        Use 'DESC' for decending
+ * @returns {json} json represntation of Sequelize user model
+ */
+exports.db_getClientCases = function(clientID, sort='ASC') {
+  return db.appointments.findAll({
+    where: {clientID: clientID},
+    order: [['createdAt', sort]],
+    raw: true,
+  });
+};
+
 // ----------------------------------------------------------------------------
 
 /**
