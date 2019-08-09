@@ -30,9 +30,9 @@ exports.login = function(req, res) {
 
 /**
  * Gets checks db for appointments for Lawyer and sends this along with Lawyer info to main Lawyer page
- * @param {*} res 
- * @param {*} page 
- * @param {*} user 
+ * @param {*} res
+ * @param {*} page
+ * @param {*} user
  */
 function renderLawyerPage(res, page, user){
   var userInfo;
@@ -44,11 +44,11 @@ function renderLawyerPage(res, page, user){
         promises.push(crud.db_getUserId(user.clientID)
         .then(client =>{
           //format client before moving on
-          client.phoneNumber = formatPhoneNumber(client.phoneNumber)  // format phone
+          client.phoneNumber = formatPhoneNumber(client.phoneNumber);  // format phone
 
-          return client; 
+          return client;
         }));
-      })
+      });
       return Promise.all(promises); //get all appointments and user info before moving on
     })
     .then(clients =>{
@@ -59,7 +59,7 @@ function renderLawyerPage(res, page, user){
         email: user.email,
         phoneNumber: formatPhoneNumber(user.phoneNumber),
         appointments: clients
-      }
+      };
       res.render(page, userInfo);
     })
     .catch(function(error){
@@ -71,27 +71,27 @@ function renderLawyerPage(res, page, user){
         email: user.email,
         phoneNumber: formatPhoneNumber(user.phoneNumber),
         appointments: null
-      }
+      };
       res.render(page, userInfo);
     });
-    
+
     /**
-     * Formats a Date object 
-     * @param {Date object} date 
+     * Formats a Date object
+     * @param {Date object} date
      */
     function formatDateTime(date){
-      return  date.getMonth() + 
-              '/' + 
-              date.getDay() + 
-              '/' + 
-              date.getFullYear() + 
+      return  date.getMonth() +
+              '/' +
+              date.getDay() +
+              '/' +
+              date.getFullYear() +
               ' ' +
               date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     }
 
     /**
      * Formats a phone number to (xxx) xxx-xxxx
-     * @param {String} phoneNumberString 
+     * @param {String} phoneNumberString
      */
     function formatPhoneNumber(ph) {
       return '(' + ph.substr(0,3) + ')' + ' ' + ph.substr(3,3) + '-' + ph.substr(6,4);

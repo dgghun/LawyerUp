@@ -2,10 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 var clientController = require('../controllers/clientcontroller');
-var {isLoggedIn, userAuth} = require('../middleware/userAuth'); //destructuring assignment ECMA6
+var {isLoggedIn} = require('../middleware/userAuth'); //destructuring assignment ECMA6
 
 //------ User Client Routes ------
-router.get('/client', isLoggedIn, function(req, res) { res.render('client/clientNews');});
+router.get('/client', isLoggedIn, clientController.fetchNews);
+// router.get('/client', isLoggedIn, function(req, res) { res.render('client/clientNews');});
+
 router.get('/client/incidentForm', isLoggedIn, clientController.incidentForm);
 router.get('/client/lawyerSearch', isLoggedIn, function(req, res) { res.render('client/lawyerSearch');});
 router.get('/client/mailbox', isLoggedIn, function(req, res) { res.render('client/clientMailbox');});

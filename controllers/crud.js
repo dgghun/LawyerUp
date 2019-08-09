@@ -140,6 +140,33 @@ exports.db_getLawyerAppointments = function(id){
   });
 };
 
+/**
+ * Gets user appointments
+ *
+ * @param {boolean} isClient true/false if searching for client
+ * @param {string} id lawyer id to serach for
+ * @param {string} sort sort order for dates:
+ *        Use 'ASC' for acending
+ *        Use 'DESC' for decending
+ * @returns {json} json represntation of Sequelize user model
+ */
+exports.db_getAppointments = function(isClient, id, sort='ASC'){
+  if (isClient == 'client'){
+    return db.appointments.findAll({
+      where: {clientID: id},
+      order:[['apptDate', sort]],
+      raw: true,
+    });
+  } else{
+    return db.appointments.findAll({
+      where: {lawyerID: id},
+      order:[['apptDate', sort]],
+      raw:true,
+    });
+  }
+};
+
+
 exports.db_createIncident = function(incident){
   return db.cases.create(incident);
 };
