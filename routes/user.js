@@ -6,8 +6,6 @@ var {isLoggedIn} = require('../middleware/userAuth'); //destructuring assignment
 
 //------ User Client Routes ------
 router.get('/client', isLoggedIn, clientController.fetchNews);
-// router.get('/client', isLoggedIn, function(req, res) { res.render('client/clientNews');});
-
 router.get('/client/incidentForm', isLoggedIn, clientController.incidentForm);
 router.get('/client/lawyerSearch', isLoggedIn, function(req, res) { res.render('client/lawyerSearch');});
 router.get('/client/mailbox', isLoggedIn, function(req, res) { res.render('client/clientMailbox');});
@@ -17,9 +15,7 @@ router.get('/client/profile', isLoggedIn, function(req, res) { res.render('clien
 router.get('/client/changePassword', isLoggedIn, function(req, res) { res.render('client/clientChangePassword');});
 router.get('/client/changeEmail', isLoggedIn, function(req, res) { res.render('client/clientChangeEmail');});
 router.get('/client/requestAppointment', isLoggedIn, clientController.requestAppointment);
-
 router.post('/client/incidentFormSubmit', isLoggedIn, clientController.incidentFormSubmit);
-// router.post('/client/requestAppointment', isLoggedIn, clientController.requestAppointment);
 
 
 //------ User Lawyer Routes ------

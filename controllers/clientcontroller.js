@@ -167,7 +167,7 @@ exports.fetchNews = (req, res) => {
       req.session.uid
     )
     .then(userAppt => {
-      if (userAppt === "empty") {
+      if (userAppt === "empty" || userAppt === null) {
         res.render("client/clientNews");
       } else {
         req.session.aptkey = userAppt.clientRoomKey.toString() + userAppt.lawyerRoomKey.toString();
