@@ -14,7 +14,12 @@ Install required Node.js modules
 ```
 npm install
 ```
-Create the MySQL database and generate the tables using Sequelize. You can modify the MySQL parameters if needed in the config/config.js file. 
+Log into MySQL and create the database
+```
+mysql> CREATE DATABASE lawyerup_db_dev;
+```
+
+Generate the tables using Sequelize. You can modify the MySQL parameters if needed in the config/config.js file. 
 ```
 npx sequelize-cli db:create
 npx sequelize-cli db:migrate
