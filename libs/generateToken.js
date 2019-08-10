@@ -11,8 +11,10 @@ fs = require('fs');
 const commandLineArgs = require('command-line-args');
 var tokenGenerated = false;
 var vCardFileSpecified = false;
-const APPID = '296a15.vidyo.io'                 //vidyo app id
-const KEY = '0f954348ba37481ea1d930248d9f4c5f'  //vidyo dev key
+//const APPID = '296a15.vidyo.io'                 //vidyo app id OLD
+const APPID = 'da6a1f.vidyo.io'                 //vidyo app id
+//const KEY = '0f954348ba37481ea1d930248d9f4c5f'  //vidyo dev key OLD
+const KEY = '8bca9564877944de8f639194e4f8beeb'  //vidyo dev key
 
 const optionDefinitions = [{
     name: 'key',
