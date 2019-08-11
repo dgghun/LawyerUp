@@ -8,7 +8,11 @@ Currently this app is in development:
 ## Using the devlopment branch
 Clone the branch
 ```
-git clone http://github.com/VonHohenheim/LawyerUp/tree/develop
+git clone http://github.com/VonHohenheim/LawyerUp
+```
+Checkout the developement branch
+```
+git checkout develop
 ```
 Install required Node.js modules
 ```
