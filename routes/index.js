@@ -6,6 +6,7 @@ let landing = require("../controllers/landing");
 let loginController = require("../controllers/logincontroller");
 let signupController = require("../controllers/signupcontroller");
 let videoController = require('../controllers/videocontroller');
+let lawyerController = require('../controllers/lawyercontroller');
 
 
 router.get("/", landing.get_landing);
@@ -18,6 +19,7 @@ router.get("/lawyersignup", landing.lawyer_signup);
 router.get("/logout", landing.logout);
 
 router.post("/", landing.get_landing);
+router.post("/renderLawyer", lawyerController.renderLaywer)
 router.post("/logout", landing.logout);
 router.post("/login", loginController.login);
 router.post("/clientsignup", signupController.signupClient); //client information submit

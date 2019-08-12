@@ -113,7 +113,20 @@ html
                                         button.btn.btn-success.btn-sm.m-1(type='button') ACCEPT
                                         form(role='form', method='POST', action='#', id="declineAppt=" + item.id, name="declineAppt=" + item.id) 
                                             button.btn.btn-danger.btn-sm.m-1(type='button') DECLINE
-                                        //- button.btn.btn-danger.btn-sm.m-1(type='button') DECLINE  
+                            else
+                                a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
+                                    div.d-flex.w-100.justify-content-between
+                                        h5.mb-1 #{item.firstName} #{item.lastName}
+                                        label.badge.badge-dark 
+                                            span.align-middle APPOINTMENT TESTING
+                                    div.hide-overflow.d-flex
+                                        i.fas.fa-envelope-square.mr-1.mt-1
+                                        p.mb-1 #{item.email}
+                                    div.hide-overflow.d-flex
+                                        i.fas.fa-phone-square-alt.mr-1.mt-1
+                                        p.mb-1 #{item.phoneNumber}
+                                    small.m-1 Appointment testing
+  
                         //- Hard coded cards for testing
                         a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
                             div.d-flex.w-100.justify-content-between
