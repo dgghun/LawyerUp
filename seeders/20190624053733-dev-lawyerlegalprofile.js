@@ -22,6 +22,24 @@ module.exports = {
         updatedAt: new Date()
       },
       {
+        userID: 3,
+        fieldID: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 3,
+        fieldID: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 3,
+        fieldID: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
         userID: 4,
         fieldID: 51,
         createdAt: new Date(),
@@ -30,6 +48,24 @@ module.exports = {
       {
         userID: 4,
         fieldID: 54,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 4,
+        fieldID: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 4,
+        fieldID: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 4,
+        fieldID: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -46,6 +82,24 @@ module.exports = {
         updatedAt: new Date()
       },
       {
+        userID: 5,
+        fieldID: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 5,
+        fieldID: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 5,
+        fieldID: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
         userID: 6,
         fieldID: 51,
         createdAt: new Date(),
@@ -58,14 +112,68 @@ module.exports = {
         updatedAt: new Date()
       },
       {
+        userID: 6,
+        fieldID: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 6,
+        fieldID: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 6,
+        fieldID: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
         userID: 7,
         fieldID: 12,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
+        userID: 7,
+        fieldID: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 7,
+        fieldID: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 7,
+        fieldID: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
         userID: 8,
         fieldID: 60,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 8,
+        fieldID: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 8,
+        fieldID: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userID: 8,
+        fieldID: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       },
