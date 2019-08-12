@@ -33,3 +33,14 @@ function nextAppointment(aptArray) {
     return err;
   }
 }
+
+/**
+ * returns a room key based on appointment id
+ */
+exports.getRoomKey = (apptId) =>{
+  return crud.db_getAppointment(apptId)
+  .then(appt =>{
+    var roomKey = "" + appt.clientRoomKey + appt.lawyerRoomKey;
+    return roomKey;
+  });
+}

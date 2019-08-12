@@ -1,6 +1,33 @@
 var db = require("../libs/db");
 
 /**
+ * Gets a single appointment based on id
+ */
+exports.db_getAppointment = function (apptId) {
+  return db.appointments.findOne({
+    where: { id: apptId },
+    raw: true
+  });
+}
+
+/**
+ * updates an appoinment based on appointment string
+ */
+exports.db_updateAppointment = function (appointment) {
+  return db.appointments.update(appointment, {
+    where: { id: appointment.id }
+  })
+    .then(function (rowsUpdated) {
+      return rowsUpdated;
+    })
+    .catch(function (err) {
+      console.error("UPDATE ERROR");
+      console.error(err);
+      return null;
+    });
+}
+
+/**
  * Inserts user into table
  *
  * @param {string} userDict dictonary of user attributes

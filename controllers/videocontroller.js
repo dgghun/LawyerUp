@@ -19,13 +19,13 @@ exports.launchVideo = function(req, res) {
   }
   //used for the way lawyer UI is calling launchVideo
   else{
-      apt.fetchNextAppointment((req.path.includes('client') ? 'client':'lawyer'), req.session.uid)
-      .then(userApt => {
+    apt.getRoomKey(req.body.apptId)
+      .then(roomKey => {
         var token = tokenGenerator.getToken("", "", req.session.firstName, 1800, "");
         var userInfo = {
           token: token,
           name: req.session.firstName,
-          room: userApt.clientRoomKey.toString() + userApt.lawyerRoomKey.toString()
+          room: roomKey
         };
         console.log("videoController - UserInfo:" + JSON.stringify(userInfo));
         res.render("videochat", userInfo);

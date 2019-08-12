@@ -13,23 +13,6 @@ html
         -moz-box-shadow: 10px 10px 16px -10px rgba(0,0,0,0.75);
         box-shadow: 10px 10px 16px -10px rgba(0,0,0,0.75);
       }
-    //-   .list-group{
-    //-     max-height: 750px;
-    //-     margin-bottom: 10px;
-    //-     overflow:scroll;
-    //-     -webkit-overflow-scrolling: touch;
-    //-   }
-
-    //-   body{
-    //-      background:
-    //-     /* top, transparent black, faked with gradient */ 
-    //-     linear-gradient(
-    //-       rgba(0, 0, 0, 0.7), 
-    //-       rgba(0, 0, 0, 0.7)
-    //-     ),
-    //-     /* bottom, image */
-    //-     url(images/wallpaper.jpg);
-    //-   }
 
     block head
         //- link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
@@ -51,12 +34,12 @@ html
 
             .collapse.navbar-collapse(id="lawyerNavbar")
                 ul.navbar-nav.mr-auto
-                    li.nav-item
-                        a.nav-link(href="#") Link 1
-                    li.nav-item
-                        a.nav-link(href="#") Link 2
-                    li.nav-item
-                        a.nav-link(href="#") Link 3
+                    //- li.nav-item
+                    //-     a.nav-link(href="#") Link 1
+                    //- li.nav-item
+                    //-     a.nav-link(href="#") Link 2
+                    //- li.nav-item
+                    //-     a.nav-link(href="#") Link 3
                 ul.navbar-nav.float-right
                     form(role='form', method='POST', action='/logout')
                         input(type="hidden",id="message",name="message",value="You are now logged out.")
@@ -92,7 +75,7 @@ html
                                 a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
                                     div.d-flex.w-100.justify-content-between
                                         h5.mb-1 #{item.firstName} #{item.lastName}
-                                        label.badge.badge-dark 
+                                        label.badge.badge-warning 
                                             span.align-middle APPOINTMENT REQUEST
                                     div.hide-overflow.d-flex
                                         i.fas.fa-envelope-square.mr-1.mt-1
@@ -101,7 +84,9 @@ html
                                         i.fas.fa-phone-square-alt.mr-1.mt-1
                                         p.mb-1 #{item.phoneNumber}
                                     small.m-1 Select Appointment Date
-                                    form.form-inline(role='form', method='POST', action='#', id="acceptAppt=" + item.id, name="acceptAppt=" + item.id)
+                                    form.form-inline(role='form', method='POST', action='/acceptAppt', id="acceptAppt=" + item.id, name="acceptAppt=" + item.id)
+                                        //- input(id='clientId', name='clientId', type='hidden', value=item.id)
+                                        input(id='apptId', name='apptId', type='hidden', value=item.apptId)
                                         div.input-group.m-1(style='width:50%;')
                                             span.input-group-addon 
                                                 i.fas.fa-calendar-alt.mt-2.mr-1
@@ -110,83 +95,95 @@ html
                                             span.input-group-addon 
                                                 i.fas.fa-clock.mt-2.mr-1
                                             input.form-control(id="time", name="time", type='time', value= moment().format('hh:mm') + ':00')
-                                        button.btn.btn-success.btn-sm.m-1(type='button') ACCEPT
-                                        form(role='form', method='POST', action='#', id="declineAppt=" + item.id, name="declineAppt=" + item.id) 
-                                            button.btn.btn-danger.btn-sm.m-1(type='button') DECLINE
-                            else
+                                        button.btn.btn-success.btn-sm.m-1(type='submit', name='submitAppt', value='accept') ACCEPT
+                                        button.btn.btn-danger.btn-sm.m-1(type='submit', name='submitAppt', value='decline') DECLINE
+                            //- appointment not ready
+                            else if item.apptAccepted == 1 && item.apptReady == 0
                                 a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
                                     div.d-flex.w-100.justify-content-between
                                         h5.mb-1 #{item.firstName} #{item.lastName}
-                                        label.badge.badge-dark 
-                                            span.align-middle APPOINTMENT TESTING
+                                        label.badge.badge-secondary 
+                                            span.align-middle UPCOMING APPOINTMENT
                                     div.hide-overflow.d-flex
                                         i.fas.fa-envelope-square.mr-1.mt-1
                                         p.mb-1 #{item.email}
                                     div.hide-overflow.d-flex
                                         i.fas.fa-phone-square-alt.mr-1.mt-1
                                         p.mb-1 #{item.phoneNumber}
-                                    small.m-1 Appointment testing
+                                    small.mb-1 Appointment Date
+                                    div.hide-overflow.d-flex
+                                        i.fas.fa-calendar-alt.mr-2.mt-1
+                                        p.mb-1 #{item.apptDate}
+                            //- appointment past
+                            else if item.apptAccepted == 1 && item.apptReady == -1
+                                a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
+                                    div.d-flex.w-100.justify-content-between
+                                        h5.mb-1 #{item.firstName} #{item.lastName}
+                                        label.badge.badge-dark 
+                                            span.align-middle PAST APPOINTMENT 
+                                    div.hide-overflow.d-flex
+                                        i.fas.fa-envelope-square.mr-1.mt-1
+                                        p.mb-1 #{item.email}
+                                    div.hide-overflow.d-flex
+                                        i.fas.fa-phone-square-alt.mr-1.mt-1
+                                        p.mb-1 #{item.phoneNumber}
+                                    small.mb-1 Appointment Date
+                                    div.hide-overflow.d-flex
+                                        i.fas.fa-calendar-alt.mr-2.mt-1
+                                        p.mb-1 #{item.apptDate}
+                            //- appointment READY
+                            else if item.apptAccepted == 1 && item.apptReady == 1
+                                a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
+                                    div.d-flex.w-100.justify-content-between
+                                        h5.mb-1 #{item.firstName} #{item.lastName}
+                                        label.badge.badge-primary 
+                                            span.align-middle APPOINTMENT READY!
+                                    div.hide-overflow.d-flex
+                                        i.fas.fa-envelope-square.mr-1.mt-1
+                                        p.mb-1 #{item.email}
+                                    div.hide-overflow.d-flex
+                                        i.fas.fa-phone-square-alt.mr-1.mt-1
+                                        p.mb-1 #{item.phoneNumber}
+                                    small.mb-1 Appointment Date
+                                    div.hide-overflow.d-flex
+                                        i.fas.fa-calendar-alt.mr-2.mt-1
+                                        p.mb-1 #{item.apptDate}
+                                    form.form-inline(role='form', method='POST', action='/launchVideo')
+                                        input(id='apptId', name='apptId', type='hidden', value=item.apptId)
+                                        button.btn.btn-primary.btn-sm.mb-2(type='submit') LAUNCH CHAT 
+                            //- appointment declined
+                            else if item.apptAccepted == 0
+                                a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
+                                    div.d-flex.w-100.justify-content-between
+                                        h5.mb-1 #{item.firstName} #{item.lastName}
+                                        label.badge.badge-danger 
+                                            span.align-middle DECLINED APPOINTMENT 
+                                    div.hide-overflow.d-flex
+                                        i.fas.fa-envelope-square.mr-1.mt-1
+                                        p.mb-1 #{item.email}
+                                    div.hide-overflow.d-flex
+                                        i.fas.fa-phone-square-alt.mr-1.mt-1
+                                        p.mb-1 #{item.phoneNumber}
+
   
                         //- Hard coded cards for testing
-                        a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
-                            div.d-flex.w-100.justify-content-between
-                                h5.mb-1 John Doughnut
-                                small.text-muted 7/2/19 4:30pm
-                            p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-                            small.text-muted Donec id elit non mi porta.
-                        a.list-group-item.list-group-item-action.flex-column.align-items-start.active(href="#")
-                            div.d-flex.w-100.justify-content-between
-                                h5.mb-1 John Doughnut
-                                small 7/2/19 4:30pm
-                            p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+                        //- a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
+                        //-     div.d-flex.w-100.justify-content-between
+                        //-         h5.mb-1 John Doughnut
+                        //-         small.text-muted 7/2/19 4:30pm
+                        //-     p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+                        //-     small.text-muted Donec id elit non mi porta.
+                        //- a.list-group-item.list-group-item-action.flex-column.align-items-start.active(href="#")
+                        //-     div.d-flex.w-100.justify-content-between
+                        //-         h5.mb-1 John Doughnut
+                        //-         small 7/2/19 4:30pm
+                        //-     p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
 
-                            //- TESTING launch video chat
-                            //- input data should be handled by session/cookie. Just testing at this point.
-                            form.form-inline(role='form', method='POST', action='/launchVideo')
-                                //- input(type="hidden",id="userName",name="userName",value="#{firstName}")
-                                //- input(type="hidden",id="id",name="id",value="#{id}")
-                                button.btn.btn-success.btn-sm.mb-2(type='submit') MEETING READY! 
+                        //-     //- TESTING launch video chat
+                        //-     //- input data should be handled by session/cookie. Just testing at this point.
+                        //-     form.form-inline(role='form', method='POST', action='/launchVideo')
+                        //-         //- input(type="hidden",id="userName",name="userName",value="#{firstName}")
+                        //-         //- input(type="hidden",id="id",name="id",value="#{id}")
+                        //-         button.btn.btn-success.btn-sm.mb-2(type='submit') MEETING READY! 
 
-                        a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
-                            div.d-flex.w-100.justify-content-between
-                                h5.mb-1 John Doughnut
-                                small.text-muted 7/2/19 4:30pm
-                            p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-                            small.text-muted Donec id elit non mi porta.
-                        a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
-                            div.d-flex.w-100.justify-content-between
-                                h5.mb-1 John Doughnut
-                                small.text-muted 7/2/19 4:30pm
-                            p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-                            small.text-muted Donec id elit non mi porta.
-                        a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
-                            div.d-flex.w-100.justify-content-between
-                                h5.mb-1 John Doughnut
-                                small.text-muted 7/2/19 4:30pm
-                            p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-                            small.text-muted Donec id elit non mi porta.
-                        a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
-                            div.d-flex.w-100.justify-content-between
-                                h5.mb-1 John Doughnut
-                                small.text-muted 7/2/19 4:30pm
-                            p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-                            small.text-muted Donec id elit non mi porta.
-                        a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
-                            div.d-flex.w-100.justify-content-between
-                                h5.mb-1 John Doughnut
-                                small.text-muted 7/2/19 4:30pm
-                            p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-                            small.text-muted Donec id elit non mi porta.
-                        a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
-                            div.d-flex.w-100.justify-content-between
-                                h5.mb-1 John Doughnut
-                                small.text-muted 7/2/19 4:30pm
-                            p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-                            small.text-muted Donec id elit non mi porta.
-                        a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
-                            div.d-flex.w-100.justify-content-between
-                                h5.mb-1 John Doughnut
-                                small.text-muted 7/2/19 4:30pm
-                            p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-                            small.text-muted Donec id elit non mi porta.
-                            
+                    

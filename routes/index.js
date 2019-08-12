@@ -19,7 +19,8 @@ router.get("/lawyersignup", landing.lawyer_signup);
 router.get("/logout", landing.logout);
 
 router.post("/", landing.get_landing);
-router.post("/renderLawyer", lawyerController.renderLaywer)
+router.post("/renderLawyer", lawyerController.renderLaywer);
+router.post("/acceptAppt", lawyerController.acceptAppt);
 router.post("/logout", landing.logout);
 router.post("/login", loginController.login);
 router.post("/clientsignup", signupController.signupClient); //client information submit
