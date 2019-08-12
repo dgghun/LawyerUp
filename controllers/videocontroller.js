@@ -25,9 +25,13 @@ exports.launchVideo = function(req, res) {
         var userInfo = {
           token: token,
           name: req.session.firstName,
-          room: roomKey
+          room: roomKey,
+          apptId: req.body.apptId,
+          isLawyer: true
         };
         console.log("videoController - UserInfo:" + JSON.stringify(userInfo));
+        console.log("videoController - REQ.SESSION:" + JSON.stringify(req.session));
+        console.log("videoController - REQ.BODY:" + JSON.stringify(req.body));
         res.render("videochat", userInfo);
       })
       .catch(function (err) {
