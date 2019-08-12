@@ -19,8 +19,10 @@ html
             h1.m2.display-4.text-center LawyerUp
             div.h-75(id="renderer")
             div.text-center
-                button.btn.btn-outline-danger.m-5.shadow
-                    i.fas.fa-phone.fa-3x
+                form(role='form', method='POST', action='#')
+                    div.form-group
+                        button.btn.btn-outline-danger.m-5.shadow-lg(type='button',data-toggle="tooltip", data-placement="| top | bottom | left | right", title="End call")
+                            i.fas.fa-phone.fa-3x
         
 
         script(src='https://static.vidyo.io/latest/javascript/VidyoClient/VidyoClient.js?onload=onVidyoClientLoaded&webrtc=true&plugin=false')
