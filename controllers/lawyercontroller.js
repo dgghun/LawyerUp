@@ -60,12 +60,14 @@ exports.renderLaywer = (res, page, user) =>{
                         client.phoneNumber = formatPhoneNumber(client.phoneNumber);  // format phone
                         client.apptId = appt.id;
                         client.apptAccepted = appt.apptAccepted;
-                        client.apptDate = formatDateTime(appt.apptDate);
+                        client.apptDate = appt.apptDate;
+                        // client.apptDate = formatDateTime(appt.apptDate);
                         client.apptReady = APPT_NOTREADY;
                         
                         //check for appointment dates/times for setting video button
                         if(appt.apptDate != null){
                             var timeToAppt = (appt.apptDate - new Date()) / 1000 / 3600;    // hours until or past appointment
+                            console.log('-->lawyerController: Time Till Appt is ' + timeToAppt + ' hrs');
                             if(timeToAppt <= -1){    //hour has past
                                 console.log('--> An hour or more has past since appt time :(')
                                 client.apptReady = APPT_PAST;

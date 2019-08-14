@@ -90,11 +90,11 @@ html
                                         div.input-group.m-1(style='width:50%;')
                                             span.input-group-addon 
                                                 i.fas.fa-calendar-alt.mt-2.mr-1
-                                            input.form-control.input-sm(id="date", name="date", type='date', value= moment().format('YYYY-MM-DD'))
+                                            input.form-control.input-sm(id="date", name="date", type='date', value= moment(moment().format('L')).format('YYYY-MM-DD'))
                                         div.input-group.m-1(style='width:40%;')
                                             span.input-group-addon 
                                                 i.fas.fa-clock.mt-2.mr-1
-                                            input.form-control(id="time", name="time", type='time', value= moment().format('hh:mm') + ':00')
+                                            input.form-control(id="time", name="time", type='time', value= moment(moment().startOf('minute').toDate()).format('hh:mm:ss'))
                                         button.btn.btn-success.btn-sm.m-1(type='submit', name='submitAppt', value='accept') ACCEPT
                                         button.btn.btn-danger.btn-sm.m-1(type='submit', name='submitAppt', value='decline') DECLINE
                             //- appointment not ready
@@ -113,7 +113,7 @@ html
                                     small.mb-1 Appointment Date
                                     div.hide-overflow.d-flex
                                         i.fas.fa-calendar-alt.mr-2.mt-1
-                                        p.mb-1 #{item.apptDate}
+                                        p.mb-1= moment(item.apptDate).format('lll')
                             //- appointment past
                             else if item.apptAccepted == 1 && item.apptReady == -1
                                 a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
@@ -130,7 +130,7 @@ html
                                     small.mb-1 Appointment Date
                                     div.hide-overflow.d-flex
                                         i.fas.fa-calendar-alt.mr-2.mt-1
-                                        p.mb-1 #{item.apptDate}
+                                        p.mb-1= moment(item.apptDate).format('lll')
                             //- appointment READY
                             else if item.apptAccepted == 1 && item.apptReady == 1
                                 a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
@@ -147,7 +147,7 @@ html
                                     small.mb-1 Appointment Date
                                     div.hide-overflow.d-flex
                                         i.fas.fa-calendar-alt.mr-2.mt-1
-                                        p.mb-1 #{item.apptDate}
+                                        p.mb-1= moment(item.apptDate).format('lll')
                                     form.form-inline(role='form', method='POST', action='/launchVideo')
                                         input(id='apptId', name='apptId', type='hidden', value=item.apptId)
                                         button.btn.btn-primary.btn-sm.mb-2(type='submit') LAUNCH CHAT 
