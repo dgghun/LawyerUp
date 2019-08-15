@@ -167,9 +167,10 @@ exports.fetchNews = (req, res) => {
       req.session.uid
     )
     .then(userAppt => {
-      if (userAppt === "empty" || userAppt === null) {
+      if (userAppt === "empty" || userAppt === null || userAppt.apptDate === null) {
         res.render("client/clientNews");
-      } else {
+      }
+      else {
         req.session.aptkey = userAppt.clientRoomKey.toString() + userAppt.lawyerRoomKey.toString();
         res.render("client/clientNews", {
           nextAppointment: JSON.stringify(userAppt.apptDate)

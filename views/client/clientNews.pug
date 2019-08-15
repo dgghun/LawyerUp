@@ -12,7 +12,7 @@ append content
       |  #{msg}
       button.close(type='button', data-dismiss='alert') ×
 
-  if nextAppointment
+  if nextAppointment != null
     form(method='POST', action='/launchVideo')
       .alert.alert-info.alert-dismissible.fade.show
         strong Your next appointment is scheduled on:
