@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     country: {type: DataTypes.STRING, allowNull: false},
     password: {type: DataTypes.STRING, allowNull: false},
     isLawyer: {type: DataTypes.BOOLEAN, allowNull: false},
-    roomKey: {type: DataTypes.UUID, allowNull: false}
+    roomKey: {type: DataTypes.UUID, allowNull: false},
+    profileImg: {type: DataTypes.STRING}
   }, {});
   user.associate = function(models) {
     // associations can be defined here

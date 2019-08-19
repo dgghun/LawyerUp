@@ -125,12 +125,7 @@ exports.incidentFormSubmit = (req, res, next, update=false) => {
             res.render("client/lawyerSearch", {
               lawyerProfiles: suggestedLawyers
             });
-
           })
-
-
-
-
           .catch(function(err) {
             console.log("Error: Could not determine lawyer suggestions");
           });
