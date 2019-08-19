@@ -65,7 +65,6 @@ exports.incidentForm = (req, res, next) => {
 exports.incidentFormSubmit = (req, res, next, update=false) => {
   //TODO: Needs to handle the update of the user form if file already exists
 
-  console.log('test');
   let incident_info = {
     uuid: uuidv4(),
     isForClient: req.body.radio_who_for_client == "on" ? "true" : "false",
@@ -90,6 +89,7 @@ exports.incidentFormSubmit = (req, res, next, update=false) => {
         }
 
         //Lookup lawyers for case type
+        var suggestedLawyers = [];
         crud
           .db_getLegalIncidentMap_IdFK(Number(incident_info.incidentID))
           .then(incidentId => {
@@ -110,16 +110,27 @@ exports.incidentFormSubmit = (req, res, next, update=false) => {
             return Promise.all([crud.db_getUsers(usersIdList)]);
           })
           .then(lawyerId => {
-            let suggestedLawyers = [];
+            let lawyerIDList = [];
             lawyerId[0].forEach(element => {
+              lawyerIDList.push(element.id);
               suggestedLawyers.push(element);
             });
-
+            return Promise.all([crud.db_getSecondaryLawyers(lawyerIDList)]);
+          })
+          .then(secondaryLawyerCandidates => {
             req.session.caseUUID = incident_info.uuid;
+            secondaryLawyerCandidates[0].forEach(item => {
+              suggestedLawyers.push(item);
+            });
             res.render("client/lawyerSearch", {
               lawyerProfiles: suggestedLawyers
             });
+
           })
+
+
+
+
           .catch(function(err) {
             console.log("Error: Could not determine lawyer suggestions");
           });
@@ -136,8 +147,6 @@ exports.incidentFormSubmit = (req, res, next, update=false) => {
  * @param {response} res HTTP Response
  */
 exports.incidentFormUpdate = (req, res) => {
-  //TODO: Needs to handle the update of the user form if file already exists
-
   let incident_info = {
     uuid: req.session.case,
     isForClient: req.body.radio_who_for_client == "on" ? "true" : "false",
@@ -146,7 +155,7 @@ exports.incidentFormUpdate = (req, res) => {
     clientStory: req.body.clientStory
   };
 
-  req.session.case = null;
+  req.session.case = null; //clear session data
 
   ensureExists(CASES_DIR, function(err) {
     //persist client case "incident" information to case file (json)

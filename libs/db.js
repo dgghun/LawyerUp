@@ -12,6 +12,8 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+db.OP = Sequelize.Op;
+
 db.cases = require('../models/cases')(sequelize, Sequelize);
 db.users = require('../models/users')(sequelize, Sequelize);
 db.incidents = require('../models/incidents')(sequelize, Sequelize);

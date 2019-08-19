@@ -3,29 +3,30 @@ var db = require("../libs/db");
 /**
  * Gets a single appointment based on id
  */
-exports.db_getAppointment = function (apptId) {
+exports.db_getAppointment = function(apptId) {
   return db.appointments.findOne({
     where: { id: apptId },
     raw: true
   });
-}
+};
 
 /**
  * updates an appoinment based on appointment string
  */
-exports.db_updateAppointment = function (appointment) {
-  return db.appointments.update(appointment, {
-    where: { id: appointment.id }
-  })
-    .then(function (rowsUpdated) {
+exports.db_updateAppointment = function(appointment) {
+  return db.appointments
+    .update(appointment, {
+      where: { id: appointment.id }
+    })
+    .then(function(rowsUpdated) {
       return rowsUpdated;
     })
-    .catch(function (err) {
+    .catch(function(err) {
       console.error("UPDATE ERROR");
       console.error(err);
       return null;
     });
-}
+};
 
 /**
  * Inserts user into table
@@ -43,11 +44,11 @@ exports.db_createUser = function(userDict) {
  * @param {var} userId a users id
  * @returns Sequelize user model or NULL
  */
-exports.db_getUserId = function(userId){
+exports.db_getUserId = function(userId) {
   return db.users.findOne({
-    where: {id: userId},
+    where: { id: userId },
     attributes: { exclude: ["password", "roomKey", "createdAt", "updatedAt"] },
-    raw:true
+    raw: true
   });
 };
 
@@ -79,7 +80,7 @@ exports.db_getIncidents = function() {
  */
 exports.db_getLegalFields = function() {
   return db.legalFields.findAll({
-    attributes: ['id','field']
+    attributes: ["id", "field"]
   });
 };
 
@@ -116,18 +117,20 @@ exports.db_getLawyerProfile_UserIdFk = function(fieldId) {
  * @param {boolean} [basicProfile=true] determines if we should exlude columns
  * @returns user model
  */
-exports.db_getUsers = function(userId, profile = 'basic') {
-  switch(profile){
-    case 'all':
+exports.db_getUsers = function(userId, profile = "basic") {
+  switch (profile) {
+    case "all":
       return db.users.findAll({
         where: { id: userId }
       });
-    case 'basic':
+    case "basic":
       return db.users.findAll({
         where: { id: userId },
-        attributes: { exclude: ["password", "roomKey", "createdAt", "updatedAt"] }
+        attributes: {
+          exclude: ["password", "roomKey", "createdAt", "updatedAt"]
+        }
       });
-    case 'appointment':
+    case "appointment":
       return db.users.findAll({
         where: { id: userId },
         attributes: { exclude: ["password", "createdAt", "updatedAt"] }
@@ -140,9 +143,9 @@ exports.db_getUsers = function(userId, profile = 'basic') {
 
  * @param {string} lawyerID lawyerLegalProfiles.ID
  */
-exports.db_retriveUserID_LawyerIDPK = function(lawyerID){
+exports.db_retriveUserID_LawyerIDPK = function(lawyerID) {
   return db.lawyerLegalProfiles.findOne({
-    where: {id: lawyerID}
+    where: { id: lawyerID }
   });
 };
 
@@ -151,7 +154,7 @@ exports.db_retriveUserID_LawyerIDPK = function(lawyerID){
  *
  * @param {dictonary} appointment appointment request from client
  */
-exports.db_createAppointment = function(appointment){
+exports.db_createAppointment = function(appointment) {
   return db.appointments.create(appointment);
 };
 
@@ -160,10 +163,10 @@ exports.db_createAppointment = function(appointment){
  *
  * @param {string} id lawyer id to serach for
  */
-exports.db_getLawyerAppointments = function(id){
+exports.db_getLawyerAppointments = function(id) {
   return db.appointments.findAll({
-    where: {lawyerID: id},
-    raw:true,
+    where: { lawyerID: id },
+    raw: true
   });
 };
 
@@ -177,27 +180,25 @@ exports.db_getLawyerAppointments = function(id){
  *        Use 'DESC' for decending
  * @returns {json} json represntation of Sequelize user model
  */
-exports.db_getAppointments = function(isClient, id, sort='ASC'){
-  if (isClient == 'client'){
+exports.db_getAppointments = function(isClient, id, sort = "ASC") {
+  if (isClient == "client") {
     return db.appointments.findAll({
-      where: {clientID: id},
-      order:[['apptDate', sort]],
-      raw: true,
+      where: { clientID: id },
+      order: [["apptDate", sort]],
+      raw: true
     });
-  } else{
+  } else {
     return db.appointments.findAll({
-      where: {lawyerID: id},
-      order:[['apptDate', sort]],
-      raw:true,
+      where: { lawyerID: id },
+      order: [["apptDate", sort]],
+      raw: true
     });
   }
 };
 
-
-exports.db_createIncident = function(incident){
+exports.db_createIncident = function(incident) {
   return db.cases.create(incident);
 };
-
 
 /**
  *Fetches all of a clients submitted cases saved in the appointments tables.
@@ -208,12 +209,34 @@ exports.db_createIncident = function(incident){
  *        Use 'DESC' for decending
  * @returns {json} json represntation of Sequelize user model
  */
-exports.db_getClientCases = function(clientID, sort='ASC') {
+exports.db_getClientCases = function(clientID, sort = "ASC") {
   return db.appointments.findAll({
-    where: {clientID: clientID},
-    order: [['createdAt', sort]],
-    raw: true,
+    where: { clientID: clientID },
+    order: [["createdAt", sort]],
+    raw: true
   });
+};
+
+/**
+ *Fetches all lawyers not in listed in passed parameter
+ *
+ * @param {string} lawyerIdList list of lawyer user id's not to fetch
+ * @returns {json} json represntation of Sequelize user model
+ */
+exports.db_getSecondaryLawyers = function(lawyerIdList) {
+//   return db.users.findAll({
+//     where: {
+//       isLawyer: 1,
+//       // id: { [db.OP.ne]: { [db.OP.in]: lawyerIdList } }
+//       // id: { [db.OP.ne]: { [db.OP.in]: lawyerIdList } }
+//     }
+//   });
+// };
+  return db.users.findAll({
+    where: {
+      isLawyer: 1,
+      id: { [db.OP.notIn]: lawyerIdList } }
+    });
 };
 
 // ----------------------------------------------------------------------------
