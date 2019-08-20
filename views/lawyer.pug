@@ -98,22 +98,22 @@ html
                                         button.btn.btn-success.btn-sm.m-1(type='submit', name='submitAppt', value='accept') ACCEPT
                                         button.btn.btn-danger.btn-sm.m-1(type='submit', name='submitAppt', value='decline') DECLINE
                             //- appointment not ready
-                            else if item.apptAccepted == 1 && item.apptReady == 0
-                                a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
-                                    div.d-flex.w-100.justify-content-between
-                                        h5.mb-1 #{item.firstName} #{item.lastName}
-                                        label.badge.badge-secondary 
-                                            span.align-middle UPCOMING APPOINTMENT
-                                    div.hide-overflow.d-flex
-                                        i.fas.fa-envelope-square.mr-1.mt-1
-                                        p.mb-1 #{item.email}
-                                    div.hide-overflow.d-flex
-                                        i.fas.fa-phone-square-alt.mr-1.mt-1
-                                        p.mb-1 #{item.phoneNumber}
-                                    small.mb-1 Appointment Date
-                                    div.hide-overflow.d-flex
-                                        i.fas.fa-calendar-alt.mr-2.mt-1
-                                        p.mb-1= moment(item.apptDate).format('lll')
+                            //- else if item.apptAccepted == 1 && item.apptReady == 0
+                            //-     a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
+                            //-         div.d-flex.w-100.justify-content-between
+                            //-             h5.mb-1 #{item.firstName} #{item.lastName}
+                            //-             label.badge.badge-secondary 
+                            //-                 span.align-middle UPCOMING APPOINTMENT
+                            //-         div.hide-overflow.d-flex
+                            //-             i.fas.fa-envelope-square.mr-1.mt-1
+                            //-             p.mb-1 #{item.email}
+                            //-         div.hide-overflow.d-flex
+                            //-             i.fas.fa-phone-square-alt.mr-1.mt-1
+                            //-             p.mb-1 #{item.phoneNumber}
+                            //-         small.mb-1 Appointment Date
+                            //-         div.hide-overflow.d-flex
+                            //-             i.fas.fa-calendar-alt.mr-2.mt-1
+                            //-             p.mb-1= moment(item.apptDate).format('lll')
                             //- appointment past
                             else if item.apptAccepted == 1 && item.apptReady == -1
                                 a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
@@ -132,7 +132,8 @@ html
                                         i.fas.fa-calendar-alt.mr-2.mt-1
                                         p.mb-1= moment(item.apptDate).format('lll')
                             //- appointment READY
-                            else if item.apptAccepted == 1 && item.apptReady == 1
+                            //- else if item.apptAccepted == 1 && item.apptReady == 1
+                            else if item.apptAccepted == 1 && item.apptReady == 0 //for testing
                                 a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
                                     div.d-flex.w-100.justify-content-between
                                         h5.mb-1 #{item.firstName} #{item.lastName}
