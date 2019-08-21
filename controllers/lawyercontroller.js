@@ -68,12 +68,12 @@ exports.renderLaywer = (res, page, user) =>{
                         if(appt.apptDate != null){
                             var timeToAppt = (appt.apptDate - new Date()) / 1000 / 3600;    // hours until or past appointment
                             console.log('-->lawyerController: Time Till Appt is ' + timeToAppt + ' hrs');
-                            if(timeToAppt <= -1){    //hour has past
-                                console.log('--> An hour or more has past since appt time :(')
+                            if(timeToAppt < -48){    //48 hours has past
+                                console.log('--> 48 hours or more has past since appt time :(')
                                 client.apptReady = APPT_PAST;
                             }
                             else if(timeToAppt >= -48 && timeToAppt <= 48){ //set to 48 hours for now.
-                                console.log('--> An hour within appt time!')
+                                console.log('--> 48 hours within appt time!')
                                 client.apptReady = APPT_READY;
                             }
                             else{

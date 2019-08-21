@@ -132,8 +132,7 @@ html
                                         i.fas.fa-calendar-alt.mr-2.mt-1
                                         p.mb-1= moment(item.apptDate).format('lll')
                             //- appointment READY
-                            //- else if item.apptAccepted == 1 && item.apptReady == 1
-                            else if item.apptAccepted == 1 && item.apptReady == 0 
+                            else if item.apptAccepted == 1 && item.apptReady == 1
                                 a.list-group-item.list-group-item-action.flex-column.align-items-start.mb-1.shadow
                                     div.d-flex.w-100.justify-content-between
                                         h5.mb-1 #{item.firstName} #{item.lastName}
