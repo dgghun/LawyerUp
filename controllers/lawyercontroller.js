@@ -72,7 +72,7 @@ exports.renderLaywer = (res, page, user) =>{
                                 console.log('--> An hour or more has past since appt time :(')
                                 client.apptReady = APPT_PAST;
                             }
-                            else if(timeToAppt >= -1 && timeToAppt <= 0){
+                            else if(timeToAppt >= -48 && timeToAppt <= 48){ //set to 48 hours for now.
                                 console.log('--> An hour within appt time!')
                                 client.apptReady = APPT_READY;
                             }
